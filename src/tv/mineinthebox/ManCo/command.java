@@ -35,11 +35,9 @@ public class command implements CommandExecutor {
 					if(p instanceof Player) {
 						if(chestList.getCrateList.containsKey(p.getName())) {
 							sender.sendMessage(ChatColor.RED + "could not create a crate because this player has allready a non used crate!");
-							System.out.print("this is crate 1");
 							return false;
 						} else if(chestList.getCrateList2.containsKey(p.getName())) {
 							sender.sendMessage(ChatColor.RED + "could not create a crate because this player has allready a non used crate!");
-							System.out.print("this is crate 2");
 							return false;
 						}
 						Location loc = p.getLocation();
