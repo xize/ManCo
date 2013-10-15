@@ -1,0 +1,20 @@
+name: ManCo
+version: 0.2
+description: ManCo item spawner
+author: xize
+authors: [] 
+website:
+
+main: tv.mineinthebox.ManCo.manCo
+database: false
+depend: []
+softdepend: []
+
+commands:
+  manco:
+    description: main command
+    aliases: [mc]
+    permission:
+    permission-message:
+
+permissions:
