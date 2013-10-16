@@ -23,7 +23,7 @@ public class cratescheduler {
 
 			@Override
 			public void run() {
-				if(Bukkit.getOnlinePlayers().length > configuration.roundsPerTime()) {
+				if(Bukkit.getOnlinePlayers().length > configuration.roundsPerTime() || Bukkit.getOnlinePlayers().length == configuration.roundsPerTime()) {
 					for(int i = 0; i < configuration.roundsPerTime(); i++) {
 						doCrate();
 					}
