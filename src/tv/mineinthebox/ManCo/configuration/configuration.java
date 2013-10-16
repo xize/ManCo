@@ -16,10 +16,13 @@ public class configuration {
 			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "items.yml");
 			if(!f.exists()) {
 				FileConfiguration con = YamlConfiguration.loadConfiguration(f);
+				FileConfigurationOptions opt = con.options();
 				if(!con.isSet("time")) {
 					con.set("time", 90000);
 				}
-				FileConfigurationOptions opt = con.options();
+				if(!con.isSet("roundsPerTime")) {
+					con.set("roundsPerTime", 3);
+				}
 				opt.header("Default configuration file for manCo crates!\nscheme DataValue:subDataValue:Amount");
 				ArrayList<String> list = new ArrayList<String>();
 				list.add("98:1:1");
@@ -33,10 +36,27 @@ public class configuration {
 					con.set("time", 90000);
 					con.save(f);
 				}
+				if(!con.isSet("roundsPerTime")) {
+					con.set("roundsPerTime", 3);
+					con.save(f);
+				}
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public static int roundsPerTime() {
+		try {
+			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "items.yml");
+			if(f.exists()) {
+				FileConfiguration con = YamlConfiguration.loadConfiguration(f);
+				return con.getInt("roundsPerTime");
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
 	}
 	
 	public static int getTime() {

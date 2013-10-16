@@ -9,7 +9,6 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitTask;
 
 import tv.mineinthebox.ManCo.events.cratescheduler;
 import tv.mineinthebox.ManCo.events.handler;
@@ -37,9 +36,8 @@ public class command implements CommandExecutor {
 					}
 				} else if(args.length == 1) {
 					if(args[0].equalsIgnoreCase("reload")) {
-						BukkitTask task = cratescheduler.tasks.get(0);
-						task.cancel();
-						cratescheduler.tasks.remove(0);
+						cratescheduler.task.cancel();
+						cratescheduler.task = null;
 						cratescheduler.startScheduler();
 						handler.restartListeners();
 						sender.sendMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + "reload successfully");
