@@ -23,6 +23,12 @@ public class configuration {
 				if(!con.isSet("roundsPerTime")) {
 					con.set("roundsPerTime", 3);
 				}
+				if(!con.isSet("useIconomy.enabled")) {
+					con.set("useIconomy.enabled", false);
+				}
+				if(!con.isSet("useIconomy.price")) {
+					con.set("useIconomy.price", 10.0);
+				}
 				opt.header("Default configuration file for manCo crates!\nscheme DataValue:subDataValue:Amount");
 				ArrayList<String> list = new ArrayList<String>();
 				list.add("98:1:1");
@@ -40,10 +46,46 @@ public class configuration {
 					con.set("roundsPerTime", 3);
 					con.save(f);
 				}
+				if(!con.isSet("useIconomy.enabled")) {
+					con.set("useIconomy.enabled", false);
+					con.save(f);
+				}
+				if(!con.isSet("useIconomy.price")) {
+					con.set("useIconomy.price", 10.0);
+					con.save(f);
+				}
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public static boolean isEconomyEnabled() {
+		try {
+			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "items.yml");
+			if(f.exists()) {
+				FileConfiguration con = YamlConfiguration.loadConfiguration(f);
+				if(con.getBoolean("useIconomy.enabled")) {
+					return true;
+				}
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	public static double returnIconomyPrice() {
+		try {
+			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "items.yml");
+			if(f.exists()) {
+				FileConfiguration con = YamlConfiguration.loadConfiguration(f);
+				return con.getDouble("useIconomy.price");
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return 0.0;
 	}
 	
 	public static int roundsPerTime() {
