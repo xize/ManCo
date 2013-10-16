@@ -1,5 +1,6 @@
 package tv.mineinthebox.ManCo.events;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import org.bukkit.Bukkit;
@@ -8,6 +9,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitTask;
 
 import tv.mineinthebox.ManCo.chestList;
 import tv.mineinthebox.ManCo.manCo;
@@ -15,8 +17,10 @@ import tv.mineinthebox.ManCo.configuration.configuration;
 
 public class cratescheduler {
 
+	public static ArrayList<BukkitTask> tasks = new ArrayList<BukkitTask>();
+	
 	public static void startScheduler() {
-		Bukkit.getScheduler().runTaskTimer(manCo.getPlugin(), new Runnable() {
+		BukkitTask taskID = Bukkit.getScheduler().runTaskTimer(manCo.getPlugin(), new Runnable() {
 
 			@Override
 			public void run() {
@@ -38,6 +42,7 @@ public class cratescheduler {
 			}
 
 		}, 0, configuration.getTime());
+		tasks.add(taskID);
 	}
 
 }

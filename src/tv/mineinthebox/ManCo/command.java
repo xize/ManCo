@@ -9,6 +9,10 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitTask;
+
+import tv.mineinthebox.ManCo.events.cratescheduler;
+import tv.mineinthebox.ManCo.events.handler;
 
 public class command implements CommandExecutor {
 	
@@ -27,26 +31,42 @@ public class command implements CommandExecutor {
 						Entity entity = p.getWorld().spawnFallingBlock(loc, Material.CHEST, (byte) 1);
 						chestList.getFallingStateChest.put(entity, p.getName());
 						Bukkit.broadcastMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + p.getName() + " found a ManCo crate!");
+						sender.sendMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + "you've successfully spawned a crate for yourself!");
 					} else {
 						sender.sendMessage("a console cannot have a location !");
 					}
 				} else if(args.length == 1) {
-					Player p = Bukkit.getPlayer(args[0]);
-					if(p instanceof Player) {
-						if(chestList.getCrateList.containsKey(p.getName())) {
-							sender.sendMessage(ChatColor.RED + "could not create a crate because this player has allready a non used crate!");
-							return false;
-						} else if(chestList.getCrateList2.containsKey(p.getName())) {
-							sender.sendMessage(ChatColor.RED + "could not create a crate because this player has allready a non used crate!");
-							return false;
-						}
-						Location loc = p.getLocation();
-						loc.setY(120);
-						Entity entity = p.getWorld().spawnFallingBlock(loc, Material.CHEST, (byte) 1);
-						chestList.getFallingStateChest.put(entity, p.getName());
-						Bukkit.broadcastMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + p.getName() + " found a ManCo crate!");	
+					if(args[0].equalsIgnoreCase("reload")) {
+						BukkitTask task = cratescheduler.tasks.get(0);
+						task.cancel();
+						cratescheduler.tasks.remove(0);
+						cratescheduler.startScheduler();
+						handler.restartListeners();
+						sender.sendMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + "reload successfully");
+					} else if(args[0].equalsIgnoreCase("help")) {
+						sender.sendMessage(ChatColor.GOLD + ".oO___[ManCo supplycrates]___Oo.");
+						sender.sendMessage(ChatColor.RED + "Admin: " + ChatColor.GRAY + "/manco " + ChatColor.WHITE + ": spawn a supplycrate for yourself");
+						sender.sendMessage(ChatColor.RED + "Admin: " + ChatColor.GRAY + "/manco <player> " + ChatColor.WHITE + ": spawn a supplycrate for a player");
+						sender.sendMessage(ChatColor.RED + "Admin: " + ChatColor.GRAY + "/manco reload " + ChatColor.WHITE + ": reloads the plugin");
 					} else {
-						sender.sendMessage(ChatColor.RED + "this player is not online!");
+						Player p = Bukkit.getPlayer(args[0]);
+						if(p instanceof Player) {
+							if(chestList.getCrateList.containsKey(p.getName())) {
+								sender.sendMessage(ChatColor.RED + "could not create a crate because this player has allready a non used crate!");
+								return false;
+							} else if(chestList.getCrateList2.containsKey(p.getName())) {
+								sender.sendMessage(ChatColor.RED + "could not create a crate because this player has allready a non used crate!");
+								return false;
+							}
+							Location loc = p.getLocation();
+							loc.setY(120);
+							Entity entity = p.getWorld().spawnFallingBlock(loc, Material.CHEST, (byte) 1);
+							chestList.getFallingStateChest.put(entity, p.getName());
+							Bukkit.broadcastMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + p.getName() + " found a ManCo crate!");	
+							sender.sendMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + "you've successfully spawned a ManCo crate for " + p.getName() + "!");
+						} else {
+							sender.sendMessage(ChatColor.RED + "this player is not online!");
+						}	
 					}
 				}
 			} else {
