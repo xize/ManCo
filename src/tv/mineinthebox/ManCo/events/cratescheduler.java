@@ -53,7 +53,7 @@ public class cratescheduler {
 				//then use the native method.
 
 				for(Player p2 : Bukkit.getOnlinePlayers()) {
-					if(!(chestList.getCrateList.containsKey(p2.getName()) || !vanish.isVanished(p2) || chestList.getCrateList2.containsKey(p2.getName()))) {
+					if(!(chestList.getCrateList.containsKey(p2.getName()) || vanish.isVanished(p2) || chestList.getCrateList2.containsKey(p2.getName()))) {
 						if(!p2.getName().equalsIgnoreCase(p.getName())) {
 							doCrateNative(p2);
 							break;
@@ -80,12 +80,10 @@ public class cratescheduler {
 			int playerID = rand.nextInt(i) + 0;
 			Player p = Bukkit.getOnlinePlayers()[playerID];
 			if(chestList.getCrateList.containsKey(p.getName()) || !worldguard.canPlayerBuild(p) || vanish.isVanished(p) || chestList.getCrateList2.containsKey(p.getName())) {
-
 				//player already has a crate, loop through all possible online players to see if they can get a crate.
 				//then use the native method.
-
 				for(Player p2 : Bukkit.getOnlinePlayers()) {
-					if(!(chestList.getCrateList.containsKey(p2.getName()) || !vanish.isVanished(p2) || worldguard.canPlayerBuild(p2) || chestList.getCrateList2.containsKey(p2.getName()))) {
+					if(!(chestList.getCrateList.containsKey(p2.getName()) || vanish.isVanished(p2) || !worldguard.canPlayerBuild(p2) || chestList.getCrateList2.containsKey(p2.getName()))) {
 						if(!p2.getName().equalsIgnoreCase(p.getName())) {
 							doCrateNative(p2);
 							break;
