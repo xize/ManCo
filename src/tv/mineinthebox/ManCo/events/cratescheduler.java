@@ -13,11 +13,12 @@ import org.bukkit.scheduler.BukkitTask;
 import tv.mineinthebox.ManCo.chestList;
 import tv.mineinthebox.ManCo.manCo;
 import tv.mineinthebox.ManCo.configuration.configuration;
+import tv.mineinthebox.ManCo.utils.vanish;
 
 public class cratescheduler {
 
 	public static BukkitTask task;
-	
+
 	public static void startScheduler() {
 		BukkitTask taskID = Bukkit.getScheduler().runTaskTimer(manCo.getPlugin(), new Runnable() {
 
@@ -33,28 +34,30 @@ public class cratescheduler {
 		}, 0, configuration.getTime());
 		task = taskID;
 	}
-	
+
 	public static void doCrate() {
 		Random rand = new Random();
 		int i = Bukkit.getOnlinePlayers().length;
 		if(i > 0) {
 			int playerID = rand.nextInt(i) + 0;
 			Player p = Bukkit.getOnlinePlayers()[playerID];
-			if(chestList.getCrateList.containsKey(p.getName()) || chestList.getCrateList2.containsKey(p.getName())) {
-				
+			if(chestList.getCrateList.containsKey(p.getName()) || vanish.isVanished(p) || chestList.getCrateList2.containsKey(p.getName())) {
+
 				//player already has a crate, loop through all possible online players to see if they can get a crate.
 				//then use the native method.
-				
+
 				for(Player p2 : Bukkit.getOnlinePlayers()) {
 					if(!(chestList.getCrateList.containsKey(p2.getName()) || chestList.getCrateList2.containsKey(p2.getName()))) {
-						doCrateNative(p2);
-						break;
+						if(!p2.getName().equalsIgnoreCase(p.getName())) {
+							doCrateNative(p2);
+							break;
+						}
 					}
 				}
 			} else {
-				
+
 				//Random player doesn't have a crate so we can proceed the code:)
-				
+
 				Location loc = p.getLocation();
 				loc.setY(120);
 				Entity entity = p.getWorld().spawnFallingBlock(loc, Material.CHEST, (byte) 1);
@@ -63,7 +66,7 @@ public class cratescheduler {
 			}
 		}
 	}
-	
+
 	public static void doCrateNative(Player p) {
 		Location loc = p.getLocation();
 		loc.setY(120);

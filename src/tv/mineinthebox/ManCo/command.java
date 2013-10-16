@@ -12,6 +12,7 @@ import org.bukkit.entity.Player;
 
 import tv.mineinthebox.ManCo.events.cratescheduler;
 import tv.mineinthebox.ManCo.events.handler;
+import tv.mineinthebox.ManCo.utils.vanish;
 
 public class command implements CommandExecutor {
 	
@@ -23,6 +24,10 @@ public class command implements CommandExecutor {
 						Player p = (Player) sender;
 						if(chestList.getCrateList.containsKey(p.getName()) || chestList.getCrateList2.containsKey(p.getName())) {
 							sender.sendMessage(ChatColor.RED + "could not create a crate because you allready have a non used crate!");
+							return false;
+						}
+						if(vanish.isVanished(p)) {
+							sender.sendMessage(ChatColor.RED + "you cannot spawn a crate for yourself when you are vanished!");
 							return false;
 						}
 						Location loc = p.getLocation();
@@ -54,6 +59,10 @@ public class command implements CommandExecutor {
 								return false;
 							} else if(chestList.getCrateList2.containsKey(p.getName())) {
 								sender.sendMessage(ChatColor.RED + "could not create a crate because this player has allready a non used crate!");
+								return false;
+							}
+							if(vanish.isVanished(p)) {
+								sender.sendMessage(ChatColor.RED + "you cannot spawn a crate for yourself when you are vanished!");
 								return false;
 							}
 							Location loc = p.getLocation();
