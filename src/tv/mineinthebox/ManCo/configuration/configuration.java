@@ -21,7 +21,7 @@ public class configuration {
 					con.set("time", 90000);
 				}
 				if(!con.isSet("roundsPerTime")) {
-					con.set("roundsPerTime", 3);
+					con.set("roundsPerTime", 2);
 				}
 				if(!con.isSet("useIconomy.enabled")) {
 					con.set("useIconomy.enabled", false);
@@ -43,7 +43,7 @@ public class configuration {
 					con.save(f);
 				}
 				if(!con.isSet("roundsPerTime")) {
-					con.set("roundsPerTime", 3);
+					con.set("roundsPerTime", 2);
 					con.save(f);
 				}
 				if(!con.isSet("useIconomy.enabled")) {
