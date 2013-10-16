@@ -21,7 +21,6 @@ public class iconomy {
 					return false;
 				}
 			} else {
-				System.out.print("line 25");
 				return false;
 			}
 		}
