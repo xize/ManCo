@@ -23,7 +23,7 @@ public class cratescheduler {
 
 			@Override
 			public void run() {
-				if(Bukkit.getOnlinePlayers().length > configuration.roundsPerTime() || Bukkit.getOnlinePlayers().length == configuration.roundsPerTime()) {
+				if(Bukkit.getOnlinePlayers().length > configuration.roundsPerTime()) {
 					for(int i = 0; i < configuration.roundsPerTime(); i++) {
 						doCrate();
 					}
@@ -41,8 +41,20 @@ public class cratescheduler {
 			int playerID = rand.nextInt(i) + 0;
 			Player p = Bukkit.getOnlinePlayers()[playerID];
 			if(chestList.getCrateList.containsKey(p.getName()) || chestList.getCrateList2.containsKey(p.getName())) {
-				//player allready has a chest!
+				
+				//player already has a crate, loop through all possible online players to see if they can get a crate.
+				//then use the native method.
+				
+				for(Player p2 : Bukkit.getOnlinePlayers()) {
+					if(!(chestList.getCrateList.containsKey(p2.getName()) || chestList.getCrateList2.containsKey(p2.getName()))) {
+						doCrateNative(p2);
+						break;
+					}
+				}
 			} else {
+				
+				//Random player doesn't have a crate so we can proceed the code:)
+				
 				Location loc = p.getLocation();
 				loc.setY(120);
 				Entity entity = p.getWorld().spawnFallingBlock(loc, Material.CHEST, (byte) 1);
@@ -50,6 +62,14 @@ public class cratescheduler {
 				Bukkit.broadcastMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + p.getName() + " found a ManCo crate!");	
 			}
 		}
+	}
+	
+	public static void doCrateNative(Player p) {
+		Location loc = p.getLocation();
+		loc.setY(120);
+		Entity entity = p.getWorld().spawnFallingBlock(loc, Material.CHEST, (byte) 1);
+		chestList.getFallingStateChest.put(entity, p.getName());
+		Bukkit.broadcastMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + p.getName() + " found a ManCo crate!");
 	}
 
 }
