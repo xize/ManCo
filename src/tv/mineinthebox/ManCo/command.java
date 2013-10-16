@@ -12,7 +12,9 @@ import org.bukkit.entity.Player;
 
 import tv.mineinthebox.ManCo.events.cratescheduler;
 import tv.mineinthebox.ManCo.events.handler;
+import tv.mineinthebox.ManCo.utils.util;
 import tv.mineinthebox.ManCo.utils.vanish;
+import tv.mineinthebox.ManCo.utils.worldguard;
 
 public class command implements CommandExecutor {
 	
@@ -29,6 +31,12 @@ public class command implements CommandExecutor {
 						if(vanish.isVanished(p)) {
 							sender.sendMessage(ChatColor.RED + "you cannot spawn a crate for yourself when you are vanished!");
 							return false;
+						}
+						if(util.isWorldGuardEnabled()) {
+							if(!worldguard.canPlayerBuild(p)) {
+								sender.sendMessage(ChatColor.RED + "you cannot spawn a crate for yourself when you are in a protected worldguard region!");
+								return false;
+							}
 						}
 						Location loc = p.getLocation();
 						loc.setY(120);
@@ -64,6 +72,12 @@ public class command implements CommandExecutor {
 							if(vanish.isVanished(p)) {
 								sender.sendMessage(ChatColor.RED + "you cannot spawn a crate for yourself when you are vanished!");
 								return false;
+							}
+							if(util.isWorldGuardEnabled()) {
+								if(!worldguard.canPlayerBuild(p)) {
+									sender.sendMessage(ChatColor.RED + "you cannot spawn a crate for this player when he is in a protected worldguard region!");
+									return false;
+								}
 							}
 							Location loc = p.getLocation();
 							loc.setY(120);
