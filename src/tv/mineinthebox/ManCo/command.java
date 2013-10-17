@@ -24,43 +24,56 @@ public class command implements CommandExecutor {
 		if(cmd.getName().equalsIgnoreCase("manco")) {
 			if(sender.hasPermission("manco.command")) {
 				if(args.length == 0) {
-					if(sender instanceof Player) {
-						Player p = (Player) sender;
-						if(chestList.getCrateList.containsKey(p.getName()) || chestList.getCrateList2.containsKey(p.getName())) {
-							sender.sendMessage(ChatColor.RED + "could not create a crate because you allready have a non used crate!");
-							return false;
-						}
-						if(vanish.isVanished(p)) {
-							sender.sendMessage(ChatColor.RED + "you cannot spawn a crate for yourself when you are vanished!");
-							return false;
-						}
-						if(util.isWorldGuardEnabled()) {
-							if(!worldguard.canPlayerBuild(p)) {
-								sender.sendMessage(ChatColor.RED + "you cannot spawn a crate for yourself when you are in a protected worldguard region!");
+					if(sender.hasPermission("manco.spawn")) {
+						if(sender instanceof Player) {
+							Player p = (Player) sender;
+							if(chestList.getCrateList.containsKey(p.getName()) || chestList.getCrateList2.containsKey(p.getName())) {
+								sender.sendMessage(ChatColor.RED + "could not create a crate because you allready have a non used crate!");
 								return false;
 							}
+							if(vanish.isVanished(p)) {
+								sender.sendMessage(ChatColor.RED + "you cannot spawn a crate for yourself when you are vanished!");
+								return false;
+							}
+							if(util.isWorldGuardEnabled()) {
+								if(!worldguard.canPlayerBuild(p)) {
+									sender.sendMessage(ChatColor.RED + "you cannot spawn a crate for yourself when you are in a protected worldguard region!");
+									return false;
+								}
+							}
+							Location loc = p.getLocation();
+							loc.setY(120);
+							Entity entity = p.getWorld().spawnFallingBlock(loc, Material.CHEST, (byte) 1);
+							chestList.getFallingStateChest.put(entity, p.getName());
+							Bukkit.broadcastMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + p.getName() + " found a ManCo crate!");
+							sender.sendMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + "you've successfully spawned a crate for yourself!");
+						} else {
+							sender.sendMessage("a console cannot have a location !");
 						}
-						Location loc = p.getLocation();
-						loc.setY(120);
-						Entity entity = p.getWorld().spawnFallingBlock(loc, Material.CHEST, (byte) 1);
-						chestList.getFallingStateChest.put(entity, p.getName());
-						Bukkit.broadcastMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + p.getName() + " found a ManCo crate!");
-						sender.sendMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + "you've successfully spawned a crate for yourself!");
 					} else {
-						sender.sendMessage("a console cannot have a location !");
+						sender.sendMessage(ChatColor.RED + "you are not allowed to use this command!");
 					}
 				} else if(args.length == 1) {
 					if(args[0].equalsIgnoreCase("reload")) {
-						cratescheduler.task.cancel();
-						cratescheduler.task = null;
-						cratescheduler.startScheduler();
-						handler.restartListeners();
-						sender.sendMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + "reload successfully");
+						if(sender.hasPermission("manco.reload")) {
+							cratescheduler.task.cancel();
+							cratescheduler.task = null;
+							cratescheduler.startScheduler();
+							handler.restartListeners();
+							sender.sendMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + "reload successfully");
+						} else {
+							sender.sendMessage(ChatColor.RED + "you are not allowed to use this command!");
+						}
 					} else if(args[0].equalsIgnoreCase("help")) {
-						sender.sendMessage(ChatColor.GOLD + ".oO___[ManCo supplycrates]___Oo.");
-						sender.sendMessage(ChatColor.RED + "Admin: " + ChatColor.GRAY + "/manco " + ChatColor.WHITE + ": spawn a supplycrate for yourself");
-						sender.sendMessage(ChatColor.RED + "Admin: " + ChatColor.GRAY + "/manco <player> " + ChatColor.WHITE + ": spawn a supplycrate for a player");
-						sender.sendMessage(ChatColor.RED + "Admin: " + ChatColor.GRAY + "/manco reload " + ChatColor.WHITE + ": reloads the plugin");
+						if(sender.hasPermission("manco.help.admin")) {
+							sender.sendMessage(ChatColor.GOLD + ".oO___[ManCo supplycrates]___Oo.");
+							sender.sendMessage(ChatColor.RED + "Admin: " + ChatColor.GRAY + "/manco " + ChatColor.WHITE + ": spawn a supplycrate for yourself");
+							sender.sendMessage(ChatColor.RED + "Admin: " + ChatColor.GRAY + "/manco <player> " + ChatColor.WHITE + ": spawn a supplycrate for a player");
+							sender.sendMessage(ChatColor.RED + "Admin: " + ChatColor.GRAY + "/manco reload " + ChatColor.WHITE + ": reloads the plugin");
+							sender.sendMessage(ChatColor.RED + "Admin: " + ChatColor.GRAY + "/manco buy " + ChatColor.WHITE + ": buy a ManCo crate!");
+						} else {
+							sender.sendMessage(ChatColor.RED + "you are not allowed to use this command!");
+						}
 					} else if(args[0].equalsIgnoreCase("buy")) {
 						if(sender.hasPermission("manco.canbuy")) {
 							if(configuration.isEconomyEnabled()) {
@@ -107,34 +120,38 @@ public class command implements CommandExecutor {
 							sender.sendMessage(ChatColor.RED + "you are not allowed to buy ManCo crates!");
 						}
 					} else {
-						Player p = Bukkit.getPlayer(args[0]);
-						if(p instanceof Player) {
-							if(chestList.getCrateList.containsKey(p.getName())) {
-								sender.sendMessage(ChatColor.RED + "could not create a crate because this player has allready a non used crate!");
-								return false;
-							} else if(chestList.getCrateList2.containsKey(p.getName())) {
-								sender.sendMessage(ChatColor.RED + "could not create a crate because this player has allready a non used crate!");
-								return false;
-							}
-							if(vanish.isVanished(p)) {
-								sender.sendMessage(ChatColor.RED + "you cannot spawn a crate for yourself when you are vanished!");
-								return false;
-							}
-							if(util.isWorldGuardEnabled()) {
-								if(!worldguard.canPlayerBuild(p)) {
-									sender.sendMessage(ChatColor.RED + "you cannot spawn a crate for this player when he is in a protected worldguard region!");
+						if(sender.hasPermission("manco.spawn")) {
+							Player p = Bukkit.getPlayer(args[0]);
+							if(p instanceof Player) {
+								if(chestList.getCrateList.containsKey(p.getName())) {
+									sender.sendMessage(ChatColor.RED + "could not create a crate because this player has allready a non used crate!");
+									return false;
+								} else if(chestList.getCrateList2.containsKey(p.getName())) {
+									sender.sendMessage(ChatColor.RED + "could not create a crate because this player has allready a non used crate!");
 									return false;
 								}
+								if(vanish.isVanished(p)) {
+									sender.sendMessage(ChatColor.RED + "you cannot spawn a crate for yourself when you are vanished!");
+									return false;
+								}
+								if(util.isWorldGuardEnabled()) {
+									if(!worldguard.canPlayerBuild(p)) {
+										sender.sendMessage(ChatColor.RED + "you cannot spawn a crate for this player when he is in a protected worldguard region!");
+										return false;
+									}
+								}
+								Location loc = p.getLocation();
+								loc.setY(120);
+								Entity entity = p.getWorld().spawnFallingBlock(loc, Material.CHEST, (byte) 1);
+								chestList.getFallingStateChest.put(entity, p.getName());
+								Bukkit.broadcastMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + p.getName() + " found a ManCo crate!");	
+								sender.sendMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + "you've successfully spawned a ManCo crate for " + p.getName() + "!");
+							} else {
+								sender.sendMessage(ChatColor.RED + "this player is not online!");
 							}
-							Location loc = p.getLocation();
-							loc.setY(120);
-							Entity entity = p.getWorld().spawnFallingBlock(loc, Material.CHEST, (byte) 1);
-							chestList.getFallingStateChest.put(entity, p.getName());
-							Bukkit.broadcastMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + p.getName() + " found a ManCo crate!");	
-							sender.sendMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + "you've successfully spawned a ManCo crate for " + p.getName() + "!");
 						} else {
-							sender.sendMessage(ChatColor.RED + "this player is not online!");
-						}	
+							sender.sendMessage(ChatColor.RED + "you are not allowed to use this command!");
+						}
 					}
 				}
 			} else {

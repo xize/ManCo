@@ -1,5 +1,5 @@
 name: ManCo
-version: 0.2
+version: 0.3
 description: ManCo item spawner
 author: xize
 authors: [] 
@@ -8,7 +8,7 @@ website:
 main: tv.mineinthebox.ManCo.manCo
 database: false
 depend: []
-softdepend: [WorldGuard]
+softdepend: [WorldGuard, iConomy, Vault]
 
 commands:
   manco:
