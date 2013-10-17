@@ -65,7 +65,7 @@ public class cratescheduler {
 				//Random player doesn't have a crate so we can proceed the code:)
 
 				Location loc = p.getLocation();
-				loc.setY(120);
+				loc.setY(256);
 				Entity entity = p.getWorld().spawnFallingBlock(loc, Material.CHEST, (byte) 1);
 				chestList.getFallingStateChest.put(entity, p.getName());
 				Bukkit.broadcastMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + p.getName() + " found a ManCo crate!");	
@@ -95,7 +95,7 @@ public class cratescheduler {
 				//Random player doesn't have a crate so we can proceed the code:)
 
 				Location loc = p.getLocation();
-				loc.setY(120);
+				loc.setY(256);
 				Entity entity = p.getWorld().spawnFallingBlock(loc, Material.CHEST, (byte) 1);
 				chestList.getFallingStateChest.put(entity, p.getName());
 				Bukkit.broadcastMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + p.getName() + " found a ManCo crate!");	
@@ -105,7 +105,7 @@ public class cratescheduler {
 
 	public static void doCrateNative(Player p) {
 		Location loc = p.getLocation();
-		loc.setY(120);
+		loc.setY(256);
 		Entity entity = p.getWorld().spawnFallingBlock(loc, Material.CHEST, (byte) 1);
 		chestList.getFallingStateChest.put(entity, p.getName());
 		Bukkit.broadcastMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + p.getName() + " found a ManCo crate!");

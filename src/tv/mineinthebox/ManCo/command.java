@@ -42,7 +42,7 @@ public class command implements CommandExecutor {
 								}
 							}
 							Location loc = p.getLocation();
-							loc.setY(120);
+							loc.setY(256);
 							Entity entity = p.getWorld().spawnFallingBlock(loc, Material.CHEST, (byte) 1);
 							chestList.getFallingStateChest.put(entity, p.getName());
 							Bukkit.broadcastMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + p.getName() + " found a ManCo crate!");
@@ -85,7 +85,7 @@ public class command implements CommandExecutor {
 												if(worldguard.canPlayerBuild(p)) {
 													if(iconomy.debitMoney(p, configuration.returnIconomyPrice())) { 
 														Location loc = p.getLocation();
-														loc.setY(120);
+														loc.setY(256);
 														Entity entity = p.getWorld().spawnFallingBlock(loc, Material.CHEST, (byte) 1);
 														chestList.getFallingStateChest.put(entity, p.getName());
 														Bukkit.broadcastMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + p.getName() + " has bought a ManCo crate!");
@@ -98,7 +98,7 @@ public class command implements CommandExecutor {
 											} else {
 												if(iconomy.debitMoney(p, configuration.returnIconomyPrice())) { 
 													Location loc = p.getLocation();
-													loc.setY(120);
+													loc.setY(256);
 													Entity entity = p.getWorld().spawnFallingBlock(loc, Material.CHEST, (byte) 1);
 													chestList.getFallingStateChest.put(entity, p.getName());
 													Bukkit.broadcastMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + p.getName() + " has bought a ManCo crate!");
@@ -141,7 +141,7 @@ public class command implements CommandExecutor {
 									}
 								}
 								Location loc = p.getLocation();
-								loc.setY(120);
+								loc.setY(256);
 								Entity entity = p.getWorld().spawnFallingBlock(loc, Material.CHEST, (byte) 1);
 								chestList.getFallingStateChest.put(entity, p.getName());
 								Bukkit.broadcastMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + p.getName() + " found a ManCo crate!");	
