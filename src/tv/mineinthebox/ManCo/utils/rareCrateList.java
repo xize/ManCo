@@ -1,4 +1,4 @@
-package tv.mineinthebox.ManCo;
+package tv.mineinthebox.ManCo.utils;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -14,8 +14,11 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Entity;
 import org.bukkit.inventory.ItemStack;
 
+import tv.mineinthebox.ManCo.logType;
+import tv.mineinthebox.ManCo.manCo;
+
 @SuppressWarnings("deprecation")
-public class chestList {
+public class rareCrateList {
 	public static HashMap<Entity, String> getFallingStateChest = new HashMap<Entity, String>();
 	public static HashMap<String, Chest> getCrateList = new HashMap<String, Chest>();
 	public static HashMap<String, Chest> getCrateList2 = new HashMap<String, Chest>();

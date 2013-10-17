@@ -8,6 +8,7 @@ import tv.mineinthebox.ManCo.configuration.configuration;
 import tv.mineinthebox.ManCo.events.chestCheck;
 import tv.mineinthebox.ManCo.events.cratescheduler;
 import tv.mineinthebox.ManCo.events.handler;
+import tv.mineinthebox.ManCo.utils.rareCrate;
 
 public class manCo extends JavaPlugin {
 	
@@ -21,6 +22,9 @@ public class manCo extends JavaPlugin {
 		handler.launch();
 		cratescheduler.startScheduler();
 		getCommand("manco").setExecutor(new command());
+		if(!rareCrate.getRareCrateList().isEmpty()) {
+			cratescheduler.startRareScheduler();
+		}
 	}
 	
 	public void onDisable() {

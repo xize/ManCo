@@ -15,6 +15,7 @@ import tv.mineinthebox.ManCo.events.cratescheduler;
 import tv.mineinthebox.ManCo.events.handler;
 import tv.mineinthebox.ManCo.utils.iconomy;
 import tv.mineinthebox.ManCo.utils.normalCrate;
+import tv.mineinthebox.ManCo.utils.normalCrateList;
 import tv.mineinthebox.ManCo.utils.util;
 import tv.mineinthebox.ManCo.utils.vanish;
 import tv.mineinthebox.ManCo.utils.worldguard;
@@ -28,7 +29,7 @@ public class command implements CommandExecutor {
 					if(sender.hasPermission("manco.spawn")) {
 						if(sender instanceof Player) {
 							Player p = (Player) sender;
-							if(chestList.getCrateList.containsKey(p.getName()) || chestList.getCrateList2.containsKey(p.getName())) {
+							if(normalCrateList.getCrateList.containsKey(p.getName()) || normalCrateList.getCrateList2.containsKey(p.getName())) {
 								sender.sendMessage(ChatColor.RED + "could not create a crate because you allready have a non used crate!");
 								return false;
 							}
@@ -45,7 +46,7 @@ public class command implements CommandExecutor {
 							Location loc = p.getLocation();
 							loc.setY(normalCrate.getCrateSpawnHeight(p));
 							Entity entity = p.getWorld().spawnFallingBlock(loc, Material.CHEST, (byte) 1);
-							chestList.getFallingStateChest.put(entity, p.getName());
+							normalCrateList.getFallingStateChest.put(entity, p.getName());
 							Bukkit.broadcastMessage(ChatColor.GREEN + "[ManCo] " + normalCrate.getCrateFoundMessage().replace("%p", p.getName()));
 							sender.sendMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + "you've successfully spawned a crate for yourself!");
 						} else {
@@ -81,14 +82,14 @@ public class command implements CommandExecutor {
 								if(util.isIconomyEnabled()) {
 									if(sender instanceof Player) {
 										Player p = (Player) sender;
-										if(!(chestList.getCrateList.containsKey(p.getName()) || chestList.getCrateList2.containsKey(p.getName()))) {
+										if(!(normalCrateList.getCrateList.containsKey(p.getName()) || normalCrateList.getCrateList2.containsKey(p.getName()))) {
 											if(util.isWorldGuardEnabled()) {
 												if(worldguard.canPlayerBuild(p)) {
 													if(iconomy.debitMoney(p, configuration.returnIconomyPrice())) { 
 														Location loc = p.getLocation();
 														loc.setY(normalCrate.getCrateSpawnHeight(p));
 														Entity entity = p.getWorld().spawnFallingBlock(loc, Material.CHEST, (byte) 1);
-														chestList.getFallingStateChest.put(entity, p.getName());
+														normalCrateList.getFallingStateChest.put(entity, p.getName());
 														Bukkit.broadcastMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + p.getName() + " has bought a ManCo crate!");
 													} else {
 														sender.sendMessage(ChatColor.RED + "you have not enough money to buy a ManCo crate!");
@@ -101,7 +102,7 @@ public class command implements CommandExecutor {
 													Location loc = p.getLocation();
 													loc.setY(normalCrate.getCrateSpawnHeight(p));
 													Entity entity = p.getWorld().spawnFallingBlock(loc, Material.CHEST, (byte) 1);
-													chestList.getFallingStateChest.put(entity, p.getName());
+													normalCrateList.getFallingStateChest.put(entity, p.getName());
 													Bukkit.broadcastMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + p.getName() + " has bought a ManCo crate!");
 												} else {
 													sender.sendMessage(ChatColor.RED + "you have not enough money to buy a ManCo crate!");
@@ -124,10 +125,10 @@ public class command implements CommandExecutor {
 						if(sender.hasPermission("manco.spawn")) {
 							Player p = Bukkit.getPlayer(args[0]);
 							if(p instanceof Player) {
-								if(chestList.getCrateList.containsKey(p.getName())) {
+								if(normalCrateList.getCrateList.containsKey(p.getName())) {
 									sender.sendMessage(ChatColor.RED + "could not create a crate because this player has allready a non used crate!");
 									return false;
-								} else if(chestList.getCrateList2.containsKey(p.getName())) {
+								} else if(normalCrateList.getCrateList2.containsKey(p.getName())) {
 									sender.sendMessage(ChatColor.RED + "could not create a crate because this player has allready a non used crate!");
 									return false;
 								}
@@ -144,7 +145,7 @@ public class command implements CommandExecutor {
 								Location loc = p.getLocation();
 								loc.setY(normalCrate.getCrateSpawnHeight(p));
 								Entity entity = p.getWorld().spawnFallingBlock(loc, Material.CHEST, (byte) 1);
-								chestList.getFallingStateChest.put(entity, p.getName());
+								normalCrateList.getFallingStateChest.put(entity, p.getName());
 								Bukkit.broadcastMessage(ChatColor.GREEN + "[ManCo] " + normalCrate.getCrateFoundMessage().replace("%p", p.getName()));	
 								sender.sendMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + "you've successfully spawned a ManCo crate for " + p.getName() + "!");
 							} else {
