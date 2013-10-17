@@ -24,6 +24,7 @@ import org.bukkit.inventory.ItemStack;
 
 import tv.mineinthebox.ManCo.chestList;
 import tv.mineinthebox.ManCo.manCo;
+import tv.mineinthebox.ManCo.configuration.configuration;
 
 public class chestCheck implements Listener {
 
@@ -86,13 +87,13 @@ public class chestCheck implements Listener {
 			}
 		}
 	}
-	
+
 	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void blockBreak(BlockBreakEvent e) {
 		for(BlockFace face : BlockFace.values()) {
 			Block block = e.getBlock().getRelative(face);
-			
+
 			if(block.getType() == Material.CHEST) {
 				if(chestList.chestLocations.containsKey(block.getLocation())) {
 					e.getPlayer().sendMessage(ChatColor.RED + "you are not allowed to break a ManCo crate!");
@@ -223,17 +224,19 @@ public class chestCheck implements Listener {
 					Chest chestFromCrateList = chestList.getCrateList2.get(e.getPlayer().getName());
 					if(chest.equals(chestFromCrateList)) {
 						ItemStack[] items = chestList.ItemsFromChest.get(e.getPlayer().getName());
-						StringBuilder build = new StringBuilder();
-						for(int i = 0; i < items.length; i++) {
-							if(items[i] != null) {
-								if(i == (items.length - 1)) {
-									build.append(items[i].getType().name().toLowerCase().replace("_", " ") + "").toString();
-								} else {
-									build.append(items[i].getType().name().toLowerCase().replace("_", " ") + ", ").toString();	
+						if(!configuration.isUnCrateMessageDisabled()) {
+							StringBuilder build = new StringBuilder();
+							for(int i = 0; i < items.length; i++) {
+								if(items[i] != null) {
+									if(i == (items.length - 1)) {
+										build.append(items[i].getType().name().toLowerCase().replace("_", " ") + "").toString();
+									} else {
+										build.append(items[i].getType().name().toLowerCase().replace("_", " ") + ", ").toString();	
+									}
 								}
 							}
+							Bukkit.broadcastMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + e.getPlayer().getName() + ChatColor.GRAY + " has uncrated the following items!, " + build.toString());
 						}
-						Bukkit.broadcastMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + e.getPlayer().getName() + ChatColor.GRAY + " has uncrated the following items!, " + build.toString());
 						chestList.getCrateList2.remove(e.getPlayer().getName());
 						chestList.ItemsFromChest.remove(e.getPlayer().getName());
 						chestList.chestLocations.remove(chest.getLocation());

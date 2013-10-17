@@ -34,6 +34,9 @@ public class configuration {
 				if(!con.isSet("CrateFoundMessage")) {
 					con.set("CrateFoundMessage", "&7%p has found a ManCo crate!");
 				}
+				if(!con.isSet("disableUncrateMessage")) {
+					con.set("disableUncraftMessage", false);
+				}
 				opt.header("Default configuration file for manCo crates!\nscheme DataValue:subDataValue:Amount");
 				ArrayList<String> list = new ArrayList<String>();
 				list.add("98:1:1");
@@ -63,6 +66,10 @@ public class configuration {
 					con.set("CrateFoundMessage", "&7%p has found a ManCo crate!");
 					con.save(f);
 				}
+				if(!con.isSet("disableUncrateMessage")) {
+					con.set("disableUncraftMessage", false);
+					con.save(f);
+				}
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -80,6 +87,19 @@ public class configuration {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public static boolean isUnCrateMessageDisabled() {
+		try {
+			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "items.yml");
+			if(f.exists()) {
+				FileConfiguration con = YamlConfiguration.loadConfiguration(f);
+				return con.getBoolean("disableUncraftMessage");
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 	
 	public static int getCrateSpawnHeight(Player p) {
