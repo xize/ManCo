@@ -42,10 +42,10 @@ public class command implements CommandExecutor {
 								}
 							}
 							Location loc = p.getLocation();
-							loc.setY(256);
+							loc.setY(configuration.getCrateSpawnHeight(p));
 							Entity entity = p.getWorld().spawnFallingBlock(loc, Material.CHEST, (byte) 1);
 							chestList.getFallingStateChest.put(entity, p.getName());
-							Bukkit.broadcastMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + p.getName() + " found a ManCo crate!");
+							Bukkit.broadcastMessage(ChatColor.GREEN + "[ManCo] " + configuration.getCrateFoundMessage().replace("%p", p.getName()));
 							sender.sendMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + "you've successfully spawned a crate for yourself!");
 						} else {
 							sender.sendMessage("a console cannot have a location !");
@@ -85,7 +85,7 @@ public class command implements CommandExecutor {
 												if(worldguard.canPlayerBuild(p)) {
 													if(iconomy.debitMoney(p, configuration.returnIconomyPrice())) { 
 														Location loc = p.getLocation();
-														loc.setY(256);
+														loc.setY(configuration.getCrateSpawnHeight(p));
 														Entity entity = p.getWorld().spawnFallingBlock(loc, Material.CHEST, (byte) 1);
 														chestList.getFallingStateChest.put(entity, p.getName());
 														Bukkit.broadcastMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + p.getName() + " has bought a ManCo crate!");
@@ -98,7 +98,7 @@ public class command implements CommandExecutor {
 											} else {
 												if(iconomy.debitMoney(p, configuration.returnIconomyPrice())) { 
 													Location loc = p.getLocation();
-													loc.setY(256);
+													loc.setY(configuration.getCrateSpawnHeight(p));
 													Entity entity = p.getWorld().spawnFallingBlock(loc, Material.CHEST, (byte) 1);
 													chestList.getFallingStateChest.put(entity, p.getName());
 													Bukkit.broadcastMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + p.getName() + " has bought a ManCo crate!");
@@ -141,10 +141,10 @@ public class command implements CommandExecutor {
 									}
 								}
 								Location loc = p.getLocation();
-								loc.setY(256);
+								loc.setY(configuration.getCrateSpawnHeight(p));
 								Entity entity = p.getWorld().spawnFallingBlock(loc, Material.CHEST, (byte) 1);
 								chestList.getFallingStateChest.put(entity, p.getName());
-								Bukkit.broadcastMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + p.getName() + " found a ManCo crate!");	
+								Bukkit.broadcastMessage(ChatColor.GREEN + "[ManCo] " + configuration.getCrateFoundMessage().replace("%p", p.getName()));	
 								sender.sendMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + "you've successfully spawned a ManCo crate for " + p.getName() + "!");
 							} else {
 								sender.sendMessage(ChatColor.RED + "this player is not online!");

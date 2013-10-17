@@ -3,9 +3,11 @@ package tv.mineinthebox.ManCo.configuration;
 import java.io.File;
 import java.util.ArrayList;
 
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.FileConfigurationOptions;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
 
 import tv.mineinthebox.ManCo.manCo;
 
@@ -28,6 +30,9 @@ public class configuration {
 				}
 				if(!con.isSet("useIconomy.price")) {
 					con.set("useIconomy.price", 10.0);
+				}
+				if(!con.isSet("CrateFoundMessage")) {
+					con.set("CrateFoundMessage", "&7%p has found a ManCo crate!");
 				}
 				opt.header("Default configuration file for manCo crates!\nscheme DataValue:subDataValue:Amount");
 				ArrayList<String> list = new ArrayList<String>();
@@ -54,9 +59,34 @@ public class configuration {
 					con.set("useIconomy.price", 10.0);
 					con.save(f);
 				}
+				if(!con.isSet("CrateFoundMessage")) {
+					con.set("CrateFoundMessage", "&7%p has found a ManCo crate!");
+					con.save(f);
+				}
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
+		}
+	}
+	
+	public static String getCrateFoundMessage() {
+		try {
+			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "items.yml");
+			if(f.exists()) {
+				FileConfiguration con = YamlConfiguration.loadConfiguration(f);
+				return ChatColor.translateAlternateColorCodes('&', con.getString("CrateFoundMessage"));
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public static int getCrateSpawnHeight(Player p) {
+		if(p.getLocation().getY() < 100) {
+			return 120;
+		} else {
+			return 256;
 		}
 	}
 	
