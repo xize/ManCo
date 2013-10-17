@@ -24,7 +24,7 @@ import org.bukkit.inventory.ItemStack;
 
 import tv.mineinthebox.ManCo.chestList;
 import tv.mineinthebox.ManCo.manCo;
-import tv.mineinthebox.ManCo.configuration.configuration;
+import tv.mineinthebox.ManCo.utils.normalCrate;
 
 public class chestCheck implements Listener {
 
@@ -224,7 +224,7 @@ public class chestCheck implements Listener {
 					Chest chestFromCrateList = chestList.getCrateList2.get(e.getPlayer().getName());
 					if(chest.equals(chestFromCrateList)) {
 						ItemStack[] items = chestList.ItemsFromChest.get(e.getPlayer().getName());
-						if(!configuration.isUnCrateMessageDisabled()) {
+						if(!normalCrate.isUnCrateMessageDisabled()) {
 							StringBuilder build = new StringBuilder();
 							for(int i = 0; i < items.length; i++) {
 								if(items[i] != null) {

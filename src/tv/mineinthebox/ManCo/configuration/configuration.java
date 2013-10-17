@@ -3,12 +3,9 @@ package tv.mineinthebox.ManCo.configuration;
 import java.io.File;
 import java.util.ArrayList;
 
-import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.FileConfigurationOptions;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.entity.Player;
-
 import tv.mineinthebox.ManCo.manCo;
 
 public class configuration {
@@ -19,6 +16,11 @@ public class configuration {
 			if(!f.exists()) {
 				FileConfiguration con = YamlConfiguration.loadConfiguration(f);
 				FileConfigurationOptions opt = con.options();
+				opt.header("Default configuration file for manCo crates!\nscheme DataValue:subDataValue:Amount");
+				ArrayList<String> list = new ArrayList<String>();
+				list.add("98:1:1");
+				list.add("20:0:3");
+				con.set("item.ids", list);
 				if(!con.isSet("time")) {
 					con.set("time", 90000);
 				}
@@ -35,13 +37,30 @@ public class configuration {
 					con.set("CrateFoundMessage", "&7%p has found a ManCo crate!");
 				}
 				if(!con.isSet("disableUncrateMessage")) {
-					con.set("disableUncraftMessage", false);
+					con.set("disableUncrateMessage", false);
 				}
-				opt.header("Default configuration file for manCo crates!\nscheme DataValue:subDataValue:Amount");
-				ArrayList<String> list = new ArrayList<String>();
-				list.add("98:1:1");
-				list.add("20:0:3");
-				con.set("item.ids", list);
+				if(!con.isSet("rarecrates")) {
+					ArrayList<String> a= new ArrayList<String>();
+					a.add("264:0:32");
+					a.add("264:0:12");
+					a.add("265:0:5");
+					a.add("322:1:2");
+					ArrayList<String> list1 = new ArrayList<String>();
+					list1.add("264:0:32");
+					list1.add("264:0:12");
+					list1.add("265:0:5");
+					list1.add("322:1:2");
+					con.set("rarecrates.rarecrate1.enable", true);
+					con.set("rarecrates.rarecrate1.dropRateChance", 5);
+					con.set("rarecrates.rarecrate1.crateFoundMessage", "&7%p has found a &1(Rare)&7 ManCo crate!");
+					con.set("rarecrates.rarecrate1.items", a.toArray());
+					con.set("rarecrates.anothercrate.enable", false);
+					con.set("rarecrates.anothercrate.dropRateChance", 2);
+					con.set("rarecrates.anothercrate.crateFoundMessage", "&7%p has found a &1(Rare)&7 ManCo crate!");
+					con.set("rarecrates.anothercrate.items", list1.toArray());
+					list1.clear();
+					a.clear();
+				}
 				con.save(f);
 				list.clear();
 			} else {
@@ -67,46 +86,35 @@ public class configuration {
 					con.save(f);
 				}
 				if(!con.isSet("disableUncrateMessage")) {
-					con.set("disableUncraftMessage", false);
+					con.set("disableUncrateMessage", false);
+					con.save(f);
+				}
+				if(!con.isSet("rarecrates")) {
+					ArrayList<String> a= new ArrayList<String>();
+					a.add("264:0:32");
+					a.add("264:0:12");
+					a.add("265:0:5");
+					a.add("322:1:2");
+					ArrayList<String> list = new ArrayList<String>();
+					list.add("264:0:32");
+					list.add("264:0:12");
+					list.add("265:0:5");
+					list.add("322:1:2");
+					con.set("rarecrates.rarecrate1.enable", true);
+					con.set("rarecrates.rarecrate1.dropRateChance", 5);
+					con.set("rarecrates.rarecrate1.crateFoundMessage", "&7%p has found a &1(Rare)&7 ManCo crate!");
+					con.set("rarecrates.rarecrate1.items", a.toArray());
+					con.set("rarecrates.anothercrate.enable", false);
+					con.set("rarecrates.anothercrate.dropRateChance", 2);
+					con.set("rarecrates.anothercrate.crateFoundMessage", "&7%p has found a &1(Rare)&7 ManCo crate!");
+					con.set("rarecrates.anothercrate.items", list.toArray());
+					list.clear();
+					a.clear();
 					con.save(f);
 				}
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
-		}
-	}
-	
-	public static String getCrateFoundMessage() {
-		try {
-			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "items.yml");
-			if(f.exists()) {
-				FileConfiguration con = YamlConfiguration.loadConfiguration(f);
-				return ChatColor.translateAlternateColorCodes('&', con.getString("CrateFoundMessage"));
-			}
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-	
-	public static boolean isUnCrateMessageDisabled() {
-		try {
-			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "items.yml");
-			if(f.exists()) {
-				FileConfiguration con = YamlConfiguration.loadConfiguration(f);
-				return con.getBoolean("disableUncraftMessage");
-			}
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-		return false;
-	}
-	
-	public static int getCrateSpawnHeight(Player p) {
-		if(p.getLocation().getY() < 100) {
-			return 120;
-		} else {
-			return 256;
 		}
 	}
 	

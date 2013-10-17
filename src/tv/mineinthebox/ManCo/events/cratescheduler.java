@@ -13,6 +13,7 @@ import org.bukkit.scheduler.BukkitTask;
 import tv.mineinthebox.ManCo.chestList;
 import tv.mineinthebox.ManCo.manCo;
 import tv.mineinthebox.ManCo.configuration.configuration;
+import tv.mineinthebox.ManCo.utils.normalCrate;
 import tv.mineinthebox.ManCo.utils.util;
 import tv.mineinthebox.ManCo.utils.vanish;
 import tv.mineinthebox.ManCo.utils.worldguard;
@@ -65,10 +66,10 @@ public class cratescheduler {
 				//Random player doesn't have a crate so we can proceed the code:)
 
 				Location loc = p.getLocation();
-				loc.setY(configuration.getCrateSpawnHeight(p));
+				loc.setY(normalCrate.getCrateSpawnHeight(p));
 				Entity entity = p.getWorld().spawnFallingBlock(loc, Material.CHEST, (byte) 1);
 				chestList.getFallingStateChest.put(entity, p.getName());
-				Bukkit.broadcastMessage(ChatColor.GREEN + "[ManCo] " + configuration.getCrateFoundMessage().replace("%p", p.getName()));	
+				Bukkit.broadcastMessage(ChatColor.GREEN + "[ManCo] " + normalCrate.getCrateFoundMessage().replace("%p", p.getName()));	
 			}
 		}
 	}
@@ -95,20 +96,20 @@ public class cratescheduler {
 				//Random player doesn't have a crate so we can proceed the code:)
 
 				Location loc = p.getLocation();
-				loc.setY(configuration.getCrateSpawnHeight(p));
+				loc.setY(normalCrate.getCrateSpawnHeight(p));
 				Entity entity = p.getWorld().spawnFallingBlock(loc, Material.CHEST, (byte) 1);
 				chestList.getFallingStateChest.put(entity, p.getName());
-				Bukkit.broadcastMessage(ChatColor.GREEN + "[ManCo] " + configuration.getCrateFoundMessage().replace("%p", p.getName()));	
+				Bukkit.broadcastMessage(ChatColor.GREEN + "[ManCo] " + normalCrate.getCrateFoundMessage().replace("%p", p.getName()));	
 			}
 		}
 	}
 
 	public static void doCrateNative(Player p) {
 		Location loc = p.getLocation();
-		loc.setY(configuration.getCrateSpawnHeight(p));
+		loc.setY(normalCrate.getCrateSpawnHeight(p));
 		Entity entity = p.getWorld().spawnFallingBlock(loc, Material.CHEST, (byte) 1);
 		chestList.getFallingStateChest.put(entity, p.getName());
-		Bukkit.broadcastMessage(ChatColor.GREEN + "[ManCo] " + configuration.getCrateFoundMessage().replace("%p", p.getName()));
+		Bukkit.broadcastMessage(ChatColor.GREEN + "[ManCo] " + normalCrate.getCrateFoundMessage().replace("%p", p.getName()));
 	}
 
 }
