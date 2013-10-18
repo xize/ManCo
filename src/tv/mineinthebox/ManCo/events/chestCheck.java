@@ -50,7 +50,7 @@ public class chestCheck implements Listener {
 				String[] args = rareCrateList.getFallingStateChest.get(e.getEntity()).split(":");
 				e.getBlock().setData((byte) 3);
 				Chest chest = (Chest) e.getBlock().getState();
-				rareCrateList.getCrateList.put(rareCrateList.getFallingStateChest.get(e.getEntity()), chest);
+				rareCrateList.getCrateList.put(args[0], chest);
 				rareCrateList.chestLocations.put(chest.getLocation(), e.getBlock());
 				rareCrateList.getFallingStateChest.remove(e.getEntity());
 				rareCrateList.setRandomItems(chest, args[1]);
@@ -252,6 +252,111 @@ public void getInventory(final InventoryOpenEvent e) {
 
 					}, 300);
 				}
+			} else if(rareCrateList.getCrateList.containsKey(e.getPlayer().getName())) {
+				Chest chestFromList = rareCrateList.getCrateList.get(e.getPlayer().getName());
+				if(!chest.equals(chestFromList)){
+					if(normalCrateList.getCrateList.containsValue(chest)) {
+						e.setCancelled(true);
+					}
+				} else {
+					if(normalCrateList.schedulerTime.contains(e.getPlayer().getName())) {
+						e.setCancelled(true);
+						return;
+					}
+					final Player p = (Player) e.getPlayer();
+					e.setCancelled(true);
+					normalCrateList.schedulerTime.add(e.getPlayer().getName());
+					Bukkit.getScheduler().scheduleSyncDelayedTask(manCo.getPlugin(), new Runnable() {
+
+						@Override
+						public void run() {
+							p.sendMessage(ChatColor.GREEN + "opening crate 5");
+							p.playSound(chest.getLocation(), Sound.CHEST_OPEN, 0, 1);
+							p.playSound(chest.getLocation(), Sound.CHEST_OPEN, 1, 0);
+							p.playSound(chest.getLocation(), Sound.CHEST_CLOSE, 1, 0);
+							p.playSound(chest.getLocation(), Sound.CHEST_OPEN, 1, 0);
+						}
+
+					}, 50);
+					Bukkit.getScheduler().scheduleSyncDelayedTask(manCo.getPlugin(), new Runnable() {
+
+						@Override
+						public void run() {
+							p.sendMessage(ChatColor.GREEN + "opening crate 4");
+							p.playSound(chest.getLocation(), Sound.CHEST_OPEN, 0, 1);
+							p.playSound(chest.getLocation(), Sound.CHEST_OPEN, 1, 0);
+							p.playSound(chest.getLocation(), Sound.CHEST_CLOSE, 1, 0);
+							p.playSound(chest.getLocation(), Sound.CHEST_OPEN, 1, 0);
+						}
+
+					}, 100);
+					Bukkit.getScheduler().scheduleSyncDelayedTask(manCo.getPlugin(), new Runnable() {
+
+						@Override
+						public void run() {
+							p.sendMessage(ChatColor.GREEN + "opening crate 3");
+							p.playSound(chest.getLocation(), Sound.CHEST_OPEN, 0, 1);
+							p.playSound(chest.getLocation(), Sound.CHEST_OPEN, 1, 0);
+							p.playSound(chest.getLocation(), Sound.CHEST_CLOSE, 1, 0);
+							p.playSound(chest.getLocation(), Sound.CHEST_OPEN, 1, 0);
+						}
+
+
+					}, 150);
+					Bukkit.getScheduler().scheduleSyncDelayedTask(manCo.getPlugin(), new Runnable() {
+
+						@Override
+						public void run() {
+							p.sendMessage(ChatColor.GREEN + "opening crate 2");
+							p.playSound(chest.getLocation(), Sound.CHEST_OPEN, 0, 1);
+							p.playSound(chest.getLocation(), Sound.CHEST_OPEN, 1, 0);
+							p.playSound(chest.getLocation(), Sound.CHEST_CLOSE, 1, 0);
+							p.playSound(chest.getLocation(), Sound.CHEST_OPEN, 1, 0);
+						}
+
+					}, 200);
+					Bukkit.getScheduler().scheduleSyncDelayedTask(manCo.getPlugin(), new Runnable() {
+
+						@Override
+						public void run() {
+							p.sendMessage(ChatColor.GREEN + "opening crate 1");
+							p.playSound(chest.getLocation(), Sound.CHEST_OPEN, 0, 1);
+							p.playSound(chest.getLocation(), Sound.CHEST_OPEN, 1, 0);
+							p.playSound(chest.getLocation(), Sound.CHEST_CLOSE, 1, 0);
+							p.playSound(chest.getLocation(), Sound.CHEST_OPEN, 1, 0);
+							if(!(chest.getLocation().getX() - (chest.getLocation().getX() + p.getLocation().getX()) <= 6 || chest.getLocation().getZ() - (chest.getLocation().getZ() + p.getLocation().getZ()) <= 6 || chest.getLocation().getY() - (chest.getLocation().getY() + p.getLocation().getY()) <= 6)) {
+								p.sendMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + "you are to far away to open this crate!");
+								e.setCancelled(true);
+								return;
+							}
+						}
+
+					}, 250);
+					Bukkit.getScheduler().scheduleSyncDelayedTask(manCo.getPlugin(), new Runnable() {
+
+						@Override
+						public void run() {
+							try {
+								p.sendMessage(ChatColor.GREEN + "opening crate...");
+								p.playSound(chest.getLocation(), Sound.CHEST_OPEN, 0, 1);
+								p.playSound(chest.getLocation(), Sound.CHEST_OPEN, 1, 0);
+								p.playSound(chest.getLocation(), Sound.CHEST_CLOSE, 1, 0);
+								p.playSound(chest.getLocation(), Sound.CHEST_OPEN, 1, 0);
+								if(e.isCancelled()) {
+									e.setCancelled(false);
+									rareCrateList.ItemsFromChest.put(e.getPlayer().getName(), e.getInventory().getContents());
+									rareCrateList.getCrateList.remove(e.getPlayer().getName());
+									rareCrateList.getCrateList2.put(e.getPlayer().getName(), chest);
+									p.openInventory(e.getInventory());
+									rareCrateList.schedulerTime.remove(e.getPlayer().getName());
+								}	
+							} catch(NullPointerException e) {
+								//supress this
+							}
+						}
+
+					}, 300);
+				}
 			}
 		}
 	}
@@ -282,6 +387,28 @@ public void chestClose(InventoryCloseEvent e) {
 					normalCrateList.getCrateList2.remove(e.getPlayer().getName());
 					normalCrateList.ItemsFromChest.remove(e.getPlayer().getName());
 					normalCrateList.chestLocations.remove(chest.getLocation());
+					chest.getBlock().breakNaturally();
+				}
+			} else if(rareCrateList.getCrateList2.containsKey(e.getPlayer().getName())) {
+				Chest chestFromCrateList = rareCrateList.getCrateList2.get(e.getPlayer().getName());
+				if(chest.equals(chestFromCrateList)) {
+					ItemStack[] items = rareCrateList.ItemsFromChest.get(e.getPlayer().getName());
+					if(!normalCrate.isUnCrateMessageDisabled()) {
+						StringBuilder build = new StringBuilder();
+						for(int i = 0; i < items.length; i++) {
+							if(items[i] != null) {
+								if(i == (items.length - 1)) {
+									build.append(items[i].getType().name().toLowerCase().replace("_", " ") + "").toString();
+								} else {
+									build.append(items[i].getType().name().toLowerCase().replace("_", " ") + ", ").toString();	
+								}
+							}
+						}
+						Bukkit.broadcastMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + e.getPlayer().getName() + ChatColor.GRAY + " has uncrated the following items!, " + build.toString());
+					}
+					rareCrateList.getCrateList2.remove(e.getPlayer().getName());
+					rareCrateList.ItemsFromChest.remove(e.getPlayer().getName());
+					rareCrateList.chestLocations.remove(chest.getLocation());
 					chest.getBlock().breakNaturally();
 				}
 			}
