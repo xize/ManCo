@@ -132,6 +132,11 @@ public void blockBreak(BlockBreakEvent e) {
 				e.setCancelled(true);
 				block.setData((byte) 3);
 				break;
+			} else if(rareCrateList.chestLocations.containsKey(block.getLocation())) {
+				e.getPlayer().sendMessage(ChatColor.RED + "you are not allowed to break a ManCo crate!");
+				e.setCancelled(true);
+				block.setData((byte) 3);
+				break;
 			}
 		}
 	}
