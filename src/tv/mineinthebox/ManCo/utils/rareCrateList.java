@@ -26,6 +26,7 @@ public class rareCrateList {
 	public static HashMap<String, ItemStack[]> ItemsFromChest = new HashMap<String, ItemStack[]>();
 	public static HashMap<Location, Block> chestLocations = new HashMap<Location, Block>();
 	public static ArrayList<String> schedulerTime = new ArrayList<String>();
+	public static HashMap<String, String> rareCrates = new HashMap<String, String>();
 	
 	public static void setRandomItems(Chest chest, String RareID) {
 		if(!ListDataValues.isEmpty()) {

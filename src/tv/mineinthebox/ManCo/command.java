@@ -11,6 +11,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
 import tv.mineinthebox.ManCo.configuration.configuration;
+import tv.mineinthebox.ManCo.events.chestCheck;
 import tv.mineinthebox.ManCo.events.cratescheduler;
 import tv.mineinthebox.ManCo.events.handler;
 import tv.mineinthebox.ManCo.utils.iconomy;
@@ -63,6 +64,7 @@ public class command implements CommandExecutor {
 							cratescheduler.task2.cancel();
 							cratescheduler.task = null;
 							cratescheduler.task2 = null;
+							chestCheck.destroyChestOnDisable();
 							cratescheduler.startScheduler();
 							if(!rareCrate.getRareCrateList().isEmpty()) {
 								cratescheduler.startRareScheduler();
