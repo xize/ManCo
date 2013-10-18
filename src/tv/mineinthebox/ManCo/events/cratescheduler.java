@@ -89,7 +89,7 @@ public class cratescheduler {
 						for(Player p2 : Bukkit.getOnlinePlayers()) {
 							if(!(normalCrateList.getCrateList.containsKey(p2.getName()) || rareCrateList.getCrateList.containsKey(p.getName()+":"+rareCrate.getRareCrateList().get(RandomCrate)) || rareCrateList.getCrateList2.containsKey(p.getName()+":"+rareCrate.getRareCrateList().get(RandomCrate)) || vanish.isVanished(p2) || normalCrateList.getCrateList2.containsKey(p2.getName()))) {
 								if(!p2.getName().equalsIgnoreCase(p.getName())) {
-									doRareCrateNative(p2);
+									doRareCrateNative(p2, RandomCrate);
 									break;
 								}
 							}
@@ -183,12 +183,12 @@ public class cratescheduler {
 		Bukkit.broadcastMessage(ChatColor.GREEN + "[ManCo] " + normalCrate.getCrateFoundMessage().replace("%p", p.getName()));
 	}
 	
-	public static void doRareCrateNative(Player p) {
+	public static void doRareCrateNative(Player p, int RandomCrate) {
 		Location loc = p.getLocation();
 		loc.setY(normalCrate.getCrateSpawnHeight(p));
 		Entity entity = p.getWorld().spawnFallingBlock(loc, Material.CHEST, (byte) 1);
-		normalCrateList.getFallingStateChest.put(entity, p.getName());
-		Bukkit.broadcastMessage(ChatColor.GREEN + "[ManCo] " + normalCrate.getCrateFoundMessage().replace("%p", p.getName()));
+		normalCrateList.getFallingStateChest.put(entity, p.getName()+":"+rareCrate.getRareCrateList().get(RandomCrate));
+		Bukkit.broadcastMessage(ChatColor.GREEN + "[ManCo] " + rareCrate.getCrateFoundMessage(rareCrate.getRareCrateList().get(RandomCrate)).replace("%p", p.getName()));
 	}
 
 }
