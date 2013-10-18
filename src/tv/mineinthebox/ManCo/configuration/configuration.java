@@ -39,6 +39,9 @@ public class configuration {
 				if(!con.isSet("disableUncrateMessage")) {
 					con.set("disableUncrateMessage", false);
 				}
+				if(!con.isSet("spawnCrateNearby")) {
+					con.set("spawnCrateNearby", false);
+				}
 				if(!con.isSet("rarecrates")) {
 					ArrayList<String> a= new ArrayList<String>();
 					a.add("264:0:32");
@@ -89,6 +92,10 @@ public class configuration {
 					con.set("disableUncrateMessage", false);
 					con.save(f);
 				}
+				if(!con.isSet("spawnCrateNearby")) {
+					con.set("spawnCrateNearby", false);
+					con.save(f);
+				}
 				if(!con.isSet("rarecrates")) {
 					ArrayList<String> a= new ArrayList<String>();
 					a.add("264:0:32");
@@ -116,6 +123,19 @@ public class configuration {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public static boolean spawnCrateNearby() {
+		try {
+			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "items.yml");
+			if(f.exists()) {
+				FileConfiguration con = YamlConfiguration.loadConfiguration(f);
+				return con.getBoolean("spawnCrateNearby");
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 	
 	public static boolean isEconomyEnabled() {
