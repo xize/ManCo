@@ -23,6 +23,7 @@ public class manCo extends JavaPlugin {
 		cratescheduler.startScheduler();
 		getCommand("manco").setExecutor(new command());
 		if(!rareCrate.getRareCrateList().isEmpty()) {
+			log("scheduelr found!: this is the arrayList!" + rareCrate.getRareCrateList().toString(), logType.info);
 			cratescheduler.startRareScheduler();
 		}
 	}

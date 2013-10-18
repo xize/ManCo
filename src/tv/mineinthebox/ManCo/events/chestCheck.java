@@ -324,11 +324,6 @@ public void getInventory(final InventoryOpenEvent e) {
 							p.playSound(chest.getLocation(), Sound.CHEST_OPEN, 1, 0);
 							p.playSound(chest.getLocation(), Sound.CHEST_CLOSE, 1, 0);
 							p.playSound(chest.getLocation(), Sound.CHEST_OPEN, 1, 0);
-							if(!(chest.getLocation().getX() - (chest.getLocation().getX() + p.getLocation().getX()) <= 6 || chest.getLocation().getZ() - (chest.getLocation().getZ() + p.getLocation().getZ()) <= 6 || chest.getLocation().getY() - (chest.getLocation().getY() + p.getLocation().getY()) <= 6)) {
-								p.sendMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + "you are to far away to open this crate!");
-								e.setCancelled(true);
-								return;
-							}
 						}
 
 					}, 250);

@@ -43,7 +43,7 @@ public class cratescheduler {
 		}, 0, configuration.getTime());
 		task = taskID;
 	}
-	
+
 	public static void startRareScheduler() {
 		BukkitTask taskID = Bukkit.getScheduler().runTaskTimer(manCo.getPlugin(), new Runnable() {
 
@@ -60,20 +60,20 @@ public class cratescheduler {
 				}
 			}
 
-		}, 0, configuration.getTime());
+		}, 0, configuration.getTime()+80);
 		task2 = taskID;
 	}
-	
+
 	public static void doRareCrateWithoutWG() {
 		//lets crawl through all avaible rare chests!
 		int maxRareCrates = rareCrate.getRareCrateList().size();
 		Random rand = new Random();
 		int RandomCrate = rand.nextInt(maxRareCrates) + 0;
-		if(rareCrate.getRareCrateList().contains(RandomCrate)) {
+		if(rareCrate.getRareCrateList().get(RandomCrate) != null) {
 			//now lets do the chance!
 			int getCrateChance = rareCrate.getRareCrateChance(rareCrate.getRareCrateList().get(RandomCrate));
 			Random rand2 = new Random();
-			int crateChance = rand2.nextInt(100) + 0;
+			int crateChance = rand2.nextInt(100) + 1;
 			if(crateChance <= getCrateChance) {
 				//chance success
 				Random rarerand = new Random();
@@ -101,20 +101,20 @@ public class cratescheduler {
 						Location loc = p.getLocation();
 						loc.setY(normalCrate.getCrateSpawnHeight(p));
 						Entity entity = p.getWorld().spawnFallingBlock(loc, Material.CHEST, (byte) 1);
-						rareCrateList.getFallingStateChest.put(entity, p.getName()+":"+rareCrate.getRareCrateList().get(RandomCrate));
+						rareCrateList.getFallingStateChest.put(entity, p.getName()+":"+rareCrate.getRareCrateList().get(RandomCrate));	
 						Bukkit.broadcastMessage(ChatColor.GREEN + "[ManCo] " + rareCrate.getCrateFoundMessage(rareCrate.getRareCrateList().get(RandomCrate)).replace("%p", p.getName()));	
 					}
 				}
 			}
 		}
 	}
-	
+
 	public static void doRareCrateWithWG() {
 		//lets crawl through all avaible rare chests!
 		int maxRareCrates = rareCrate.getRareCrateList().size();
 		Random rand = new Random();
 		int RandomCrate = rand.nextInt(maxRareCrates) + 0;
-		if(rareCrate.getRareCrateList().contains(RandomCrate)) {
+		if(rareCrate.getRareCrateList().get(RandomCrate) != null) {
 			//now lets do the chance!
 			int getCrateChance = rareCrate.getRareCrateChance(rareCrate.getRareCrateList().get(RandomCrate));
 			Random rand2 = new Random();
@@ -183,7 +183,7 @@ public class cratescheduler {
 			}
 		}
 	}
-	
+
 	public static void doCrateWithWG() {
 		Random rand = new Random();
 		int i = Bukkit.getOnlinePlayers().length;
@@ -221,7 +221,7 @@ public class cratescheduler {
 		normalCrateList.getFallingStateChest.put(entity, p.getName());
 		Bukkit.broadcastMessage(ChatColor.GREEN + "[ManCo] " + normalCrate.getCrateFoundMessage().replace("%p", p.getName()));
 	}
-	
+
 	public static void doRareCrateNative(Player p, int RandomCrate) {
 		Location loc = p.getLocation();
 		loc.setY(normalCrate.getCrateSpawnHeight(p));

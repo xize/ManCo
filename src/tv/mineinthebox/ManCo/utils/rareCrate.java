@@ -13,6 +13,9 @@ public class rareCrate {
 	
 	public static ArrayList<String> getRareCrateList() {
 		ArrayList<String> list = new ArrayList<String>();
+		if(!list.isEmpty()) {
+			list.clear();
+		}
 		try {
 			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "items.yml");
 			if(f.exists()) {
@@ -50,7 +53,7 @@ public class rareCrate {
 			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "items.yml");
 			if(f.exists()) {
 				FileConfiguration con = YamlConfiguration.loadConfiguration(f);
-				return ChatColor.translateAlternateColorCodes('&', con.getString("rarecrates."+crateName+".CrateFoundMessage"));
+				return ChatColor.translateAlternateColorCodes('&', con.getString("rarecrates."+crateName+".crateFoundMessage"));
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
