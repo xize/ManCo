@@ -16,6 +16,7 @@ import tv.mineinthebox.ManCo.events.handler;
 import tv.mineinthebox.ManCo.utils.iconomy;
 import tv.mineinthebox.ManCo.utils.normalCrate;
 import tv.mineinthebox.ManCo.utils.normalCrateList;
+import tv.mineinthebox.ManCo.utils.rareCrate;
 import tv.mineinthebox.ManCo.utils.util;
 import tv.mineinthebox.ManCo.utils.vanish;
 import tv.mineinthebox.ManCo.utils.worldguard;
@@ -59,8 +60,13 @@ public class command implements CommandExecutor {
 					if(args[0].equalsIgnoreCase("reload")) {
 						if(sender.hasPermission("manco.reload")) {
 							cratescheduler.task.cancel();
+							cratescheduler.task2.cancel();
 							cratescheduler.task = null;
+							cratescheduler.task2 = null;
 							cratescheduler.startScheduler();
+							if(!rareCrate.getRareCrateList().isEmpty()) {
+								cratescheduler.startRareScheduler();
+							}
 							handler.restartListeners();
 							sender.sendMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + "reload successfully");
 						} else {
