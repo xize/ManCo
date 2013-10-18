@@ -27,12 +27,15 @@ public class rareCrateList {
 	public static HashMap<Location, Block> chestLocations = new HashMap<Location, Block>();
 	public static ArrayList<String> schedulerTime = new ArrayList<String>();
 	
-	public static void setRandomItems(Chest chest) {
+	public static void setRandomItems(Chest chest, String RareID) {
+		if(!ListDataValues.isEmpty()) {
+			ListDataValues.clear();
+		}
 		try {
 			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "items.yml");
 			if(f.exists()) {
 				FileConfiguration con = YamlConfiguration.loadConfiguration(f);
-				for(String idDate : con.getStringList("item.ids")) {
+				for(String idDate : con.getStringList("rarecrates."+RareID+".items")) {
 					ListDataValues.add(idDate);
 				}
 				chest.getInventory().setItem(0, getItemStack());

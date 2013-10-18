@@ -45,12 +45,15 @@ public class chestCheck implements Listener {
 		} else if(rareCrateList.getFallingStateChest.containsKey(e.getEntity())) {
 			e.getBlock().setType(Material.CHEST);
 			if(e.getBlock().getType() == Material.CHEST) {
+				//deserialize the name;)
+				//args[0] is the player name, args[1] is the RareCrate name from the configuration!
+				String[] args = rareCrateList.getFallingStateChest.get(e.getEntity()).split(":");
 				e.getBlock().setData((byte) 3);
 				Chest chest = (Chest) e.getBlock().getState();
 				rareCrateList.getCrateList.put(rareCrateList.getFallingStateChest.get(e.getEntity()), chest);
 				rareCrateList.chestLocations.put(chest.getLocation(), e.getBlock());
 				rareCrateList.getFallingStateChest.remove(e.getEntity());
-				rareCrateList.setRandomItems(chest);
+				rareCrateList.setRandomItems(chest, args[1]);
 			}
 			e.setCancelled(true);
 		}
