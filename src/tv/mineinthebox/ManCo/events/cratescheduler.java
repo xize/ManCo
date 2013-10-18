@@ -110,7 +110,46 @@ public class cratescheduler {
 	}
 	
 	public static void doRareCrateWithWG() {
-		
+		//lets crawl through all avaible rare chests!
+		int maxRareCrates = rareCrate.getRareCrateList().size();
+		Random rand = new Random();
+		int RandomCrate = rand.nextInt(maxRareCrates) + 0;
+		if(rareCrate.getRareCrateList().contains(RandomCrate)) {
+			//now lets do the chance!
+			int getCrateChance = rareCrate.getRareCrateChance(rareCrate.getRareCrateList().get(RandomCrate));
+			Random rand2 = new Random();
+			int crateChance = rand2.nextInt(100) + 0;
+			if(crateChance <= getCrateChance) {
+				//chance success
+				Random rarerand = new Random();
+				int i = Bukkit.getOnlinePlayers().length;
+				if(i > 0) {
+					int playerID = rarerand.nextInt(i) + 0;
+					Player p = Bukkit.getOnlinePlayers()[playerID];
+					if(normalCrateList.getCrateList.containsKey(p.getName()) || rareCrateList.getCrateList.containsKey(p.getName()) || rareCrateList.getCrateList2.containsKey(p.getName()) || !worldguard.canPlayerBuild(p) || vanish.isVanished(p) || normalCrateList.getCrateList2.containsKey(p.getName())) {
+						//player already has a crate, loop through all possible online players to see if they can get a crate.
+						//then use the native method.
+						for(Player p2 : Bukkit.getOnlinePlayers()) {
+							if(!(normalCrateList.getCrateList.containsKey(p2.getName()) || vanish.isVanished(p2) || !worldguard.canPlayerBuild(p2) || normalCrateList.getCrateList2.containsKey(p2.getName()))) {
+								if(!p2.getName().equalsIgnoreCase(p.getName())) {
+									doRareCrateNative(p2, RandomCrate);
+									break;
+								}
+							}
+						}
+					} else {
+
+						//Random player doesn't have a crate so we can proceed the code:)
+
+						Location loc = p.getLocation();
+						loc.setY(normalCrate.getCrateSpawnHeight(p));
+						Entity entity = p.getWorld().spawnFallingBlock(loc, Material.CHEST, (byte) 1);
+						rareCrateList.getFallingStateChest.put(entity, p.getName()+":"+rareCrate.getRareCrateList().get(RandomCrate));
+						Bukkit.broadcastMessage(ChatColor.GREEN + "[ManCo] " + rareCrate.getCrateFoundMessage(rareCrate.getRareCrateList().get(RandomCrate)).replace("%p", p.getName()));	
+					}
+				}
+			}
+		}
 	}
 
 	public static void doCrateWithoutWG() {
