@@ -3,6 +3,7 @@ package tv.mineinthebox.ManCo.utils;
 import java.io.File;
 import java.util.ArrayList;
 
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -42,6 +43,19 @@ public class rareCrate {
 			}
 		}
 		return 0;
+	}
+	
+	public static String getCrateFoundMessage(String crateName) {
+		try {
+			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "items.yml");
+			if(f.exists()) {
+				FileConfiguration con = YamlConfiguration.loadConfiguration(f);
+				return ChatColor.translateAlternateColorCodes('&', con.getString("rarecrates."+crateName+".CrateFoundMessage"));
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }
