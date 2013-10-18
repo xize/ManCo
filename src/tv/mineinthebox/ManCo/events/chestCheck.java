@@ -436,6 +436,25 @@ public void PlayeronLeave(PlayerQuitEvent e) {
 	if(normalCrateList.schedulerTime.contains(e.getPlayer().getName())) {
 		normalCrateList.schedulerTime.remove(e.getPlayer().getName());
 	}
+	
+	if(rareCrateList.getCrateList.containsKey(e.getPlayer().getName())) {
+		Chest chest = rareCrateList.getCrateList.get(e.getPlayer().getName());
+		chest.getBlock().breakNaturally();
+		rareCrateList.getCrateList.remove(e.getPlayer().getName());
+		rareCrateList.chestLocations.remove(chest.getLocation());
+	}
+	if(rareCrateList.ItemsFromChest.containsKey(e.getPlayer().getName())) {
+		rareCrateList.ItemsFromChest.remove(e.getPlayer().getName());
+	}
+	if(rareCrateList.getCrateList2.containsKey(e.getPlayer().getName())) {
+		Chest chest = rareCrateList.getCrateList2.get(e.getPlayer().getName());
+		chest.getBlock().breakNaturally();
+		rareCrateList.getCrateList2.remove(e.getPlayer().getName());
+		rareCrateList.chestLocations.remove(chest.getLocation());
+	}
+	if(rareCrateList.schedulerTime.contains(e.getPlayer().getName())) {
+		rareCrateList.schedulerTime.remove(e.getPlayer().getName());
+	}
 }
 
 @EventHandler
@@ -458,6 +477,25 @@ public void PlayeronLeave(PlayerKickEvent e) {
 	if(normalCrateList.schedulerTime.contains(e.getPlayer().getName())) {
 		normalCrateList.schedulerTime.remove(e.getPlayer().getName());
 	}
+	
+	if(rareCrateList.getCrateList.containsKey(e.getPlayer().getName())) {
+		Chest chest = rareCrateList.getCrateList.get(e.getPlayer().getName());
+		chest.getBlock().breakNaturally();
+		rareCrateList.getCrateList.remove(e.getPlayer().getName());
+		rareCrateList.chestLocations.remove(chest.getLocation());
+	}
+	if(rareCrateList.ItemsFromChest.containsKey(e.getPlayer().getName())) {
+		rareCrateList.ItemsFromChest.remove(e.getPlayer().getName());
+	}
+	if(rareCrateList.getCrateList2.containsKey(e.getPlayer().getName())) {
+		Chest chest = rareCrateList.getCrateList2.get(e.getPlayer().getName());
+		chest.getBlock().breakNaturally();
+		rareCrateList.getCrateList2.remove(e.getPlayer().getName());
+		rareCrateList.chestLocations.remove(chest.getLocation());
+	}
+	if(rareCrateList.schedulerTime.contains(e.getPlayer().getName())) {
+		rareCrateList.schedulerTime.remove(e.getPlayer().getName());
+	}
 }
 
 public static void destroyChestOnDisable() {
@@ -479,6 +517,25 @@ public static void destroyChestOnDisable() {
 		}
 		if(normalCrateList.schedulerTime.contains(p.getPlayer().getName())) {
 			normalCrateList.schedulerTime.remove(p.getPlayer().getName());
+		}
+		
+		if(rareCrateList.getCrateList.containsKey(p.getPlayer().getName())) {
+			Chest chest = rareCrateList.getCrateList.get(p.getPlayer().getName());
+			chest.getBlock().breakNaturally();
+			rareCrateList.getCrateList.remove(p.getPlayer().getName());
+			rareCrateList.chestLocations.remove(chest.getLocation());
+		}
+		if(rareCrateList.ItemsFromChest.containsKey(p.getPlayer().getName())) {
+			rareCrateList.ItemsFromChest.remove(p.getPlayer().getName());
+		}
+		if(rareCrateList.getCrateList2.containsKey(p.getPlayer().getName())) {
+			Chest chest = rareCrateList.getCrateList2.get(p.getPlayer().getName());
+			chest.getBlock().breakNaturally();
+			rareCrateList.getCrateList2.remove(p.getPlayer().getName());
+			rareCrateList.chestLocations.remove(chest.getLocation());
+		}
+		if(rareCrateList.schedulerTime.contains(p.getPlayer().getName())) {
+			rareCrateList.schedulerTime.remove(p.getPlayer().getName());
 		}
 	}
 }
