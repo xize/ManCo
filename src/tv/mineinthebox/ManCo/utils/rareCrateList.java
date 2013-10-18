@@ -5,16 +5,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Chest;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Entity;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
-import tv.mineinthebox.ManCo.logType;
 import tv.mineinthebox.ManCo.manCo;
 
 @SuppressWarnings("deprecation")
@@ -53,15 +55,26 @@ public class rareCrateList {
 			Random rand = new Random();
 			int number = rand.nextInt(ListDataValues.size() + 0);
 			String[] splitItemName = ListDataValues.get(number).split(":");
-			int itemID = Integer.parseInt(splitItemName[0]);
-			int subData = Integer.parseInt(splitItemName[1]);
-			int amount = Integer.parseInt(splitItemName[2]);
-			ItemStack item = new ItemStack(Material.getMaterial(itemID));
-			item.setAmount(amount);
-			item.setDurability((byte) subData);
-			return item;
+			if(splitItemName[0].startsWith("MONEY_")) {
+				String subMoney = splitItemName[0].substring("MONEY_".length());
+				ItemStack item = new ItemStack(Material.PAPER);
+				ItemMeta meta = item.getItemMeta();
+				meta.setDisplayName(ChatColor.GREEN + "[ManCo]" + ChatColor.GOLD + ":money" + " " + ChatColor.GRAY + subMoney + "$");
+				item.setItemMeta(meta);
+				item.addUnsafeEnchantment(Enchantment.DURABILITY, 1);
+				item.setAmount(Integer.parseInt(splitItemName[2]));
+				return item;
+			} else {
+				int itemID = Integer.parseInt(splitItemName[0]);
+				int subData = Integer.parseInt(splitItemName[1]);
+				int amount = Integer.parseInt(splitItemName[2]);
+				ItemStack item = new ItemStack(Material.getMaterial(itemID));
+				item.setAmount(amount);
+				item.setDurability((byte) subData);
+				return item;	
+			}
 		} catch(IllegalArgumentException e) {
-			manCo.log("it seems one of your items in items.yml is wrong!", logType.severe);
+			//manCo.log("it seems one of your items in items.yml is wrong!", logType.severe);
 		}
 		return null;
 	}

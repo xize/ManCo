@@ -10,6 +10,7 @@ public class handler {
 	
 	public static void launch() {
 		setListener(new chestCheck());
+		setListener(new moneyCheck());
 	}
 	
 	public static void setListener(Listener listener) {

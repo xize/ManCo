@@ -26,5 +26,18 @@ public class iconomy {
 		}
 		return false;
 	}
+	
+	public static boolean addMoney(Player p, double money) {
+		if(util.isIconomyEnabled()) {
+			RegisteredServiceProvider<Economy> economyProvider = Bukkit.getServer().getServicesManager().getRegistration(net.milkbowl.vault.economy.Economy.class);
+			Economy econ = economyProvider.getProvider();
+				if(econ.depositPlayer(p.getName(), money).transactionSuccess()) {
+					return true;
+				} else {
+					return false;
+				}
+		}
+		return false;
+	}
 
 }

@@ -409,9 +409,17 @@ public class chestCheck implements Listener {
 							for(int i = 0; i < items.length; i++) {
 								if(items[i] != null) {
 									if(i == (items.length - 1)) {
-										build.append(items[i].getType().name().toLowerCase().replace("_", " ") + "").toString();
+										if(items[i].hasItemMeta()) {
+											build.append(items[i].getItemMeta().getDisplayName().replace("_", " ") + "").toString();
+										} else {
+											build.append(items[i].getType().name().toLowerCase().replace("_", " ") + "").toString();	
+										}
 									} else {
-										build.append(items[i].getType().name().toLowerCase().replace("_", " ") + ", ").toString();	
+										if(items[i].hasItemMeta()) {
+											build.append(items[i].getItemMeta().getDisplayName().replace("_", " ") + ", ").toString();
+										} else {
+											build.append(items[i].getType().name().toLowerCase().replace("_", " ") + ", ").toString();	
+										}	
 									}
 								}
 							}
@@ -431,9 +439,17 @@ public class chestCheck implements Listener {
 							for(int i = 0; i < items.length; i++) {
 								if(items[i] != null) {
 									if(i == (items.length - 1)) {
-										build.append(items[i].getType().name().toLowerCase().replace("_", " ") + "").toString();
+										if(items[i].hasItemMeta()) {
+											build.append(items[i].getItemMeta().getDisplayName().replace("_", " ") + "").toString();
+										} else {
+											build.append(items[i].getType().name().toLowerCase().replace("_", " ") + "").toString();	
+										}
 									} else {
-										build.append(items[i].getType().name().toLowerCase().replace("_", " ") + ", ").toString();	
+										if(items[i].hasItemMeta()) {
+											build.append(items[i].getItemMeta().getDisplayName().replace("_", " ") + ", ").toString();
+										} else {
+											build.append(items[i].getType().name().toLowerCase().replace("_", " ") + ", ").toString();	
+										}	
 									}
 								}
 							}
