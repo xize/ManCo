@@ -109,6 +109,11 @@ public void blockPlace(BlockPlaceEvent e) {
 					e.setCancelled(true);
 					block.setData((byte) 3);
 					break;
+				} else if(rareCrateList.chestLocations.containsKey(block.getLocation())) {
+					e.getPlayer().sendMessage(ChatColor.RED + "you are not allowed to place a chest near a ManCo crate!");
+					e.setCancelled(true);
+					block.setData((byte) 3);
+					break;
 				}
 			}
 		}
