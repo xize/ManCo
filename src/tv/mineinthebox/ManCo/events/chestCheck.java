@@ -24,6 +24,7 @@ import org.bukkit.inventory.ItemStack;
 import tv.mineinthebox.ManCo.manCo;
 import tv.mineinthebox.ManCo.utils.normalCrate;
 import tv.mineinthebox.ManCo.utils.normalCrateList;
+import tv.mineinthebox.ManCo.utils.rareCrateList;
 
 public class chestCheck implements Listener {
 
@@ -39,6 +40,17 @@ public class chestCheck implements Listener {
 				normalCrateList.chestLocations.put(chest.getLocation(), e.getBlock());
 				normalCrateList.getFallingStateChest.remove(e.getEntity());
 				normalCrateList.setRandomItems(chest);
+			}
+			e.setCancelled(true);
+		} else if(rareCrateList.getFallingStateChest.containsKey(e.getEntity())) {
+			e.getBlock().setType(Material.CHEST);
+			if(e.getBlock().getType() == Material.CHEST) {
+				e.getBlock().setData((byte) 3);
+				Chest chest = (Chest) e.getBlock().getState();
+				rareCrateList.getCrateList.put(rareCrateList.getFallingStateChest.get(e.getEntity()), chest);
+				rareCrateList.chestLocations.put(chest.getLocation(), e.getBlock());
+				rareCrateList.getFallingStateChest.remove(e.getEntity());
+				rareCrateList.setRandomItems(chest);
 			}
 			e.setCancelled(true);
 		}
@@ -181,6 +193,11 @@ public class chestCheck implements Listener {
 								p.playSound(chest.getLocation(), Sound.CHEST_OPEN, 1, 0);
 								p.playSound(chest.getLocation(), Sound.CHEST_CLOSE, 1, 0);
 								p.playSound(chest.getLocation(), Sound.CHEST_OPEN, 1, 0);
+								if(!(chest.getLocation().getX() - (chest.getLocation().getX() + p.getLocation().getX()) <= 6 || chest.getLocation().getZ() - (chest.getLocation().getZ() + p.getLocation().getZ()) <= 6 || chest.getLocation().getY() - (chest.getLocation().getY() + p.getLocation().getY()) <= 6)) {
+									p.sendMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + "you are to far away to open this crate!");
+									e.setCancelled(true);
+									return;
+								}
 							}
 
 						}, 250);
