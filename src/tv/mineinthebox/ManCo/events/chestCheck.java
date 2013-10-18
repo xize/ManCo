@@ -2,6 +2,8 @@ package tv.mineinthebox.ManCo.events;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Effect;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
@@ -21,9 +23,11 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
+
 import tv.mineinthebox.ManCo.manCo;
 import tv.mineinthebox.ManCo.utils.normalCrate;
 import tv.mineinthebox.ManCo.utils.normalCrateList;
+import tv.mineinthebox.ManCo.utils.rareCrate;
 import tv.mineinthebox.ManCo.utils.rareCrateList;
 
 public class chestCheck implements Listener {
@@ -54,6 +58,15 @@ public class chestCheck implements Listener {
 				//deserialize the name;)
 				//args[0] is the player name, args[1] is the RareCrate name from the configuration!
 				String[] args = rareCrateList.getFallingStateChest.get(e.getEntity()).split(",");
+				if(rareCrate.crateHasEffect(args[1])) {
+					e.getEntity().getWorld().playEffect(e.getEntity().getLocation(), Effect.MOBSPAWNER_FLAMES, 100);
+					e.getEntity().getWorld().playEffect(e.getEntity().getLocation(), Effect.ENDER_SIGNAL, 100);
+					playRespectedSound(Sound.AMBIENCE_CAVE, e.getBlock().getLocation());
+					playRespectedSound(Sound.AMBIENCE_RAIN, e.getBlock().getLocation());
+					playRespectedSound(Sound.ANVIL_BREAK, e.getBlock().getLocation());
+					playRespectedSound(Sound.AMBIENCE_THUNDER, e.getBlock().getLocation());
+					playRespectedSound(Sound.WOLF_DEATH, e.getBlock().getLocation());
+				}
 				e.getBlock().setData((byte) 3);
 				Chest chest = (Chest) e.getBlock().getState();
 				rareCrateList.getCrateList.put(args[0], chest);
@@ -64,6 +77,17 @@ public class chestCheck implements Listener {
 			}
 			e.setCancelled(true);
 		}
+	}
+	
+	public static void playRespectedSound(final Sound sound, final Location loc) {
+		Bukkit.getScheduler().scheduleSyncDelayedTask(manCo.getPlugin(), new Runnable() {
+
+			@Override
+			public void run() {
+				loc.getWorld().playSound(loc, sound, 3, 3);
+			}
+
+		}, 15);
 	}
 
 	@EventHandler

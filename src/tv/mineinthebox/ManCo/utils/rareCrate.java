@@ -60,5 +60,18 @@ public class rareCrate {
 		}
 		return null;
 	}
+	
+	public static boolean crateHasEffect(String path) {
+		try {
+			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "items.yml");
+			if(f.exists()) {
+				FileConfiguration con = YamlConfiguration.loadConfiguration(f);
+				return con.getBoolean("rarecrates."+path+".effect");
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
 
 }
