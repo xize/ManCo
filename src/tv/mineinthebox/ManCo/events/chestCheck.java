@@ -226,11 +226,6 @@ public class chestCheck implements Listener {
 								p.playSound(chest.getLocation(), Sound.CHEST_OPEN, 1, 0);
 								p.playSound(chest.getLocation(), Sound.CHEST_CLOSE, 1, 0);
 								p.playSound(chest.getLocation(), Sound.CHEST_OPEN, 1, 0);
-								if(!(chest.getLocation().getX() - (chest.getLocation().getX() + p.getLocation().getX()) <= 6 || chest.getLocation().getZ() - (chest.getLocation().getZ() + p.getLocation().getZ()) <= 6 || chest.getLocation().getY() - (chest.getLocation().getY() + p.getLocation().getY()) <= 6)) {
-									p.sendMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + "you are to far away to open this crate!");
-									e.setCancelled(true);
-									return;
-								}
 							}
 
 						}, 250);
@@ -239,6 +234,12 @@ public class chestCheck implements Listener {
 							@Override
 							public void run() {
 								try {
+									if(chest.getLocation().distance(p.getLocation()) > 6) {
+										p.sendMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + "you are to far from range to open this crate!");
+										e.setCancelled(true);
+										normalCrateList.schedulerTime.remove(e.getPlayer().getName());
+										return;
+									}
 									p.sendMessage(ChatColor.GREEN + "opening crate...");
 									p.playSound(chest.getLocation(), Sound.CHEST_OPEN, 0, 1);
 									p.playSound(chest.getLocation(), Sound.CHEST_OPEN, 1, 0);
@@ -262,17 +263,17 @@ public class chestCheck implements Listener {
 				} else if(rareCrateList.getCrateList.containsKey(e.getPlayer().getName())) {
 					Chest chestFromList = rareCrateList.getCrateList.get(e.getPlayer().getName());
 					if(!chest.equals(chestFromList)){
-						if(normalCrateList.getCrateList.containsValue(chest)) {
+						if(rareCrateList.getCrateList.containsValue(chest)) {
 							e.setCancelled(true);
 						}
 					} else {
-						if(normalCrateList.schedulerTime.contains(e.getPlayer().getName())) {
+						if(rareCrateList.schedulerTime.contains(e.getPlayer().getName())) {
 							e.setCancelled(true);
 							return;
 						}
 						final Player p = (Player) e.getPlayer();
 						e.setCancelled(true);
-						normalCrateList.schedulerTime.add(e.getPlayer().getName());
+						rareCrateList.schedulerTime.add(e.getPlayer().getName());
 						Bukkit.getScheduler().scheduleSyncDelayedTask(manCo.getPlugin(), new Runnable() {
 
 							@Override
@@ -338,6 +339,12 @@ public class chestCheck implements Listener {
 
 							@Override
 							public void run() {
+								if(chest.getLocation().distance(p.getLocation()) > 6) {
+									p.sendMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + "you are to far from range to open this crate!");
+									e.setCancelled(true);
+									rareCrateList.schedulerTime.remove(p.getName());
+									return;
+								}
 								try {
 									p.sendMessage(ChatColor.GREEN + "opening crate...");
 									p.playSound(chest.getLocation(), Sound.CHEST_OPEN, 0, 1);
