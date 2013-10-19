@@ -3,6 +3,7 @@ package tv.mineinthebox.ManCo.configuration;
 import java.io.File;
 import java.util.ArrayList;
 
+import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.FileConfigurationOptions;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -10,6 +11,7 @@ import tv.mineinthebox.ManCo.manCo;
 
 public class configuration {
 	
+	@SuppressWarnings("deprecation")
 	public static void createConfig() {
 		try {
 			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "items.yml");
@@ -53,14 +55,22 @@ public class configuration {
 					list1.add("264:0:12");
 					list1.add("265:0:5");
 					list1.add("322:1:2");
+					list1.add("MONEY_10:0:2");
 					con.set("rarecrates.rarecrate1.enable", true);
 					con.set("rarecrates.rarecrate1.dropRateChance", 5);
 					con.set("rarecrates.rarecrate1.crateFoundMessage", "&7%p has found a &1(Rare)&7 ManCo crate!");
+					con.set("rarecrates.rarecrate1.needKey", false);
+					con.set("rarecrates.rarecrate1.needKey.material", Material.BLAZE_ROD.getId());
+					con.set("rarecrates.rarecrate1.needKey.price", 3.0);
 					con.set("rarecrates.rarecrate1.effect", false);
 					con.set("rarecrates.rarecrate1.items", a.toArray());
+					
 					con.set("rarecrates.anothercrate.enable", false);
 					con.set("rarecrates.anothercrate.dropRateChance", 2);
 					con.set("rarecrates.anothercrate.crateFoundMessage", "&7%p has found a &1(Rare)&7 ManCo crate!");
+					con.set("rarecrates.anothercrate.needKey", false);
+					con.set("rarecrates.anothercrate.needKey.material", Material.BLAZE_ROD.getId());
+					con.set("rarecrates.anotercrate.needKey.price", 3.0);
 					con.set("rarecrates.anothercrate.effect", false);
 					con.set("rarecrates.anothercrate.items", list1.toArray());
 					list1.clear();
@@ -112,11 +122,18 @@ public class configuration {
 					con.set("rarecrates.rarecrate1.enable", true);
 					con.set("rarecrates.rarecrate1.dropRateChance", 5);
 					con.set("rarecrates.rarecrate1.crateFoundMessage", "&7%p has found a &1(Rare)&7 ManCo crate!");
+					con.set("rarecrates.rarecrate1.needKey", false);
+					con.set("rarecrates.rarecrate1.needKey.material", Material.BLAZE_ROD.getId());
+					con.set("rarecrates.rarecrate1.needKey.price", 3.0);
 					con.set("rarecrates.rarecrate1.effect", false);
 					con.set("rarecrates.rarecrate1.items", a.toArray());
+					
 					con.set("rarecrates.anothercrate.enable", false);
 					con.set("rarecrates.anothercrate.dropRateChance", 2);
 					con.set("rarecrates.anothercrate.crateFoundMessage", "&7%p has found a &1(Rare)&7 ManCo crate!");
+					con.set("rarecrates.anothercrate.needKey", false);
+					con.set("rarecrates.anothercrate.needKey.material", Material.BLAZE_ROD.getId());
+					con.set("rarecrates.anothercrate.needKey.price", 3.0);
 					con.set("rarecrates.anothercrate.effect", false);
 					con.set("rarecrates.anothercrate.items", list.toArray());
 					list.clear();
