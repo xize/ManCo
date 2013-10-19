@@ -68,7 +68,6 @@ public class chestCheck implements Listener {
 					playRespectedSound(Sound.AMBIENCE_THUNDER, e.getBlock().getLocation());
 					playRespectedSound(Sound.WOLF_DEATH, e.getBlock().getLocation());
 				}
-				System.out.print("name: " + args[0] + " rarecrateName: " + args[1]);
 				e.getBlock().setData((byte) 3);
 				Chest chest = (Chest) e.getBlock().getState();
 				rareCrateList.getCrateList.put(args[0], chest);
@@ -527,6 +526,7 @@ public class chestCheck implements Listener {
 
 		if(rareCrateList.getCrateList.containsKey(e.getPlayer().getName())) {
 			Chest chest = rareCrateList.getCrateList.get(e.getPlayer().getName());
+			chest.getInventory().clear();
 			chest.getBlock().breakNaturally();
 			rareCrateList.getCrateList.remove(e.getPlayer().getName());
 			rareCrateList.chestLocations.remove(chest.getLocation());
@@ -537,6 +537,7 @@ public class chestCheck implements Listener {
 		if(rareCrateList.getCrateList2.containsKey(e.getPlayer().getName())) {
 			Chest chest = rareCrateList.getCrateList2.get(e.getPlayer().getName());
 			chest.getBlock().breakNaturally();
+			chest.getInventory().clear();
 			rareCrateList.getCrateList2.remove(e.getPlayer().getName());
 			rareCrateList.chestLocations.remove(chest.getLocation());
 		}
@@ -571,6 +572,7 @@ public class chestCheck implements Listener {
 
 		if(rareCrateList.getCrateList.containsKey(e.getPlayer().getName())) {
 			Chest chest = rareCrateList.getCrateList.get(e.getPlayer().getName());
+			chest.getInventory().clear();
 			chest.getBlock().breakNaturally();
 			rareCrateList.getCrateList.remove(e.getPlayer().getName());
 			rareCrateList.chestLocations.remove(chest.getLocation());
@@ -580,6 +582,7 @@ public class chestCheck implements Listener {
 		}
 		if(rareCrateList.getCrateList2.containsKey(e.getPlayer().getName())) {
 			Chest chest = rareCrateList.getCrateList2.get(e.getPlayer().getName());
+			chest.getInventory().clear();
 			chest.getBlock().breakNaturally();
 			rareCrateList.getCrateList2.remove(e.getPlayer().getName());
 			rareCrateList.chestLocations.remove(chest.getLocation());
@@ -615,6 +618,7 @@ public class chestCheck implements Listener {
 
 			if(rareCrateList.getCrateList.containsKey(p.getPlayer().getName())) {
 				Chest chest = rareCrateList.getCrateList.get(p.getPlayer().getName());
+				chest.getInventory().clear();
 				chest.getBlock().breakNaturally();
 				rareCrateList.getCrateList.remove(p.getPlayer().getName());
 				rareCrateList.chestLocations.remove(chest.getLocation());
@@ -624,6 +628,7 @@ public class chestCheck implements Listener {
 			}
 			if(rareCrateList.getCrateList2.containsKey(p.getPlayer().getName())) {
 				Chest chest = rareCrateList.getCrateList2.get(p.getPlayer().getName());
+				chest.getInventory().clear();
 				chest.getBlock().breakNaturally();
 				rareCrateList.getCrateList2.remove(p.getPlayer().getName());
 				rareCrateList.chestLocations.remove(chest.getLocation());
