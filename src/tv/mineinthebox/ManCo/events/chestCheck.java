@@ -9,6 +9,7 @@ import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.Chest;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -67,13 +68,13 @@ public class chestCheck implements Listener {
 					playRespectedSound(Sound.AMBIENCE_THUNDER, e.getBlock().getLocation());
 					playRespectedSound(Sound.WOLF_DEATH, e.getBlock().getLocation());
 				}
+				System.out.print("name: " + args[0] + " rarecrateName: " + args[1]);
 				e.getBlock().setData((byte) 3);
 				Chest chest = (Chest) e.getBlock().getState();
 				rareCrateList.getCrateList.put(args[0], chest);
 				rareCrateList.chestLocations.put(chest.getLocation(), e.getBlock());
 				rareCrateList.getFallingStateChest.remove(e.getEntity());
 				rareCrateList.setRandomItems(chest, args[1]);
-				rareCrateList.rareCrates.remove(args[0]);
 			}
 			e.setCancelled(true);
 		}
@@ -109,8 +110,10 @@ public class chestCheck implements Listener {
 						e.getPlayer().sendMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + "this crate does not belongs to you!");
 						e.setCancelled(true);
 					}
-				} else if(rareCrateList.getCrateList.containsKey(e.getPlayer().getName())) {
-					Chest chestFromList = normalCrateList.getCrateList.get(e.getPlayer().getName());
+				}
+				
+				if(rareCrateList.getCrateList.containsKey(e.getPlayer().getName())){
+					Chest chestFromList = rareCrateList.getCrateList.get(e.getPlayer().getName());
 					if(!chest.equals(chestFromList)){
 						if(rareCrateList.getCrateList.containsValue(chest)) {
 							e.getPlayer().sendMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + "this crate does not belongs to you!");
@@ -286,6 +289,7 @@ public class chestCheck implements Listener {
 					}
 				} else if(rareCrateList.getCrateList.containsKey(e.getPlayer().getName())) {
 					Chest chestFromList = rareCrateList.getCrateList.get(e.getPlayer().getName());
+					final Player p = (Player) e.getPlayer();
 					if(!chest.equals(chestFromList)){
 						if(rareCrateList.getCrateList.containsValue(chest)) {
 							e.setCancelled(true);
@@ -295,7 +299,39 @@ public class chestCheck implements Listener {
 							e.setCancelled(true);
 							return;
 						}
-						final Player p = (Player) e.getPlayer();
+						if(rareCrate.isCrateKeyEnabled(rareCrateList.rareCrates.get(e.getPlayer().getName()))) {
+							String crateName = rareCrateList.rareCrates.get(e.getPlayer().getName());
+							if(e.getPlayer().getItemInHand().getType() == rareCrate.getKey(crateName).getType()) {
+							
+								if(e.getPlayer().getItemInHand().hasItemMeta()) {
+									if(e.getPlayer().getItemInHand().containsEnchantment(Enchantment.DURABILITY)) {
+										if(e.getPlayer().getItemInHand().getItemMeta().getDisplayName().equals(rareCrate.getKey(crateName).getItemMeta().getDisplayName())) {
+											// it now can be opened with all the pleasure :)
+											p.sendMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + "succeeded key works!");
+											ItemStack item = e.getPlayer().getItemInHand();
+											item.setAmount(item.getAmount() - 1);
+											e.getPlayer().setItemInHand(item);
+										} else {
+											p.sendMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + "Invalid key!, you need the " + crateName +  " key in your hand to open this crate!");
+											e.setCancelled(true);
+											return;
+										}
+									} else {
+										p.sendMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + "you need the " + crateName +  " key in your hand to open this crate!");
+										e.setCancelled(true);
+										return;
+									}
+								} else {
+									p.sendMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + "you need the " + crateName +  " key in your hand to open this crate!");
+									e.setCancelled(true);
+									return;
+								}
+							} else {
+								p.sendMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + "you need the " + crateName +  " key in your hand to open this crate!");
+								e.setCancelled(true);
+								return;
+							}
+						}
 						e.setCancelled(true);
 						rareCrateList.schedulerTime.add(e.getPlayer().getName());
 						Bukkit.getScheduler().scheduleSyncDelayedTask(manCo.getPlugin(), new Runnable() {
@@ -382,6 +418,9 @@ public class chestCheck implements Listener {
 										rareCrateList.getCrateList2.put(e.getPlayer().getName(), chest);
 										p.openInventory(e.getInventory());
 										rareCrateList.schedulerTime.remove(e.getPlayer().getName());
+										if(rareCrateList.rareCrates.containsKey(p.getName())) {
+											rareCrateList.rareCrates.remove(p.getName());
+										}
 									}	
 								} catch(NullPointerException e) {
 									//supress this

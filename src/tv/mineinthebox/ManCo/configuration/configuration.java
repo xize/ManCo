@@ -59,7 +59,7 @@ public class configuration {
 					con.set("rarecrates.rarecrate1.enable", true);
 					con.set("rarecrates.rarecrate1.dropRateChance", 5);
 					con.set("rarecrates.rarecrate1.crateFoundMessage", "&7%p has found a &1(Rare)&7 ManCo crate!");
-					con.set("rarecrates.rarecrate1.needKey", false);
+					con.set("rarecrates.rarecrate1.needKey.enabled", false);
 					con.set("rarecrates.rarecrate1.needKey.material", Material.BLAZE_ROD.getId());
 					con.set("rarecrates.rarecrate1.needKey.price", 3.0);
 					con.set("rarecrates.rarecrate1.effect", false);
@@ -68,9 +68,9 @@ public class configuration {
 					con.set("rarecrates.anothercrate.enable", false);
 					con.set("rarecrates.anothercrate.dropRateChance", 2);
 					con.set("rarecrates.anothercrate.crateFoundMessage", "&7%p has found a &1(Rare)&7 ManCo crate!");
-					con.set("rarecrates.anothercrate.needKey", false);
+					con.set("rarecrates.anothercrate.needKey.enabled", false);
 					con.set("rarecrates.anothercrate.needKey.material", Material.BLAZE_ROD.getId());
-					con.set("rarecrates.anotercrate.needKey.price", 3.0);
+					con.set("rarecrates.anothercrate.needKey.price", 3.0);
 					con.set("rarecrates.anothercrate.effect", false);
 					con.set("rarecrates.anothercrate.items", list1.toArray());
 					list1.clear();
@@ -122,7 +122,7 @@ public class configuration {
 					con.set("rarecrates.rarecrate1.enable", true);
 					con.set("rarecrates.rarecrate1.dropRateChance", 5);
 					con.set("rarecrates.rarecrate1.crateFoundMessage", "&7%p has found a &1(Rare)&7 ManCo crate!");
-					con.set("rarecrates.rarecrate1.needKey", false);
+					con.set("rarecrates.rarecrate1.needKey.enabled", false);
 					con.set("rarecrates.rarecrate1.needKey.material", Material.BLAZE_ROD.getId());
 					con.set("rarecrates.rarecrate1.needKey.price", 3.0);
 					con.set("rarecrates.rarecrate1.effect", false);
@@ -131,7 +131,7 @@ public class configuration {
 					con.set("rarecrates.anothercrate.enable", false);
 					con.set("rarecrates.anothercrate.dropRateChance", 2);
 					con.set("rarecrates.anothercrate.crateFoundMessage", "&7%p has found a &1(Rare)&7 ManCo crate!");
-					con.set("rarecrates.anothercrate.needKey", false);
+					con.set("rarecrates.anothercrate.needKey.enabled", false);
 					con.set("rarecrates.anothercrate.needKey.material", Material.BLAZE_ROD.getId());
 					con.set("rarecrates.anothercrate.needKey.price", 3.0);
 					con.set("rarecrates.anothercrate.effect", false);

@@ -19,7 +19,7 @@ public class moneyCheck implements Listener {
 	@EventHandler
 	public void onMoneyCheck(PlayerInteractEvent e) {
 		if(e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK) {
-			if(e.getItem().getType() == Material.PAPER) {
+			if(e.getPlayer().getItemInHand().getType() == Material.PAPER && e.getPlayer().getItemInHand() != null) {
 				if(e.getItem().hasItemMeta()) {
 					if(e.getItem().getItemMeta().hasEnchant(Enchantment.DURABILITY)) {
 						String[] args = e.getItem().getItemMeta().getDisplayName().split(" ");

@@ -161,6 +161,42 @@ public class command implements CommandExecutor {
 							sender.sendMessage(ChatColor.RED + "you are not allowed to use this command!");
 						}
 					}
+				} else if(args.length == 3) {
+					if(args[0].equalsIgnoreCase("buy")) {
+						if(args[1].equalsIgnoreCase("key")) {
+							if(sender.hasPermission("manco.canbuy")) {
+								if(args[2].equalsIgnoreCase("list") || args[2].equalsIgnoreCase("help")) {
+									sender.sendMessage(ChatColor.GOLD + ".oO___[ManCo key list]___Oo.");
+									sender.sendMessage(ChatColor.GREEN + "available rare crate keys!");
+									for(String s : rareCrate.getRareCrateList()) {
+										if(rareCrate.isCrateKeyEnabled(s)) {
+											sender.sendMessage(ChatColor.GRAY + "key: " + s + ChatColor.GREEN + " price: " + rareCrate.returnKeyPrice(s));
+										}
+									}
+								} else {
+									if(util.isIconomyEnabled()) {
+										if(sender instanceof Player) {
+											Player p = (Player) sender;
+											if(rareCrate.getRareCrateList().contains(args[2])) {
+												if(iconomy.debitMoney(p, rareCrate.returnKeyPrice(args[2]))) {
+													sender.sendMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + "you successfully bought one " + args[2] + " key!");
+													p.getInventory().addItem(rareCrate.getKey(args[2]));
+												} else {
+													sender.sendMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + "you don't have money enough to buy this key");
+												}
+											} else {
+												sender.sendMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + "couldn't find this key!, please use /mc buy key list");
+											}
+										} else {
+											sender.sendMessage(ChatColor.RED + "a console cannot buy crate keys!");
+										}
+									}
+								}
+							} else {
+								sender.sendMessage(ChatColor.RED + "you don't have permission to use this command!");
+							}
+						}
+					}
 				}
 			} else {
 				sender.sendMessage(ChatColor.RED + "you don't have permission to use this command!");
