@@ -176,6 +176,25 @@ public class configuration {
 		}
 	}
 	
+	public static boolean isRareCrate(String crateName) {
+		try {
+			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "items.yml");
+			if(f.exists()) {
+				FileConfiguration con = YamlConfiguration.loadConfiguration(f);
+				if(con.isSet("rarecrates."+crateName)) {
+					if(con.getBoolean("rarecrates."+crateName+".enable")) {
+						return true;
+					} else {
+						return false;
+					}
+				}
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
 	public static boolean isPluginDisabledForWorld(World w) {
 		try {
 			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "items.yml");

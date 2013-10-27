@@ -85,7 +85,7 @@ public class command implements CommandExecutor {
 							sender.sendMessage(ChatColor.RED + "Admin: " + ChatColor.GRAY + "/manco " + ChatColor.WHITE + ": spawn a supplycrate for yourself");
 							sender.sendMessage(ChatColor.RED + "Admin: " + ChatColor.GRAY + "/manco <player> " + ChatColor.WHITE + ": spawn a supplycrate for a player");
 							sender.sendMessage(ChatColor.RED + "Admin: " + ChatColor.GRAY + "/manco reload " + ChatColor.WHITE + ": reloads the plugin");
-							sender.sendMessage(ChatColor.RED + "Admin: " + ChatColor.GRAY + "/manco buy " + ChatColor.WHITE + ": buy a ManCo crate!");
+							sender.sendMessage(ChatColor.RED + "Admin: " + ChatColor.GRAY + "/manco buy " + ChatColor.WHITE + ": buy a ManCo cra te!");
 						} else {
 							sender.sendMessage(ChatColor.RED + "you are not allowed to use this command!");
 						}
@@ -168,6 +168,48 @@ public class command implements CommandExecutor {
 						} else {
 							sender.sendMessage(ChatColor.RED + "you are not allowed to use this command!");
 						}
+					}
+				} else if(args.length == 2) {
+					if(sender.hasPermission("manco.spawn")) {
+						Player p = Bukkit.getPlayer(args[0]);
+						if(p instanceof Player) {
+							if(configuration.isRareCrate(args[1])) {
+								if(rareCrate.getRareCrateList().contains(args[1])) {
+									for(int i = 0; i < rareCrate.getRareCrateList().size(); i++) {
+										if(rareCrate.getRareCrateList().get(i).contains(args[1])) {
+											if(rareCrateList.rareCrates.containsKey(p.getName()) || normalCrateList.getFallingStateChest.containsValue(p.getName()) || rareCrateList.getCrateList2.containsKey(p.getName()) || rareCrateList.getCrateList.containsKey(p.getName()) || normalCrateList.getCrateList.containsKey(p.getName()) || normalCrateList.getCrateList2.containsKey(p.getName())) {
+												sender.sendMessage(ChatColor.RED + "could not create a crate because you allready have a non used crate!");
+												return false;
+											}
+											if(vanish.isVanished(p)) {
+												sender.sendMessage(ChatColor.RED + "you cannot spawn a crate for yourself when you are vanished!");
+												return false;
+											}
+											if(util.isWorldGuardEnabled()) {
+												if(!worldguard.canPlayerBuild(p)) {
+													sender.sendMessage(ChatColor.RED + "you cannot spawn a crate for yourself when you are in a protected worldguard region!");
+													return false;
+												}
+											}
+											if(configuration.isPluginDisabledForWorld(p.getWorld())) {
+												sender.sendMessage(ChatColor.RED + "you cannot spawn a crate in a disabled world!");
+												return false;
+											}
+											cratescheduler.doRareCrateNative(p, i);
+											break;
+										}
+									}
+								} else {
+									sender.sendMessage(ChatColor.RED + "rare crate couldn't be found in the load memory please reload the plugin!");
+								}
+							} else {
+								sender.sendMessage(ChatColor.RED + "this crate does not exist!, type \"/mc buy key list\" to see in all rare crates!");
+							}
+						} else {
+							sender.sendMessage(ChatColor.RED + "this player is not online!");
+						}
+					} else {
+						sender.sendMessage(ChatColor.RED + "you don't have permission to spawn crates!");
 					}
 				} else if(args.length == 3) {
 					if(args[0].equalsIgnoreCase("buy")) {
