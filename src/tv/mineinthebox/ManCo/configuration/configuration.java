@@ -3,7 +3,9 @@ package tv.mineinthebox.ManCo.configuration;
 import java.io.File;
 import java.util.ArrayList;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.FileConfigurationOptions;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -76,6 +78,19 @@ public class configuration {
 					list1.clear();
 					a.clear();
 				}
+				if(!con.isSet("enablePerWorld")) {
+					for(World w : Bukkit.getWorlds()) {
+						con.set("enablePerWorld."+w.getName(), true);
+					}
+					
+				} else if(con.isSet("enablePerWorld")) {
+					//check for new worlds
+					for(World w : Bukkit.getWorlds()) {
+						if(!con.isSet("enablePerWorld."+w.getName())) {
+							con.set("enablePerWorld."+w.getName(), true);
+						}
+					}
+				}
 				con.save(f);
 				list.clear();
 			} else {
@@ -140,10 +155,46 @@ public class configuration {
 					a.clear();
 					con.save(f);
 				}
+				if(!con.isSet("enablePerWorld")) {
+					for(World w : Bukkit.getWorlds()) {
+						con.set("enablePerWorld."+w.getName(), true);
+						con.save(f);
+					}
+					
+				} else if(con.isSet("enablePerWorld")) {
+					//check for new worlds
+					for(World w : Bukkit.getWorlds()) {
+						if(!con.isSet("enablePerWorld."+w.getName())) {
+							con.set("enablePerWorld."+w.getName(), true);
+							con.save(f);
+						}
+					}
+				}
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public static boolean isPluginDisabledForWorld(World w) {
+		try {
+			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "items.yml");
+			if(f.exists()) {
+				FileConfiguration con = YamlConfiguration.loadConfiguration(f);
+				if(con.isSet("enablePerWorld."+w.getName())) {
+					if(con.getBoolean("enablePerWorld."+w.getName()) == false) {
+						return true;
+					} else {
+						return false;
+					}
+				} else {
+					return false;
+				}
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 	
 	public static boolean spawnCrateNearby() {

@@ -26,6 +26,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 
 import tv.mineinthebox.ManCo.manCo;
+import tv.mineinthebox.ManCo.configuration.configuration;
 import tv.mineinthebox.ManCo.utils.normalCrate;
 import tv.mineinthebox.ManCo.utils.normalCrateList;
 import tv.mineinthebox.ManCo.utils.rareCrate;
@@ -132,6 +133,9 @@ public class chestCheck implements Listener {
 	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void blockPlace(BlockPlaceEvent e) {
+		if(configuration.isPluginDisabledForWorld(e.getPlayer().getWorld())) {
+			return;
+		}
 		ItemStack item = e.getItemInHand();
 		if(item.getType() == Material.CHEST) {
 			for(BlockFace face : BlockFace.values()) {
@@ -156,6 +160,9 @@ public class chestCheck implements Listener {
 	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void blockBreak(BlockBreakEvent e) {
+		if(configuration.isPluginDisabledForWorld(e.getPlayer().getWorld())) {
+			return;
+		}
 		for(BlockFace face : BlockFace.values()) {
 			Block block = e.getBlock().getRelative(face);
 
@@ -177,6 +184,9 @@ public class chestCheck implements Listener {
 
 	@EventHandler
 	public void getInventory(final InventoryOpenEvent e) {
+		if(configuration.isPluginDisabledForWorld(e.getPlayer().getWorld())) {
+			return;
+		}
 		if(e.getInventory().getType() == InventoryType.CHEST) {
 			if(e.getInventory().getHolder() instanceof Chest) {
 				final Chest chest = (Chest) e.getInventory().getHolder();
@@ -435,6 +445,9 @@ public class chestCheck implements Listener {
 
 	@EventHandler
 	public void chestClose(InventoryCloseEvent e) {
+		if(configuration.isPluginDisabledForWorld(e.getPlayer().getWorld())) {
+			return;
+		}
 		if(e.getInventory().getType() == InventoryType.CHEST) {
 			if(e.getInventory().getHolder() instanceof Chest) {
 				Chest chest = (Chest) e.getInventory().getHolder();

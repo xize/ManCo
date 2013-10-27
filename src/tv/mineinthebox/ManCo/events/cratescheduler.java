@@ -81,13 +81,13 @@ public class cratescheduler {
 				if(i > 0) {
 					int playerID = rarerand.nextInt(i) + 0;
 					Player p = Bukkit.getOnlinePlayers()[playerID];
-					if(rareCrateList.rareCrates.containsKey(p.getName()) || normalCrateList.getFallingStateChest.containsValue(p.getName()) || rareCrateList.getCrateList.containsKey(p.getName()) || rareCrateList.getCrateList2.containsKey(p.getName()) || normalCrateList.getCrateList.containsKey(p.getName()) || normalCrateList.getCrateList2.containsKey(p.getName()) || vanish.isVanished(p)) {
+					if(rareCrateList.rareCrates.containsKey(p.getName()) || normalCrateList.getFallingStateChest.containsValue(p.getName()) || rareCrateList.getCrateList.containsKey(p.getName()) || rareCrateList.getCrateList2.containsKey(p.getName()) || normalCrateList.getCrateList.containsKey(p.getName()) || normalCrateList.getCrateList2.containsKey(p.getName()) || vanish.isVanished(p) || configuration.isPluginDisabledForWorld(p.getWorld())) {
 
 						//player already has a crate, loop through all possible online players to see if they can get a crate.
 						//then use the native method.
 
 						for(Player p2 : Bukkit.getOnlinePlayers()) {
-							if(!(rareCrateList.rareCrates.containsKey(p2.getName()) || normalCrateList.getFallingStateChest.containsValue(p2.getName()) ||rareCrateList.getCrateList.containsKey(p2.getName()) || rareCrateList.getCrateList2.containsKey(p2.getName()) || normalCrateList.getCrateList.containsKey(p2.getName()) || normalCrateList.getCrateList2.containsKey(p2.getName()) || vanish.isVanished(p2))) {
+							if(!(rareCrateList.rareCrates.containsKey(p2.getName()) || normalCrateList.getFallingStateChest.containsValue(p2.getName()) ||rareCrateList.getCrateList.containsKey(p2.getName()) || rareCrateList.getCrateList2.containsKey(p2.getName()) || normalCrateList.getCrateList.containsKey(p2.getName()) || normalCrateList.getCrateList2.containsKey(p2.getName()) || configuration.isPluginDisabledForWorld(p2.getWorld()) || vanish.isVanished(p2))) {
 								if(!p2.getName().equalsIgnoreCase(p.getName())) {
 									doRareCrateNative(p2, RandomCrate);
 									break;
@@ -135,11 +135,11 @@ public class cratescheduler {
 				if(i > 0) {
 					int playerID = rarerand.nextInt(i) + 0;
 					Player p = Bukkit.getOnlinePlayers()[playerID];
-					if(rareCrateList.rareCrates.containsKey(p.getName()) || normalCrateList.getFallingStateChest.containsValue(p.getName()) || rareCrateList.getCrateList.containsKey(p.getName()) || rareCrateList.getCrateList2.containsKey(p.getName()) || normalCrateList.getCrateList.containsKey(p.getName()) || normalCrateList.getCrateList2.containsKey(p.getName()) || !worldguard.canPlayerBuild(p) || vanish.isVanished(p)) {
+					if(rareCrateList.rareCrates.containsKey(p.getName()) || normalCrateList.getFallingStateChest.containsValue(p.getName()) || rareCrateList.getCrateList.containsKey(p.getName()) || rareCrateList.getCrateList2.containsKey(p.getName()) || normalCrateList.getCrateList.containsKey(p.getName()) || normalCrateList.getCrateList2.containsKey(p.getName()) || !worldguard.canPlayerBuild(p) || vanish.isVanished(p) || configuration.isPluginDisabledForWorld(p.getWorld())) {
 						//player already has a crate, loop through all possible online players to see if they can get a crate.
 						//then use the native method.
 						for(Player p2 : Bukkit.getOnlinePlayers()) {
-							if(!(rareCrateList.rareCrates.containsKey(p2.getName()) || normalCrateList.getFallingStateChest.containsValue(p2.getName()) || rareCrateList.getCrateList.containsKey(p2.getName()) || rareCrateList.getCrateList2.containsKey(p2.getName()) || normalCrateList.getCrateList.containsKey(p2.getName()) || normalCrateList.getCrateList2.containsKey(p2.getName()) || vanish.isVanished(p2) || !worldguard.canPlayerBuild(p2))) {
+							if(!(rareCrateList.rareCrates.containsKey(p2.getName()) || normalCrateList.getFallingStateChest.containsValue(p2.getName()) || configuration.isPluginDisabledForWorld(p2.getWorld()) || rareCrateList.getCrateList.containsKey(p2.getName()) || rareCrateList.getCrateList2.containsKey(p2.getName()) || normalCrateList.getCrateList.containsKey(p2.getName()) || normalCrateList.getCrateList2.containsKey(p2.getName()) || vanish.isVanished(p2) || !worldguard.canPlayerBuild(p2))) {
 								if(!p2.getName().equalsIgnoreCase(p.getName())) {
 									doRareCrateNative(p2, RandomCrate);
 									break;
@@ -176,13 +176,13 @@ public class cratescheduler {
 		if(i > 0) {
 			int playerID = rand.nextInt(i) + 0;
 			Player p = Bukkit.getOnlinePlayers()[playerID];
-			if(rareCrateList.rareCrates.containsKey(p.getName()) || normalCrateList.getFallingStateChest.containsValue(p.getName()) || normalCrateList.getCrateList.containsKey(p.getName()) || normalCrateList.getCrateList2.containsKey(p.getName()) || rareCrateList.getCrateList.containsKey(p.getName()) || rareCrateList.getCrateList2.containsKey(p.getName()) || vanish.isVanished(p)) {
+			if(rareCrateList.rareCrates.containsKey(p.getName()) || normalCrateList.getFallingStateChest.containsValue(p.getName()) || configuration.isPluginDisabledForWorld(p.getWorld()) || normalCrateList.getCrateList.containsKey(p.getName()) || normalCrateList.getCrateList2.containsKey(p.getName()) || rareCrateList.getCrateList.containsKey(p.getName()) || rareCrateList.getCrateList2.containsKey(p.getName()) || vanish.isVanished(p)) {
 
 				//player already has a crate, loop through all possible online players to see if they can get a crate.
 				//then use the native method.
 
 				for(Player p2 : Bukkit.getOnlinePlayers()) {
-					if(!(rareCrateList.rareCrates.containsKey(p2.getName()) || normalCrateList.getFallingStateChest.containsValue(p2.getName()) || normalCrateList.getCrateList.containsKey(p2.getName()) || normalCrateList.getCrateList2.containsKey(p2.getName()) || rareCrateList.getCrateList.containsKey(p2.getName()) || rareCrateList.getCrateList2.containsKey(p2.getName()) || vanish.isVanished(p2))) {
+					if(!(rareCrateList.rareCrates.containsKey(p2.getName()) || configuration.isPluginDisabledForWorld(p2.getWorld()) || normalCrateList.getFallingStateChest.containsValue(p2.getName()) || normalCrateList.getCrateList.containsKey(p2.getName()) || normalCrateList.getCrateList2.containsKey(p2.getName()) || rareCrateList.getCrateList.containsKey(p2.getName()) || rareCrateList.getCrateList2.containsKey(p2.getName()) || vanish.isVanished(p2))) {
 						if(!p2.getName().equalsIgnoreCase(p.getName())) {
 							doCrateNative(p2);
 							break;
@@ -216,11 +216,11 @@ public class cratescheduler {
 		if(i > 0) {
 			int playerID = rand.nextInt(i) + 0;
 			Player p = Bukkit.getOnlinePlayers()[playerID];
-			if(rareCrateList.rareCrates.containsKey(p.getName()) || normalCrateList.getFallingStateChest.containsValue(p.getName()) || rareCrateList.getFallingStateChest.containsValue(p.getName()) || normalCrateList.getCrateList.containsKey(p.getName()) || normalCrateList.getCrateList2.containsKey(p.getName()) || rareCrateList.getCrateList.containsKey(p.getName()) || rareCrateList.getCrateList2.containsKey(p.getName()) || vanish.isVanished(p) || !worldguard.canPlayerBuild(p)) {
+			if(rareCrateList.rareCrates.containsKey(p.getName()) || normalCrateList.getFallingStateChest.containsValue(p.getName()) || configuration.isPluginDisabledForWorld(p.getWorld()) || rareCrateList.getFallingStateChest.containsValue(p.getName()) || normalCrateList.getCrateList.containsKey(p.getName()) || normalCrateList.getCrateList2.containsKey(p.getName()) || rareCrateList.getCrateList.containsKey(p.getName()) || rareCrateList.getCrateList2.containsKey(p.getName()) || vanish.isVanished(p) || !worldguard.canPlayerBuild(p)) {
 				//player already has a crate, loop through all possible online players to see if they can get a crate.
 				//then use the native method.
 				for(Player p2 : Bukkit.getOnlinePlayers()) {
-					if(!(rareCrateList.rareCrates.containsKey(p2.getName()) || normalCrateList.getFallingStateChest.containsValue(p2.getName()) || normalCrateList.getCrateList.containsKey(p2.getName()) || normalCrateList.getCrateList2.containsKey(p2.getName()) || rareCrateList.getCrateList.containsKey(p2.getName()) || rareCrateList.getCrateList2.containsKey(p2.getName()) || vanish.isVanished(p2) || !worldguard.canPlayerBuild(p2))) {
+					if(!(rareCrateList.rareCrates.containsKey(p2.getName()) || normalCrateList.getFallingStateChest.containsValue(p2.getName()) || configuration.isPluginDisabledForWorld(p2.getWorld()) || normalCrateList.getCrateList.containsKey(p2.getName()) || normalCrateList.getCrateList2.containsKey(p2.getName()) || rareCrateList.getCrateList.containsKey(p2.getName()) || rareCrateList.getCrateList2.containsKey(p2.getName()) || vanish.isVanished(p2) || !worldguard.canPlayerBuild(p2))) {
 						if(!p2.getName().equalsIgnoreCase(p.getName())) {
 							doCrateNative(p2);
 							break;

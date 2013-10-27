@@ -9,6 +9,7 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
+import tv.mineinthebox.ManCo.configuration.configuration;
 import tv.mineinthebox.ManCo.utils.iconomy;
 import tv.mineinthebox.ManCo.utils.util;
 
@@ -18,6 +19,10 @@ public class moneyCheck implements Listener {
 
 	@EventHandler
 	public void onMoneyCheck(PlayerInteractEvent e) {
+		if(configuration.isPluginDisabledForWorld(e.getPlayer().getWorld())) {
+			e.getPlayer().sendMessage(ChatColor.RED + "you cannot use ManCo money in a disabled world!");
+			return;
+		}
 		if(e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK) {
 			if(e.getPlayer().getItemInHand().getType() == Material.PAPER && e.getPlayer().getItemInHand() != null) {
 				if(e.getItem().hasItemMeta()) {

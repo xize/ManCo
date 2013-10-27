@@ -46,6 +46,10 @@ public class command implements CommandExecutor {
 									return false;
 								}
 							}
+							if(configuration.isPluginDisabledForWorld(p.getWorld())) {
+								sender.sendMessage(ChatColor.RED + "you cannot spawn a crate in a disabled world!");
+								return false;
+							}
 							Location loc = p.getLocation();
 							loc.setY(normalCrate.getCrateSpawnHeight(p));
 							Entity entity = p.getWorld().spawnFallingBlock(loc, Material.CHEST, (byte) 1);
@@ -147,6 +151,10 @@ public class command implements CommandExecutor {
 										sender.sendMessage(ChatColor.RED + "you cannot spawn a crate for this player when he is in a protected worldguard region!");
 										return false;
 									}
+								}
+								if(configuration.isPluginDisabledForWorld(p.getWorld())) {
+									sender.sendMessage(ChatColor.RED + "you cannot spawn a crate in a disabled world!");
+									return false;
 								}
 								Location loc = p.getLocation();
 								loc.setY(normalCrate.getCrateSpawnHeight(p));
