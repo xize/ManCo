@@ -101,13 +101,13 @@ public class chestCheck implements Listener {
 					Chest chestFromList = normalCrateList.getCrateList.get(e.getPlayer().getName());
 					if(!chest.equals(chestFromList)){
 						if(normalCrateList.getCrateList.containsValue(chest)) {
-							e.getPlayer().sendMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + "this crate does not belongs to you!");
+							e.getPlayer().sendMessage(ChatColor.GREEN + configuration.getPrefix() + ChatColor.GRAY + "this crate does not belongs to you!");
 							e.setCancelled(true);
 						}
 					}
 				} else if(!normalCrateList.getCrateList.containsKey(e.getPlayer().getName())) {
 					if(normalCrateList.getCrateList.containsValue(chest)) {
-						e.getPlayer().sendMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + "this crate does not belongs to you!");
+						e.getPlayer().sendMessage(ChatColor.GREEN + configuration.getPrefix() + ChatColor.GRAY + "this crate does not belongs to you!");
 						e.setCancelled(true);
 					}
 				}
@@ -116,13 +116,13 @@ public class chestCheck implements Listener {
 					Chest chestFromList = rareCrateList.getCrateList.get(e.getPlayer().getName());
 					if(!chest.equals(chestFromList)){
 						if(rareCrateList.getCrateList.containsValue(chest)) {
-							e.getPlayer().sendMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + "this crate does not belongs to you!");
+							e.getPlayer().sendMessage(ChatColor.GREEN + configuration.getPrefix() + ChatColor.GRAY + "this crate does not belongs to you!");
 							e.setCancelled(true);
 						}
 					}
 				} else if(!rareCrateList.getCrateList.containsKey(e.getPlayer().getName())) {
 					if(rareCrateList.getCrateList.containsValue(chest)) {
-						e.getPlayer().sendMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + "this crate does not belongs to you!");
+						e.getPlayer().sendMessage(ChatColor.GREEN + configuration.getPrefix() + ChatColor.GRAY + "this crate does not belongs to you!");
 						e.setCancelled(true);
 					}
 				}
@@ -271,7 +271,7 @@ public class chestCheck implements Listener {
 							public void run() {
 								try {
 									if(chest.getLocation().distance(p.getLocation()) > 6) {
-										p.sendMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + "you are to far from range to open this crate!");
+										p.sendMessage(ChatColor.GREEN + configuration.getPrefix() + ChatColor.GRAY + "you are to far from range to open this crate!");
 										e.setCancelled(true);
 										normalCrateList.schedulerTime.remove(e.getPlayer().getName());
 										return;
@@ -316,27 +316,27 @@ public class chestCheck implements Listener {
 									if(e.getPlayer().getItemInHand().containsEnchantment(Enchantment.DURABILITY)) {
 										if(e.getPlayer().getItemInHand().getItemMeta().getDisplayName().equals(rareCrate.getKey(crateName).getItemMeta().getDisplayName())) {
 											// it now can be opened with all the pleasure :)
-											p.sendMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + "succeeded key works!");
+											p.sendMessage(ChatColor.GREEN + configuration.getPrefix() + ChatColor.GRAY + "succeeded key works!");
 											ItemStack item = e.getPlayer().getItemInHand();
 											item.setAmount(item.getAmount() - 1);
 											e.getPlayer().setItemInHand(item);
 										} else {
-											p.sendMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + "Invalid key!, you need the " + crateName +  " key in your hand to open this crate!");
+											p.sendMessage(ChatColor.GREEN + configuration.getPrefix() + ChatColor.GRAY + "Invalid key!, you need the " + crateName +  " key in your hand to open this crate!");
 											e.setCancelled(true);
 											return;
 										}
 									} else {
-										p.sendMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + "you need the " + crateName +  " key in your hand to open this crate!");
+										p.sendMessage(ChatColor.GREEN + configuration.getPrefix() + ChatColor.GRAY + "you need the " + crateName +  " key in your hand to open this crate!");
 										e.setCancelled(true);
 										return;
 									}
 								} else {
-									p.sendMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + "you need the " + crateName +  " key in your hand to open this crate!");
+									p.sendMessage(ChatColor.GREEN + configuration.getPrefix() + ChatColor.GRAY + "you need the " + crateName +  " key in your hand to open this crate!");
 									e.setCancelled(true);
 									return;
 								}
 							} else {
-								p.sendMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + "you need the " + crateName +  " key in your hand to open this crate!");
+								p.sendMessage(ChatColor.GREEN + configuration.getPrefix() + ChatColor.GRAY + "you need the " + crateName +  " key in your hand to open this crate!");
 								e.setCancelled(true);
 								return;
 							}
@@ -409,7 +409,7 @@ public class chestCheck implements Listener {
 							@Override
 							public void run() {
 								if(chest.getLocation().distance(p.getLocation()) > 6) {
-									p.sendMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + "you are to far from range to open this crate!");
+									p.sendMessage(ChatColor.GREEN + configuration.getPrefix() + ChatColor.GRAY + "you are to far from range to open this crate!");
 									e.setCancelled(true);
 									rareCrateList.schedulerTime.remove(p.getName());
 									return;
@@ -474,7 +474,7 @@ public class chestCheck implements Listener {
 									}
 								}
 							}
-							Bukkit.broadcastMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + e.getPlayer().getName() + ChatColor.GRAY + " has uncrated the following items!, " + build.toString());
+							Bukkit.broadcastMessage(ChatColor.GREEN + configuration.getPrefix() + ChatColor.GRAY + e.getPlayer().getName() + ChatColor.GRAY + " has uncrated the following items!, " + build.toString());
 						}
 						normalCrateList.getCrateList2.remove(e.getPlayer().getName());
 						normalCrateList.ItemsFromChest.remove(e.getPlayer().getName());
@@ -504,7 +504,7 @@ public class chestCheck implements Listener {
 									}
 								}
 							}
-							Bukkit.broadcastMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + e.getPlayer().getName() + ChatColor.GRAY + " has uncrated the following items!, " + build.toString());
+							Bukkit.broadcastMessage(ChatColor.GREEN + configuration.getPrefix() + ChatColor.GRAY + e.getPlayer().getName() + ChatColor.GRAY + " has uncrated the following items!, " + build.toString());
 						}
 						rareCrateList.getCrateList2.remove(e.getPlayer().getName());
 						rareCrateList.ItemsFromChest.remove(e.getPlayer().getName());

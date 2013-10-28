@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -39,6 +40,12 @@ public class configuration {
 				}
 				if(!con.isSet("CrateFoundMessage")) {
 					con.set("CrateFoundMessage", "&7%p has found a ManCo crate!");
+				}
+				if(!con.isSet("CratePrefix")) {
+					con.set("CratePrefix", "&2[ManCo]");
+				}
+				if(!con.isSet("disableCrateProtection")) {
+					con.set("disableCrateProtection", false);
 				}
 				if(!con.isSet("disableUncrateMessage")) {
 					con.set("disableUncrateMessage", false);
@@ -115,6 +122,14 @@ public class configuration {
 					con.set("CrateFoundMessage", "&7%p has found a ManCo crate!");
 					con.save(f);
 				}
+				if(!con.isSet("CratePrefix")) {
+					con.set("CratePrefix", "&2[ManCo]");
+					con.save(f);
+				}
+				if(!con.isSet("disableCrateProtection")) {
+					con.set("disableCrateProtection", false);
+					con.save(f);
+				}
 				if(!con.isSet("disableUncrateMessage")) {
 					con.set("disableUncrateMessage", false);
 					con.save(f);
@@ -174,6 +189,36 @@ public class configuration {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public static boolean isChestProtectionOff() {
+		try {
+			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "items.yml");
+			if(f.exists()) {
+				FileConfiguration con = YamlConfiguration.loadConfiguration(f);
+				if(con.getBoolean("disableCrateProtection")) {
+					return false;
+				} else {
+					return true;
+				}
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	public static String getPrefix() {
+		try {
+			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "items.yml");
+			if(f.exists()) {
+				FileConfiguration con = YamlConfiguration.loadConfiguration(f);
+				return ChatColor.translateAlternateColorCodes('&', con.getString("CratePrefix") + " ");
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	public static boolean isRareCrate(String crateName) {

@@ -36,13 +36,13 @@ public class moneyCheck implements Listener {
 										ItemStack item = new ItemStack(e.getItem());
 										item.setAmount(item.getAmount() - 1);
 										e.getPlayer().getInventory().setItemInHand(item);
-										e.getPlayer().sendMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + "you successfully got " + money + "$ added to your economy bank!");
+										e.getPlayer().sendMessage(ChatColor.GREEN + configuration.getPrefix() + ChatColor.GRAY + "you successfully got " + money + "$ added to your economy bank!");
 									}
 								} catch(Exception r) {
 									r.printStackTrace();
 								}
 							} else {
-								e.getPlayer().sendMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + " iConomy or Vault is not installed!");
+								e.getPlayer().sendMessage(ChatColor.GREEN + configuration.getPrefix() + ChatColor.GRAY + " iConomy or Vault is not installed!");
 							}
 						}
 					}

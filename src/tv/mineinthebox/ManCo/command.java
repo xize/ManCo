@@ -54,8 +54,8 @@ public class command implements CommandExecutor {
 							loc.setY(normalCrate.getCrateSpawnHeight(p));
 							Entity entity = p.getWorld().spawnFallingBlock(loc, Material.CHEST, (byte) 1);
 							normalCrateList.getFallingStateChest.put(entity, p.getName());
-							Bukkit.broadcastMessage(ChatColor.GREEN + "[ManCo] " + normalCrate.getCrateFoundMessage().replace("%p", p.getName()));
-							sender.sendMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + "you've successfully spawned a crate for yourself!");
+							Bukkit.broadcastMessage(ChatColor.GREEN + configuration.getPrefix() + normalCrate.getCrateFoundMessage().replace("%p", p.getName()));
+							sender.sendMessage(ChatColor.GREEN + configuration.getPrefix() + ChatColor.GRAY + "you've successfully spawned a crate for yourself!");
 						} else {
 							sender.sendMessage("a console cannot have a location !");
 						}
@@ -75,7 +75,7 @@ public class command implements CommandExecutor {
 								cratescheduler.startRareScheduler();
 							}
 							handler.restartListeners();
-							sender.sendMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + "reload successfully");
+							sender.sendMessage(ChatColor.GREEN + configuration.getPrefix() + ChatColor.GRAY + "reload successfully");
 						} else {
 							sender.sendMessage(ChatColor.RED + "you are not allowed to use this command!");
 						}
@@ -84,8 +84,16 @@ public class command implements CommandExecutor {
 							sender.sendMessage(ChatColor.GOLD + ".oO___[ManCo supplycrates]___Oo.");
 							sender.sendMessage(ChatColor.RED + "Admin: " + ChatColor.GRAY + "/manco " + ChatColor.WHITE + ": spawn a supplycrate for yourself");
 							sender.sendMessage(ChatColor.RED + "Admin: " + ChatColor.GRAY + "/manco <player> " + ChatColor.WHITE + ": spawn a supplycrate for a player");
+							sender.sendMessage(ChatColor.RED + "Admin: " + ChatColor.GRAY + "/manco <player> rarecrateID " + ChatColor.WHITE + ": spawn a rare crate for the defined player");
 							sender.sendMessage(ChatColor.RED + "Admin: " + ChatColor.GRAY + "/manco reload " + ChatColor.WHITE + ": reloads the plugin");
-							sender.sendMessage(ChatColor.RED + "Admin: " + ChatColor.GRAY + "/manco buy " + ChatColor.WHITE + ": buy a ManCo cra te!");
+							sender.sendMessage(ChatColor.RED + "Admin: " + ChatColor.GRAY + "/manco buy " + ChatColor.WHITE + ": buy a ManCo crate!");
+							sender.sendMessage(ChatColor.RED + "Admin: " + ChatColor.GRAY + "/manco buy key list " + ChatColor.WHITE + ": shows a list of rare keys");
+							sender.sendMessage(ChatColor.RED + "Admin: " + ChatColor.GRAY + "/manco buy key <keyName> " + ChatColor.WHITE + ": here you can buy a key!");
+						} else if(sender.hasPermission("manco.help.default")) {
+							sender.sendMessage(ChatColor.GOLD + ".oO___[ManCo supplycrates default help]___Oo.");
+							sender.sendMessage(ChatColor.DARK_GRAY + "Default: " + ChatColor.GRAY + "/manco buy " + ChatColor.WHITE + ": allows you to buy a crate!");
+							sender.sendMessage(ChatColor.DARK_GRAY + "Default: " + ChatColor.GRAY + "/manco buy key list " + ChatColor.WHITE + ": shows all rare crate key IDs!");
+							sender.sendMessage(ChatColor.DARK_GRAY + "Default: " + ChatColor.GRAY + "/manco buy key <keyName> " + ChatColor.WHITE + ": buy a rare crate key!");
 						} else {
 							sender.sendMessage(ChatColor.RED + "you are not allowed to use this command!");
 						}
@@ -103,7 +111,7 @@ public class command implements CommandExecutor {
 														loc.setY(normalCrate.getCrateSpawnHeight(p));
 														Entity entity = p.getWorld().spawnFallingBlock(loc, Material.CHEST, (byte) 1);
 														normalCrateList.getFallingStateChest.put(entity, p.getName());
-														Bukkit.broadcastMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + p.getName() + " has bought a ManCo crate!");
+														Bukkit.broadcastMessage(ChatColor.GREEN + configuration.getPrefix() + ChatColor.GRAY + p.getName() + " has bought a ManCo crate!");
 													} else {
 														sender.sendMessage(ChatColor.RED + "you have not enough money to buy a ManCo crate!");
 													}
@@ -116,7 +124,7 @@ public class command implements CommandExecutor {
 													loc.setY(normalCrate.getCrateSpawnHeight(p));
 													Entity entity = p.getWorld().spawnFallingBlock(loc, Material.CHEST, (byte) 1);
 													normalCrateList.getFallingStateChest.put(entity, p.getName());
-													Bukkit.broadcastMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + p.getName() + " has bought a ManCo crate!");
+													Bukkit.broadcastMessage(ChatColor.GREEN + configuration.getPrefix() + ChatColor.GRAY + p.getName() + " has bought a ManCo crate!");
 												} else {
 													sender.sendMessage(ChatColor.RED + "you have not enough money to buy a ManCo crate!");
 												}
@@ -126,10 +134,10 @@ public class command implements CommandExecutor {
 										}
 									}
 								} else {
-									sender.sendMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + "we weren't able to find iConomy or vault!");
+									sender.sendMessage(ChatColor.GREEN + configuration.getPrefix() + ChatColor.GRAY + "we weren't able to find iConomy or vault!");
 								}
 							} else {
-								sender.sendMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + "iConomy has been disabled in the configuration");
+								sender.sendMessage(ChatColor.GREEN + configuration.getPrefix() + ChatColor.GRAY + "iConomy has been disabled in the configuration");
 							}
 						} else {
 							sender.sendMessage(ChatColor.RED + "you are not allowed to buy ManCo crates!");
@@ -160,8 +168,8 @@ public class command implements CommandExecutor {
 								loc.setY(normalCrate.getCrateSpawnHeight(p));
 								Entity entity = p.getWorld().spawnFallingBlock(loc, Material.CHEST, (byte) 1);
 								normalCrateList.getFallingStateChest.put(entity, p.getName());
-								Bukkit.broadcastMessage(ChatColor.GREEN + "[ManCo] " + normalCrate.getCrateFoundMessage().replace("%p", p.getName()));	
-								sender.sendMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + "you've successfully spawned a ManCo crate for " + p.getName() + "!");
+								Bukkit.broadcastMessage(ChatColor.GREEN + configuration.getPrefix() + normalCrate.getCrateFoundMessage().replace("%p", p.getName()));	
+								sender.sendMessage(ChatColor.GREEN + configuration.getPrefix() + ChatColor.GRAY + "you've successfully spawned a ManCo crate for " + p.getName() + "!");
 							} else {
 								sender.sendMessage(ChatColor.RED + "this player is not online!");
 							}
@@ -229,13 +237,13 @@ public class command implements CommandExecutor {
 											Player p = (Player) sender;
 											if(rareCrate.getRareCrateList().contains(args[2])) {
 												if(iconomy.debitMoney(p, rareCrate.returnKeyPrice(args[2]))) {
-													sender.sendMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + "you successfully bought one " + args[2] + " key!");
+													sender.sendMessage(ChatColor.GREEN + configuration.getPrefix() + ChatColor.GRAY + "you successfully bought one " + args[2] + " key!");
 													p.getInventory().addItem(rareCrate.getKey(args[2]));
 												} else {
-													sender.sendMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + "you don't have money enough to buy this key");
+													sender.sendMessage(ChatColor.GREEN + configuration.getPrefix() + ChatColor.GRAY + "you don't have money enough to buy this key");
 												}
 											} else {
-												sender.sendMessage(ChatColor.GREEN + "[ManCo] " + ChatColor.GRAY + "couldn't find this key!, please use /mc buy key list");
+												sender.sendMessage(ChatColor.GREEN + configuration.getPrefix() + ChatColor.GRAY + "couldn't find this key!, please use /mc buy key list");
 											}
 										} else {
 											sender.sendMessage(ChatColor.RED + "a console cannot buy crate keys!");
