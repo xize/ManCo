@@ -111,7 +111,11 @@ public class cratescheduler {
 						Entity entity = p.getWorld().spawnFallingBlock(loc, Material.CHEST, (byte) 1);
 						rareCrateList.getFallingStateChest.put(entity, p.getName()+","+rareCrate.getRareCrateList().get(RandomCrate));	
 						rareCrateList.rareCrates.put(p.getName(), rareCrate.getRareCrateList().get(RandomCrate));
-						Bukkit.broadcastMessage(ChatColor.GREEN + configuration.getPrefix() + rareCrate.getCrateFoundMessage(rareCrate.getRareCrateList().get(RandomCrate)).replace("%p", p.getName()));	
+						if(configuration.isCrateDropMessageDisabled()) {
+							//do nothing
+						} else {
+							Bukkit.broadcastMessage(ChatColor.GREEN + configuration.getPrefix() + rareCrate.getCrateFoundMessage(rareCrate.getRareCrateList().get(RandomCrate)).replace("%p", p.getName()));	
+						}	
 					}
 				}
 			}
@@ -163,7 +167,11 @@ public class cratescheduler {
 						Entity entity = p.getWorld().spawnFallingBlock(loc, Material.CHEST, (byte) 1);
 						rareCrateList.getFallingStateChest.put(entity, p.getName()+","+rareCrate.getRareCrateList().get(RandomCrate));
 						rareCrateList.rareCrates.put(p.getName(), rareCrate.getRareCrateList().get(RandomCrate));
-						Bukkit.broadcastMessage(ChatColor.GREEN + configuration.getPrefix() + rareCrate.getCrateFoundMessage(rareCrate.getRareCrateList().get(RandomCrate)).replace("%p", p.getName()));	
+						if(configuration.isCrateDropMessageDisabled()) {
+
+						} else {
+							Bukkit.broadcastMessage(ChatColor.GREEN + configuration.getPrefix() + rareCrate.getCrateFoundMessage(rareCrate.getRareCrateList().get(RandomCrate)).replace("%p", p.getName()));	
+						}
 					}
 				}
 			}
@@ -205,7 +213,11 @@ public class cratescheduler {
 				}
 				Entity entity = p.getWorld().spawnFallingBlock(loc, Material.CHEST, (byte) 1);
 				normalCrateList.getFallingStateChest.put(entity, p.getName());
-				Bukkit.broadcastMessage(ChatColor.GREEN + configuration.getPrefix() + normalCrate.getCrateFoundMessage().replace("%p", p.getName()));	
+				if(configuration.isCrateDropMessageDisabled()) {
+
+				} else {
+					Bukkit.broadcastMessage(ChatColor.GREEN + configuration.getPrefix() + normalCrate.getCrateFoundMessage().replace("%p", p.getName()));	
+				}
 			}
 		}
 	}
@@ -243,7 +255,11 @@ public class cratescheduler {
 				}
 				Entity entity = p.getWorld().spawnFallingBlock(loc, Material.CHEST, (byte) 1);
 				normalCrateList.getFallingStateChest.put(entity, p.getName());
-				Bukkit.broadcastMessage(ChatColor.GREEN + configuration.getPrefix() + normalCrate.getCrateFoundMessage().replace("%p", p.getName()));	
+				if(configuration.isCrateDropMessageDisabled()) {
+
+				} else {
+					Bukkit.broadcastMessage(ChatColor.GREEN + configuration.getPrefix() + normalCrate.getCrateFoundMessage().replace("%p", p.getName()));	
+				}
 			}
 		}
 	}
@@ -261,7 +277,11 @@ public class cratescheduler {
 		}
 		Entity entity = p.getWorld().spawnFallingBlock(loc, Material.CHEST, (byte) 1);
 		normalCrateList.getFallingStateChest.put(entity, p.getName());
-		Bukkit.broadcastMessage(ChatColor.GREEN + configuration.getPrefix() + normalCrate.getCrateFoundMessage().replace("%p", p.getName()));
+		if(configuration.isCrateDropMessageDisabled()) {
+
+		} else {
+			Bukkit.broadcastMessage(ChatColor.GREEN + configuration.getPrefix() + normalCrate.getCrateFoundMessage().replace("%p", p.getName()));
+		}
 	}
 
 	public static void doRareCrateNative(Player p, int RandomCrate) {
@@ -278,7 +298,11 @@ public class cratescheduler {
 		Entity entity = p.getWorld().spawnFallingBlock(loc, Material.CHEST, (byte) 1);
 		rareCrateList.getFallingStateChest.put(entity, p.getName()+","+rareCrate.getRareCrateList().get(RandomCrate));
 		rareCrateList.rareCrates.put(p.getName(), rareCrate.getRareCrateList().get(RandomCrate));
-		Bukkit.broadcastMessage(ChatColor.GREEN + configuration.getPrefix() + rareCrate.getCrateFoundMessage(rareCrate.getRareCrateList().get(RandomCrate)).replace("%p", p.getName()));
-	}
+		if(configuration.isCrateDropMessageDisabled()) {
+			
+		} else {
+			Bukkit.broadcastMessage(ChatColor.GREEN + configuration.getPrefix() + rareCrate.getCrateFoundMessage(rareCrate.getRareCrateList().get(RandomCrate)).replace("%p", p.getName()));
+		}
+		}
 
 }

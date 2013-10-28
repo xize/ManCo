@@ -54,8 +54,12 @@ public class command implements CommandExecutor {
 							loc.setY(normalCrate.getCrateSpawnHeight(p));
 							Entity entity = p.getWorld().spawnFallingBlock(loc, Material.CHEST, (byte) 1);
 							normalCrateList.getFallingStateChest.put(entity, p.getName());
-							Bukkit.broadcastMessage(ChatColor.GREEN + configuration.getPrefix() + normalCrate.getCrateFoundMessage().replace("%p", p.getName()));
-							sender.sendMessage(ChatColor.GREEN + configuration.getPrefix() + ChatColor.GRAY + "you've successfully spawned a crate for yourself!");
+							if(configuration.isCrateDropMessageDisabled()) {
+								sender.sendMessage(ChatColor.GREEN + configuration.getPrefix() + ChatColor.GRAY + "you've successfully spawned a crate for yourself!");
+							} else {
+								Bukkit.broadcastMessage(ChatColor.GREEN + configuration.getPrefix() + normalCrate.getCrateFoundMessage().replace("%p", p.getName()));
+								sender.sendMessage(ChatColor.GREEN + configuration.getPrefix() + ChatColor.GRAY + "you've successfully spawned a crate for yourself!");
+							}
 						} else {
 							sender.sendMessage("a console cannot have a location !");
 						}
@@ -168,8 +172,12 @@ public class command implements CommandExecutor {
 								loc.setY(normalCrate.getCrateSpawnHeight(p));
 								Entity entity = p.getWorld().spawnFallingBlock(loc, Material.CHEST, (byte) 1);
 								normalCrateList.getFallingStateChest.put(entity, p.getName());
-								Bukkit.broadcastMessage(ChatColor.GREEN + configuration.getPrefix() + normalCrate.getCrateFoundMessage().replace("%p", p.getName()));	
-								sender.sendMessage(ChatColor.GREEN + configuration.getPrefix() + ChatColor.GRAY + "you've successfully spawned a ManCo crate for " + p.getName() + "!");
+								if(configuration.isCrateDropMessageDisabled()) {
+									sender.sendMessage(ChatColor.GREEN + configuration.getPrefix() + ChatColor.GRAY + "you've successfully spawned a ManCo crate for " + p.getName() + "!");
+								} else {
+									sender.sendMessage(ChatColor.GREEN + configuration.getPrefix() + ChatColor.GRAY + "you've successfully spawned a ManCo crate for " + p.getName() + "!");
+									Bukkit.broadcastMessage(ChatColor.GREEN + configuration.getPrefix() + normalCrate.getCrateFoundMessage().replace("%p", p.getName()));
+								}	
 							} else {
 								sender.sendMessage(ChatColor.RED + "this player is not online!");
 							}
@@ -204,6 +212,7 @@ public class command implements CommandExecutor {
 												return false;
 											}
 											cratescheduler.doRareCrateNative(p, i);
+											sender.sendMessage(ChatColor.GREEN + "successfully spawned a rare crate to player " + p.getName());
 											break;
 										}
 									}

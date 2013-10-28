@@ -15,7 +15,7 @@ public class normalCrate {
 			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "items.yml");
 			if(f.exists()) {
 				FileConfiguration con = YamlConfiguration.loadConfiguration(f);
-				return ChatColor.translateAlternateColorCodes('&', con.getString("CrateFoundMessage"));
+				return ChatColor.translateAlternateColorCodes('&', con.getString("CrateFound.message"));
 			}
 		} catch(Exception e) {
 			e.printStackTrace();

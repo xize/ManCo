@@ -38,8 +38,11 @@ public class configuration {
 				if(!con.isSet("useIconomy.price")) {
 					con.set("useIconomy.price", 10.0);
 				}
-				if(!con.isSet("CrateFoundMessage")) {
-					con.set("CrateFoundMessage", "&7%p has found a ManCo crate!");
+				if(!con.isSet("CrateFound.message")) {
+					con.set("CrateFound.message", "&7%p has found a ManCo crate!");
+				}
+				if(!con.isSet("CrateFound.enableMessage")) {
+					con.set("CrateFound.enableMessage", true);
 				}
 				if(!con.isSet("CratePrefix")) {
 					con.set("CratePrefix", "&2[ManCo]");
@@ -118,8 +121,12 @@ public class configuration {
 					con.set("useIconomy.price", 10.0);
 					con.save(f);
 				}
-				if(!con.isSet("CrateFoundMessage")) {
-					con.set("CrateFoundMessage", "&7%p has found a ManCo crate!");
+				if(!con.isSet("CrateFound.message")) {
+					con.set("CrateFound.message", "&7%p has found a ManCo crate!");
+					con.save(f);
+				}
+				if(!con.isSet("CrateFound.enableMessage")) {
+					con.set("CrateFound.enableMessage", true);
 					con.save(f);
 				}
 				if(!con.isSet("CratePrefix")) {
@@ -326,6 +333,23 @@ public class configuration {
 			e.printStackTrace();
 		}
 		return 0;
+	}
+	
+	public static boolean isCrateDropMessageDisabled() {
+		try {
+			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "items.yml");
+			if(f.exists()) {
+				FileConfiguration con = YamlConfiguration.loadConfiguration(f);
+				if(con.getBoolean("CrateFound.enableMessage")) {
+					return false;
+				} else {
+					return true;
+				}
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 
 }
