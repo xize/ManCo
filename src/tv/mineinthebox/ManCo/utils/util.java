@@ -30,7 +30,8 @@ public class util {
 
 	@SuppressWarnings("deprecation")
 	public static boolean isSlab(Block block) {
-		if(block.getType() == Material.getMaterial(126) || block.getType() == Material.getMaterial(44)) {
+		Block highest = block.getLocation().getWorld().getHighestBlockAt(block.getLocation());
+		if(highest.getType() == Material.getMaterial(126) || block.getType() == Material.getMaterial(44)) {
 			return true;
 		}
 		return false;
