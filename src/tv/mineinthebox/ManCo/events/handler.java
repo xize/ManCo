@@ -4,12 +4,14 @@ import org.bukkit.Bukkit;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 
+import tv.mineinthebox.ManCo.api;
 import tv.mineinthebox.ManCo.manCo;
 
 public class handler {
 	
 	public static void launch() {
 		setListener(new chestCheck());
+		setListener(new api());
 		setListener(new moneyCheck());
 	}
 	

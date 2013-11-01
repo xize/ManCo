@@ -3,6 +3,7 @@ package tv.mineinthebox.ManCo.utils;
 import java.io.File;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -38,6 +39,14 @@ public class normalCrate {
 	
 	public static int getCrateSpawnHeight(Player p) {
 		if(p.getLocation().getY() < 100) {
+			return 120;
+		} else {
+			return 256;
+		}
+	}
+	
+	public static int getCrateSpawnHeight(Location loc) {
+		if(loc.getY() < 100) {
 			return 120;
 		} else {
 			return 256;
