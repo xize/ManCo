@@ -309,7 +309,7 @@ public class chestCheck implements Listener {
 							return;
 						}
 						if(rareCrate.isCrateKeyEnabled(rareCrateList.rareCrates.get(e.getPlayer().getName()))) {
-							String crateName = rareCrateList.rareCrates.get(e.getPlayer().getName());
+							final String crateName = rareCrateList.rareCrates.get(e.getPlayer().getName());
 							if(e.getPlayer().getItemInHand().getType() == rareCrate.getKey(crateName).getType()) {
 							
 								if(e.getPlayer().getItemInHand().hasItemMeta()) {
@@ -343,6 +343,7 @@ public class chestCheck implements Listener {
 						}
 						e.setCancelled(true);
 						rareCrateList.schedulerTime.add(e.getPlayer().getName());
+						final String crateName = rareCrateList.rareCrates.get(e.getPlayer().getName());
 						Bukkit.getScheduler().scheduleSyncDelayedTask(manCo.getPlugin(), new Runnable() {
 
 							@Override
@@ -352,6 +353,16 @@ public class chestCheck implements Listener {
 								p.playSound(chest.getLocation(), Sound.CHEST_OPEN, 1, 0);
 								p.playSound(chest.getLocation(), Sound.CHEST_CLOSE, 1, 0);
 								p.playSound(chest.getLocation(), Sound.CHEST_OPEN, 1, 0);
+								if(rareCrate.crateHasEffect(crateName)) {
+									e.getPlayer().getWorld().playEffect(chest.getLocation(), Effect.MOBSPAWNER_FLAMES, 100);
+									e.getPlayer().getWorld().playEffect(chest.getLocation(), Effect.ENDER_SIGNAL, 100);
+									playRespectedSound(Sound.AMBIENCE_CAVE, chest.getLocation());
+									playRespectedSound(Sound.AMBIENCE_RAIN, chest.getLocation());
+									playRespectedSound(Sound.ANVIL_BREAK, chest.getLocation());
+									playRespectedSound(Sound.AMBIENCE_THUNDER, chest.getLocation());
+									playRespectedSound(Sound.WOLF_DEATH, chest.getLocation());
+									
+								}
 							}
 
 						}, 50);
@@ -364,6 +375,15 @@ public class chestCheck implements Listener {
 								p.playSound(chest.getLocation(), Sound.CHEST_OPEN, 1, 0);
 								p.playSound(chest.getLocation(), Sound.CHEST_CLOSE, 1, 0);
 								p.playSound(chest.getLocation(), Sound.CHEST_OPEN, 1, 0);
+								if(rareCrate.crateHasEffect(crateName)) {
+									e.getPlayer().getWorld().playEffect(chest.getLocation(), Effect.MOBSPAWNER_FLAMES, 100);
+									e.getPlayer().getWorld().playEffect(chest.getLocation(), Effect.ENDER_SIGNAL, 100);
+									playRespectedSound(Sound.AMBIENCE_CAVE, chest.getLocation());
+									playRespectedSound(Sound.AMBIENCE_RAIN, chest.getLocation());
+									playRespectedSound(Sound.ANVIL_BREAK, chest.getLocation());
+									playRespectedSound(Sound.AMBIENCE_THUNDER, chest.getLocation());
+									playRespectedSound(Sound.WOLF_DEATH, chest.getLocation());
+								}
 							}
 
 						}, 100);
@@ -376,6 +396,15 @@ public class chestCheck implements Listener {
 								p.playSound(chest.getLocation(), Sound.CHEST_OPEN, 1, 0);
 								p.playSound(chest.getLocation(), Sound.CHEST_CLOSE, 1, 0);
 								p.playSound(chest.getLocation(), Sound.CHEST_OPEN, 1, 0);
+								if(rareCrate.crateHasEffect(crateName)) {
+									e.getPlayer().getWorld().playEffect(chest.getLocation(), Effect.MOBSPAWNER_FLAMES, 100);
+									e.getPlayer().getWorld().playEffect(chest.getLocation(), Effect.ENDER_SIGNAL, 100);
+									playRespectedSound(Sound.AMBIENCE_CAVE, chest.getLocation());
+									playRespectedSound(Sound.AMBIENCE_RAIN, chest.getLocation());
+									playRespectedSound(Sound.ANVIL_BREAK, chest.getLocation());
+									playRespectedSound(Sound.AMBIENCE_THUNDER, chest.getLocation());
+									playRespectedSound(Sound.WOLF_DEATH, chest.getLocation());
+								}
 							}
 
 
@@ -389,6 +418,15 @@ public class chestCheck implements Listener {
 								p.playSound(chest.getLocation(), Sound.CHEST_OPEN, 1, 0);
 								p.playSound(chest.getLocation(), Sound.CHEST_CLOSE, 1, 0);
 								p.playSound(chest.getLocation(), Sound.CHEST_OPEN, 1, 0);
+								if(rareCrate.crateHasEffect(crateName)) {
+									e.getPlayer().getWorld().playEffect(chest.getLocation(), Effect.MOBSPAWNER_FLAMES, 100);
+									e.getPlayer().getWorld().playEffect(chest.getLocation(), Effect.ENDER_SIGNAL, 100);
+									playRespectedSound(Sound.AMBIENCE_CAVE, chest.getLocation());
+									playRespectedSound(Sound.AMBIENCE_RAIN, chest.getLocation());
+									playRespectedSound(Sound.ANVIL_BREAK, chest.getLocation());
+									playRespectedSound(Sound.AMBIENCE_THUNDER, chest.getLocation());
+									playRespectedSound(Sound.WOLF_DEATH, chest.getLocation());
+								}
 							}
 
 						}, 200);
@@ -401,6 +439,15 @@ public class chestCheck implements Listener {
 								p.playSound(chest.getLocation(), Sound.CHEST_OPEN, 1, 0);
 								p.playSound(chest.getLocation(), Sound.CHEST_CLOSE, 1, 0);
 								p.playSound(chest.getLocation(), Sound.CHEST_OPEN, 1, 0);
+								if(rareCrate.crateHasEffect(crateName)) {
+									e.getPlayer().getWorld().playEffect(chest.getLocation(), Effect.MOBSPAWNER_FLAMES, 100);
+									e.getPlayer().getWorld().playEffect(chest.getLocation(), Effect.ENDER_SIGNAL, 100);
+									playRespectedSound(Sound.AMBIENCE_CAVE, chest.getLocation());
+									playRespectedSound(Sound.AMBIENCE_RAIN, chest.getLocation());
+									playRespectedSound(Sound.ANVIL_BREAK, chest.getLocation());
+									playRespectedSound(Sound.AMBIENCE_THUNDER, chest.getLocation());
+									playRespectedSound(Sound.WOLF_DEATH, chest.getLocation());
+								}
 							}
 
 						}, 250);
@@ -420,6 +467,15 @@ public class chestCheck implements Listener {
 									p.playSound(chest.getLocation(), Sound.CHEST_OPEN, 1, 0);
 									p.playSound(chest.getLocation(), Sound.CHEST_CLOSE, 1, 0);
 									p.playSound(chest.getLocation(), Sound.CHEST_OPEN, 1, 0);
+									if(rareCrate.crateHasEffect(crateName)) {
+										e.getPlayer().getWorld().playEffect(chest.getLocation(), Effect.MOBSPAWNER_FLAMES, 100);
+										e.getPlayer().getWorld().playEffect(chest.getLocation(), Effect.ENDER_SIGNAL, 100);
+										playRespectedSound(Sound.AMBIENCE_CAVE, chest.getLocation());
+										playRespectedSound(Sound.AMBIENCE_RAIN, chest.getLocation());
+										playRespectedSound(Sound.ANVIL_BREAK, chest.getLocation());
+										playRespectedSound(Sound.AMBIENCE_THUNDER, chest.getLocation());
+										playRespectedSound(Sound.WOLF_DEATH, chest.getLocation());
+									}
 									if(e.isCancelled()) {
 										e.setCancelled(false);
 										rareCrateList.ItemsFromChest.put(e.getPlayer().getName(), e.getInventory().getContents());
