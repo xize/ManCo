@@ -1,6 +1,8 @@
 package tv.mineinthebox.ManCo.utils;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
+import org.bukkit.block.Block;
 
 import tv.mineinthebox.ManCo.logType;
 import tv.mineinthebox.ManCo.manCo;
@@ -22,6 +24,14 @@ public class util {
 				manCo.log("in order to let the iConomy part work, please download vault at http://dev.bukkit.org/server-mods/Vault", logType.severe);
 				return false;
 			}
+		}
+		return false;
+	}
+	
+	@SuppressWarnings("deprecation")
+	public static boolean isSlab(Block block) {
+		if(block.getType() == Material.getMaterial(44)) {
+			return true;
 		}
 		return false;
 	}

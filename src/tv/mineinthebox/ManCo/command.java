@@ -4,6 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.block.BlockFace;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -34,6 +35,10 @@ public class command implements CommandExecutor {
 							Player p = (Player) sender;
 							if(rareCrateList.rareCrates.containsKey(p.getName()) || normalCrateList.getFallingStateChest.containsValue(p.getName()) || rareCrateList.getCrateList2.containsKey(p.getName()) || rareCrateList.getCrateList.containsKey(p.getName()) || normalCrateList.getCrateList.containsKey(p.getName()) || normalCrateList.getCrateList2.containsKey(p.getName())) {
 								sender.sendMessage(ChatColor.RED + "could not create a crate because you allready have a non used crate!");
+								return false;
+							}
+							if(util.isSlab(p.getLocation().getBlock().getRelative(BlockFace.DOWN))) {
+								sender.sendMessage(ChatColor.RED + "could not spawn a crate because this player is standing on a slab!");
 								return false;
 							}
 							if(vanish.isVanished(p)) {
@@ -154,6 +159,10 @@ public class command implements CommandExecutor {
 									sender.sendMessage(ChatColor.RED + "could not create a crate because this player has allready a non used crate!");
 									return false;
 								}
+								if(util.isSlab(p.getLocation().getBlock().getRelative(BlockFace.DOWN))) {
+									sender.sendMessage(ChatColor.RED + "could not spawn a crate because this player is standing on a slab!");
+									return false;
+								}
 								if(vanish.isVanished(p)) {
 									sender.sendMessage(ChatColor.RED + "you cannot spawn a crate for yourself when you are vanished!");
 									return false;
@@ -199,6 +208,10 @@ public class command implements CommandExecutor {
 											}
 											if(vanish.isVanished(p)) {
 												sender.sendMessage(ChatColor.RED + "you cannot spawn a crate for yourself when you are vanished!");
+												return false;
+											}
+											if(util.isSlab(p.getLocation().getBlock().getRelative(BlockFace.DOWN))) {
+												sender.sendMessage(ChatColor.RED + "could not spawn a crate because this player is standing on a slab!");
 												return false;
 											}
 											if(util.isWorldGuardEnabled()) {
