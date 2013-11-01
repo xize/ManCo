@@ -18,7 +18,7 @@ public class manCo extends JavaPlugin {
 	public void onEnable() {
 		plugin = this;
 		log("has been enabled!", logType.info);
-		configuration.createConfig();
+		configuration.createConfigs();
 		handler.launch();
 		cratescheduler.startScheduler();
 		getCommand("manco").setExecutor(new command());

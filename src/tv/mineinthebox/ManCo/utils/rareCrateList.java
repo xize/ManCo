@@ -35,7 +35,7 @@ public class rareCrateList {
 			ListDataValues.clear();
 		}
 		try {
-			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "items.yml");
+			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "rareCrates.yml");
 			if(f.exists()) {
 				FileConfiguration con = YamlConfiguration.loadConfiguration(f);
 				for(String idDate : con.getStringList("rarecrates."+RareID+".items")) {

@@ -32,10 +32,10 @@ public class normalCrateList {
 
 	public static void setRandomItems(Chest chest) {
 		try {
-			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "items.yml");
+			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "normalCrates.yml");
 			if(f.exists()) {
 				FileConfiguration con = YamlConfiguration.loadConfiguration(f);
-				for(String idDate : con.getStringList("item.ids")) {
+				for(String idDate : con.getStringList("crates")) {
 					ListDataValues.add(idDate);
 				}
 				chest.getInventory().setItem(0, getItemStack());

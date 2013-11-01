@@ -10,187 +10,131 @@ import org.bukkit.World;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.FileConfigurationOptions;
 import org.bukkit.configuration.file.YamlConfiguration;
+
+import tv.mineinthebox.ManCo.logType;
 import tv.mineinthebox.ManCo.manCo;
 
 public class configuration {
 	
-	@SuppressWarnings("deprecation")
-	public static void createConfig() {
+	public static void createConfigs() {
+		createNormalCrateConfig();
+		createRareCrateConfig();
+		createDefaultConfiguration();
+	}
+
+	public static void createNormalCrateConfig() {
 		try {
-			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "items.yml");
+			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "normalCrates.yml");
 			if(!f.exists()) {
 				FileConfiguration con = YamlConfiguration.loadConfiguration(f);
 				FileConfigurationOptions opt = con.options();
-				opt.header("Default configuration file for manCo crates!\nscheme DataValue:subDataValue:Amount");
-				ArrayList<String> list = new ArrayList<String>();
-				list.add("98:1:1");
-				list.add("20:0:3");
-				con.set("item.ids", list);
-				if(!con.isSet("time")) {
-					con.set("time", 90000);
-				}
-				if(!con.isSet("roundsPerTime")) {
-					con.set("roundsPerTime", 2);
-				}
-				if(!con.isSet("useIconomy.enabled")) {
-					con.set("useIconomy.enabled", false);
-				}
-				if(!con.isSet("useIconomy.price")) {
-					con.set("useIconomy.price", 10.0);
-				}
-				if(!con.isSet("CrateFound.message")) {
-					con.set("CrateFound.message", "&7%p has found a ManCo crate!");
-				}
-				if(!con.isSet("CrateFound.enableMessage")) {
-					con.set("CrateFound.enableMessage", true);
-				}
-				if(!con.isSet("CratePrefix")) {
-					con.set("CratePrefix", "&2[ManCo]");
-				}
-				if(!con.isSet("disableCrateProtection")) {
-					con.set("disableCrateProtection", false);
-				}
-				if(!con.isSet("disableUncrateMessage")) {
-					con.set("disableUncrateMessage", false);
-				}
-				if(!con.isSet("spawnCrateNearby")) {
-					con.set("spawnCrateNearby", false);
-				}
-				if(!con.isSet("rarecrates")) {
-					ArrayList<String> a= new ArrayList<String>();
-					a.add("264:0:32");
-					a.add("264:0:12");
-					a.add("265:0:5");
-					a.add("322:1:2");
-					ArrayList<String> list1 = new ArrayList<String>();
-					list1.add("264:0:32");
-					list1.add("264:0:12");
-					list1.add("265:0:5");
-					list1.add("322:1:2");
-					list1.add("MONEY_10:0:2");
-					con.set("rarecrates.rarecrate1.enable", true);
-					con.set("rarecrates.rarecrate1.dropRateChance", 5);
-					con.set("rarecrates.rarecrate1.crateFoundMessage", "&7%p has found a &1(Rare)&7 ManCo crate!");
-					con.set("rarecrates.rarecrate1.needKey.enabled", false);
-					con.set("rarecrates.rarecrate1.needKey.material", Material.BLAZE_ROD.getId());
-					con.set("rarecrates.rarecrate1.needKey.price", 3.0);
-					con.set("rarecrates.rarecrate1.effect", false);
-					con.set("rarecrates.rarecrate1.items", a.toArray());
-					
-					con.set("rarecrates.anothercrate.enable", false);
-					con.set("rarecrates.anothercrate.dropRateChance", 2);
-					con.set("rarecrates.anothercrate.crateFoundMessage", "&7%p has found a &1(Rare)&7 ManCo crate!");
-					con.set("rarecrates.anothercrate.needKey.enabled", false);
-					con.set("rarecrates.anothercrate.needKey.material", Material.BLAZE_ROD.getId());
-					con.set("rarecrates.anothercrate.needKey.price", 3.0);
-					con.set("rarecrates.anothercrate.effect", false);
-					con.set("rarecrates.anothercrate.items", list1.toArray());
-					list1.clear();
-					a.clear();
-				}
-				if(!con.isSet("enablePerWorld")) {
-					for(World w : Bukkit.getWorlds()) {
-						con.set("enablePerWorld."+w.getName(), true);
-					}
-					
-				} else if(con.isSet("enablePerWorld")) {
-					//check for new worlds
-					for(World w : Bukkit.getWorlds()) {
-						if(!con.isSet("enablePerWorld."+w.getName())) {
-							con.set("enablePerWorld."+w.getName(), true);
-						}
+				opt.header("This is the default Normal crate configuration adjust or add more random items which can be found in the crates\nhowever you cannot get more than 3 slots filled in the chest!\n\nsmall schematic how to use these lines!\nDataValue:subDataValue:Amount if there is no subvalue use 0 instead\nfor more information about data values visit http://minecraft.gamepedia.com/File:DataValuesBeta.png");
+				ArrayList<String> crates = new ArrayList<String>();
+				crates.add("98:1:1");
+				crates.add("20:0:3");
+				crates.add("383:100:1");
+				crates.add("420:0:3");
+				crates.add("329:0:1");
+				crates.add("MONEY_30:0:2");
+				con.set("crates", crates);
+				con.save(f);
+				crates.clear();
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@SuppressWarnings("deprecation")
+	public static void createRareCrateConfig() {
+		try {
+			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "rareCrates.yml");
+			if(!f.exists()) {
+				FileConfiguration con = YamlConfiguration.loadConfiguration(f);
+				FileConfigurationOptions opt = con.options();
+				opt.header("this is the default configuration for rareCrates, here you can add as many rare crates as you want and define if players need a ManCo key or not.\nnote that these chests still gets destroyed on relogs or kicks but they cannot get the drops!\n\nsmall schematic how to use these lines!\nDataValue:subDataValue:Amount if there is no subvalue use 0 instead\nfor more information about data values visit http://minecraft.gamepedia.com/File:DataValuesBeta.png");
+				ArrayList<String> a = new ArrayList<String>();
+				a.add("264:0:32");
+				a.add("264:0:12");
+				a.add("265:0:5");
+				a.add("322:1:2");
+				ArrayList<String> list1 = new ArrayList<String>();
+				list1.add("264:0:32");
+				list1.add("264:0:12");
+				list1.add("265:0:5");
+				list1.add("322:1:2");
+				list1.add("MONEY_10:0:2");
+				con.set("rarecrates.rarecrate1.enable", true);
+				con.set("rarecrates.rarecrate1.dropRateChance", 5);
+				con.set("rarecrates.rarecrate1.crateFoundMessage", "&7%p has found a &1(Rare)&7 ManCo crate!");
+				con.set("rarecrates.rarecrate1.needKey.enabled", false);
+				con.set("rarecrates.rarecrate1.needKey.material", Material.BLAZE_ROD.getId());
+				con.set("rarecrates.rarecrate1.needKey.price", 3.0);
+				con.set("rarecrates.rarecrate1.effect", false);
+				con.set("rarecrates.rarecrate1.items", a.toArray());
+
+				con.set("rarecrates.anothercrate.enable", false);
+				con.set("rarecrates.anothercrate.dropRateChance", 2);
+				con.set("rarecrates.anothercrate.crateFoundMessage", "&7%p has found a &1(Rare)&7 ManCo crate!");
+				con.set("rarecrates.anothercrate.needKey.enabled", false);
+				con.set("rarecrates.anothercrate.needKey.material", Material.BLAZE_ROD.getId());
+				con.set("rarecrates.anothercrate.needKey.price", 3.0);
+				con.set("rarecrates.anothercrate.effect", false);
+				con.set("rarecrates.anothercrate.items", list1.toArray());
+				con.save(f);
+				list1.clear();
+				a.clear();
+
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void createDefaultConfiguration() {
+		try {
+			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "config.yml");
+			if(!f.exists()) {
+				FileConfiguration con = YamlConfiguration.loadConfiguration(f);
+				FileConfigurationOptions opt = con.options();
+				opt.header("Default configuration for ManCo supply crates\nhere you can specify the prefixes, suffixes, enable iConomy and more");
+				con.set("DropTime", 90000);
+				con.set("dropRoundsPerTime", 1);
+				con.set("useIconomy.enabled", false);
+				con.set("useIconomy.buyCratePrice", 10);
+				con.set("CrateFound.message", "&7%p has found a ManCo crate!");
+				con.set("CrateFound.enableMessage", true);
+				con.set("CratePrefix", "&2[ManCo]");
+				con.set("disableCrateProtection", false);
+				con.set("disableUncrateMessage", false);
+				con.set("spawnCrateNearby", false);
+				for(World w : Bukkit.getWorlds()) {
+					if(w.getName().contains("_nether")) {
+						//ignore nether worlds!
+					} else {
+						con.set("enablePerWorld."+w.getName(), true);	
 					}
 				}
 				con.save(f);
-				list.clear();
 			} else {
+				//check for new worlds!
+				manCo.log("config.yml found! checking for new worlds", logType.info);
 				FileConfiguration con = YamlConfiguration.loadConfiguration(f);
-				if(!con.isSet("time")) {
-					con.set("time", 90000);
-					con.save(f);
-				}
-				if(!con.isSet("roundsPerTime")) {
-					con.set("roundsPerTime", 2);
-					con.save(f);
-				}
-				if(!con.isSet("useIconomy.enabled")) {
-					con.set("useIconomy.enabled", false);
-					con.save(f);
-				}
-				if(!con.isSet("useIconomy.price")) {
-					con.set("useIconomy.price", 10.0);
-					con.save(f);
-				}
-				if(!con.isSet("CrateFound.message")) {
-					con.set("CrateFound.message", "&7%p has found a ManCo crate!");
-					con.save(f);
-				}
-				if(!con.isSet("CrateFound.enableMessage")) {
-					con.set("CrateFound.enableMessage", true);
-					con.save(f);
-				}
-				if(!con.isSet("CratePrefix")) {
-					con.set("CratePrefix", "&2[ManCo]");
-					con.save(f);
-				}
-				if(!con.isSet("disableCrateProtection")) {
-					con.set("disableCrateProtection", false);
-					con.save(f);
-				}
-				if(!con.isSet("disableUncrateMessage")) {
-					con.set("disableUncrateMessage", false);
-					con.save(f);
-				}
-				if(!con.isSet("spawnCrateNearby")) {
-					con.set("spawnCrateNearby", false);
-					con.save(f);
-				}
-				if(!con.isSet("rarecrates")) {
-					ArrayList<String> a= new ArrayList<String>();
-					a.add("264:0:32");
-					a.add("264:0:12");
-					a.add("265:0:5");
-					a.add("322:1:2");
-					ArrayList<String> list = new ArrayList<String>();
-					list.add("264:0:32");
-					list.add("264:0:12");
-					list.add("265:0:5");
-					list.add("322:1:2");
-					con.set("rarecrates.rarecrate1.enable", true);
-					con.set("rarecrates.rarecrate1.dropRateChance", 5);
-					con.set("rarecrates.rarecrate1.crateFoundMessage", "&7%p has found a &1(Rare)&7 ManCo crate!");
-					con.set("rarecrates.rarecrate1.needKey.enabled", false);
-					con.set("rarecrates.rarecrate1.needKey.material", Material.BLAZE_ROD.getId());
-					con.set("rarecrates.rarecrate1.needKey.price", 3.0);
-					con.set("rarecrates.rarecrate1.effect", false);
-					con.set("rarecrates.rarecrate1.items", a.toArray());
-					
-					con.set("rarecrates.anothercrate.enable", false);
-					con.set("rarecrates.anothercrate.dropRateChance", 2);
-					con.set("rarecrates.anothercrate.crateFoundMessage", "&7%p has found a &1(Rare)&7 ManCo crate!");
-					con.set("rarecrates.anothercrate.needKey.enabled", false);
-					con.set("rarecrates.anothercrate.needKey.material", Material.BLAZE_ROD.getId());
-					con.set("rarecrates.anothercrate.needKey.price", 3.0);
-					con.set("rarecrates.anothercrate.effect", false);
-					con.set("rarecrates.anothercrate.items", list.toArray());
-					list.clear();
-					a.clear();
-					con.save(f);
-				}
-				if(!con.isSet("enablePerWorld")) {
-					for(World w : Bukkit.getWorlds()) {
-						con.set("enablePerWorld."+w.getName(), true);
-						con.save(f);
-					}
-					
-				} else if(con.isSet("enablePerWorld")) {
-					//check for new worlds
-					for(World w : Bukkit.getWorlds()) {
+				boolean bol = false;
+				for(World w : Bukkit.getWorlds()) {
+					if(w.getName().contains("_nether")) {
+						//ignore nether worlds!
+					} else {
 						if(!con.isSet("enablePerWorld."+w.getName())) {
 							con.set("enablePerWorld."+w.getName(), true);
 							con.save(f);
+							manCo.log("new world found! " + w.getName(), logType.info);
+							bol = true;
 						}
 					}
+				}
+				if(!bol) {
+					manCo.log("no new worlds found!", logType.info);
 				}
 			}
 		} catch(Exception e) {
@@ -200,7 +144,7 @@ public class configuration {
 	
 	public static boolean isChestProtectionOff() {
 		try {
-			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "items.yml");
+			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "config.yml");
 			if(f.exists()) {
 				FileConfiguration con = YamlConfiguration.loadConfiguration(f);
 				if(con.getBoolean("disableCrateProtection")) {
@@ -217,7 +161,7 @@ public class configuration {
 	
 	public static String getPrefix() {
 		try {
-			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "items.yml");
+			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "config.yml");
 			if(f.exists()) {
 				FileConfiguration con = YamlConfiguration.loadConfiguration(f);
 				return ChatColor.translateAlternateColorCodes('&', con.getString("CratePrefix") + " ");
@@ -230,7 +174,7 @@ public class configuration {
 	
 	public static boolean isRareCrate(String crateName) {
 		try {
-			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "items.yml");
+			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "rareCrates.yml");
 			if(f.exists()) {
 				FileConfiguration con = YamlConfiguration.loadConfiguration(f);
 				if(con.isSet("rarecrates."+crateName)) {
@@ -249,7 +193,7 @@ public class configuration {
 	
 	public static boolean isPluginDisabledForWorld(World w) {
 		try {
-			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "items.yml");
+			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "config.yml");
 			if(f.exists()) {
 				FileConfiguration con = YamlConfiguration.loadConfiguration(f);
 				if(con.isSet("enablePerWorld."+w.getName())) {
@@ -270,7 +214,7 @@ public class configuration {
 	
 	public static boolean spawnCrateNearby() {
 		try {
-			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "items.yml");
+			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "config.yml");
 			if(f.exists()) {
 				FileConfiguration con = YamlConfiguration.loadConfiguration(f);
 				return con.getBoolean("spawnCrateNearby");
@@ -283,7 +227,7 @@ public class configuration {
 	
 	public static boolean isEconomyEnabled() {
 		try {
-			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "items.yml");
+			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "config.yml");
 			if(f.exists()) {
 				FileConfiguration con = YamlConfiguration.loadConfiguration(f);
 				if(con.getBoolean("useIconomy.enabled")) {
@@ -298,10 +242,10 @@ public class configuration {
 	
 	public static double returnIconomyPrice() {
 		try {
-			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "items.yml");
+			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "config.yml");
 			if(f.exists()) {
 				FileConfiguration con = YamlConfiguration.loadConfiguration(f);
-				return con.getDouble("useIconomy.price");
+				return con.getDouble("useIconomy.buyCratePrice");
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -311,10 +255,10 @@ public class configuration {
 	
 	public static int roundsPerTime() {
 		try {
-			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "items.yml");
+			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "config.yml");
 			if(f.exists()) {
 				FileConfiguration con = YamlConfiguration.loadConfiguration(f);
-				return con.getInt("roundsPerTime");
+				return con.getInt("dropRoundsPerTime");
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -324,10 +268,10 @@ public class configuration {
 	
 	public static int getTime() {
 		try {
-			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "items.yml");
+			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "config.yml");
 			if(f.exists()) {
 				FileConfiguration con = YamlConfiguration.loadConfiguration(f);
-				return con.getInt("time");
+				return con.getInt("DropTime");
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -337,7 +281,7 @@ public class configuration {
 	
 	public static boolean isCrateDropMessageDisabled() {
 		try {
-			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "items.yml");
+			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "config.yml");
 			if(f.exists()) {
 				FileConfiguration con = YamlConfiguration.loadConfiguration(f);
 				if(con.getBoolean("CrateFound.enableMessage")) {

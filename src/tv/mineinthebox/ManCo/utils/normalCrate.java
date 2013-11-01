@@ -12,7 +12,7 @@ import tv.mineinthebox.ManCo.manCo;
 public class normalCrate {
 	public static String getCrateFoundMessage() {
 		try {
-			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "items.yml");
+			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "config.yml");
 			if(f.exists()) {
 				FileConfiguration con = YamlConfiguration.loadConfiguration(f);
 				return ChatColor.translateAlternateColorCodes('&', con.getString("CrateFound.message"));
@@ -25,7 +25,7 @@ public class normalCrate {
 	
 	public static boolean isUnCrateMessageDisabled() {
 		try {
-			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "items.yml");
+			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "config.yml");
 			if(f.exists()) {
 				FileConfiguration con = YamlConfiguration.loadConfiguration(f);
 				return con.getBoolean("disableUncrateMessage");

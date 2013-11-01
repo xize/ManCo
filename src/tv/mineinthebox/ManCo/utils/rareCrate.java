@@ -22,7 +22,7 @@ public class rareCrate {
 			list.clear();
 		}
 		try {
-			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "items.yml");
+			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "rareCrates.yml");
 			if(f.exists()) {
 				FileConfiguration con = YamlConfiguration.loadConfiguration(f);
 				for(String crateName : con.getConfigurationSection("rarecrates").getKeys(false)) {
@@ -41,7 +41,7 @@ public class rareCrate {
 	public static int getRareCrateChance(String RareCrateName) {
 		if(getRareCrateList().contains(RareCrateName)) {
 			try {
-				File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "items.yml");
+				File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "rareCrates.yml");
 				if(f.exists()) {
 					FileConfiguration con = YamlConfiguration.loadConfiguration(f);
 					return con.getInt("rarecrates."+RareCrateName+".dropRateChance");
@@ -55,7 +55,7 @@ public class rareCrate {
 	
 	public static String getCrateFoundMessage(String crateName) {
 		try {
-			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "items.yml");
+			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "rareCrates.yml");
 			if(f.exists()) {
 				FileConfiguration con = YamlConfiguration.loadConfiguration(f);
 				return ChatColor.translateAlternateColorCodes('&', con.getString("rarecrates."+crateName+".crateFoundMessage"));
@@ -68,7 +68,7 @@ public class rareCrate {
 	
 	public static boolean isCrateKeyEnabled(String crateName) {
 		try {
-			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "items.yml");
+			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "rareCrates.yml");
 			if(f.exists()) {
 				FileConfiguration con = YamlConfiguration.loadConfiguration(f);
 				return con.getBoolean("rarecrates."+crateName+".needKey.enabled");
@@ -81,7 +81,7 @@ public class rareCrate {
 	
 	public static double returnKeyPrice(String crateName) {
 		try {
-			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "items.yml");
+			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "rareCrates.yml");
 			if(f.exists()) {
 				FileConfiguration con = YamlConfiguration.loadConfiguration(f);
 				return con.getDouble("rarecrates."+crateName+".needKey.price");
@@ -94,7 +94,7 @@ public class rareCrate {
 	
 	public static ItemStack getKey(String crateName) {
 		try {
-			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "items.yml");
+			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "rareCrates.yml");
 			if(f.exists()) {
 				FileConfiguration con = YamlConfiguration.loadConfiguration(f);
 				try {
@@ -118,7 +118,7 @@ public class rareCrate {
 	
 	public static boolean crateHasEffect(String path) {
 		try {
-			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "items.yml");
+			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "rareCrates.yml");
 			if(f.exists()) {
 				FileConfiguration con = YamlConfiguration.loadConfiguration(f);
 				return con.getBoolean("rarecrates."+path+".effect");
