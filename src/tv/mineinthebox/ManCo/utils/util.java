@@ -3,6 +3,7 @@ package tv.mineinthebox.ManCo.utils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 
 import tv.mineinthebox.ManCo.logType;
 import tv.mineinthebox.ManCo.manCo;
@@ -31,7 +32,7 @@ public class util {
 	@SuppressWarnings("deprecation")
 	public static boolean isSlab(Block block) {
 		Block highest = block.getLocation().getWorld().getHighestBlockAt(block.getLocation());
-		if(highest.getType() == Material.getMaterial(126) || block.getType() == Material.getMaterial(44)) {
+		if(highest.getRelative(BlockFace.DOWN).getType() == Material.getMaterial(126) || highest.getRelative(BlockFace.DOWN).getType() == Material.getMaterial(44)) {
 			return true;
 		}
 		return false;
