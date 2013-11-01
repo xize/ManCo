@@ -42,6 +42,11 @@ public class util {
 			if(block.getType() == Material.getMaterial(44)) {
 				return true;
 			}	
+		} else {
+			//here we go out the data values aren't changed
+			if(block.getType() == Material.getMaterial(126)) {
+				return true;
+			}
 		}
 		return false;
 	}
