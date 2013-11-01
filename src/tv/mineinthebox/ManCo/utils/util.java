@@ -30,8 +30,18 @@ public class util {
 	
 	@SuppressWarnings("deprecation")
 	public static boolean isSlab(Block block) {
-		if(block.getType() == Material.getMaterial(44)) {
-			return true;
+		//important note about minecraft versions
+		//slabs are changed from data value between 1.6.4 and 1.7.2
+		//older versions not tested.
+		String version = Bukkit.getVersion();
+		if(version.contains("1.6.4")) {
+			if(block.getType() == Material.getMaterial(126)) {
+				return true;
+			}	
+		} else if(version.contains("1.7.2")) {
+			if(block.getType() == Material.getMaterial(44)) {
+				return true;
+			}	
 		}
 		return false;
 	}
