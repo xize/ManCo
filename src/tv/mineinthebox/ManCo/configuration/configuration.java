@@ -2,17 +2,23 @@ package tv.mineinthebox.ManCo.configuration;
 
 import java.io.File;
 import java.util.ArrayList;
-
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.block.Chest;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.FileConfigurationOptions;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
 
 import tv.mineinthebox.ManCo.logType;
 import tv.mineinthebox.ManCo.manCo;
+import tv.mineinthebox.ManCo.utils.normalCrateList;
+import tv.mineinthebox.ManCo.utils.rareCrateList;
 
 public class configuration {
 	
@@ -140,23 +146,6 @@ public class configuration {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-	}
-	
-	public static boolean isChestProtectionOff() {
-		try {
-			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "config.yml");
-			if(f.exists()) {
-				FileConfiguration con = YamlConfiguration.loadConfiguration(f);
-				if(con.getBoolean("disableCrateProtection")) {
-					return false;
-				} else {
-					return true;
-				}
-			}
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-		return false;
 	}
 	
 	public static String getPrefix() {
@@ -294,6 +283,161 @@ public class configuration {
 			e.printStackTrace();
 		}
 		return false;
+	}
+	
+	public static boolean isChestProtectionDisabled() {
+		try {
+			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "config.yml");
+			if(f.exists()) {
+				FileConfiguration con = YamlConfiguration.loadConfiguration(f);
+				if(con.getBoolean("disableCrateProtection")) {
+					return true;
+				}
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	public static String getNormalChestOwner(Chest chest) {
+		if(normalCrateList.getCrateList.containsValue(chest)) {
+			Map<String, Chest> map = normalCrateList.getCrateList;
+			Iterator<Entry<String, Chest>> it = map.entrySet().iterator();
+			while(it.hasNext()) {
+				Map.Entry<String, Chest> its = (Entry<String, Chest>) it.next();
+				if(its.getValue().getLocation().equals(chest.getLocation())) {
+					return its.getKey();
+				}
+			}	
+		} else if(normalCrateList.getCrateList2.containsValue(chest)) {
+			Map<String, Chest> map = normalCrateList.getCrateList2;
+			Iterator<Entry<String, Chest>> it = map.entrySet().iterator();
+			while(it.hasNext()) {
+				Map.Entry<String, Chest> its = (Entry<String, Chest>) it.next();
+				if(its.getValue().getLocation().equals(chest.getLocation())) {
+					return its.getKey();
+				}
+			}
+		} else {
+			return null;
+		}
+		return null;
+	}
+	
+	public static String getRareChestOwner(Chest chest) {
+		if(rareCrateList.getCrateList.containsValue(chest)) {
+			Map<String, Chest> map = rareCrateList.getCrateList;
+			Iterator<Entry<String, Chest>> it = map.entrySet().iterator();
+			while(it.hasNext()) {
+				Map.Entry<String, Chest> its = (Entry<String, Chest>) it.next();
+				if(its.getValue().getLocation().equals(chest.getLocation())) {
+					return its.getKey();
+				}
+			}
+		} else if(rareCrateList.getCrateList2.containsValue(chest)) {
+			Map<String, Chest> map = rareCrateList.getCrateList2;
+			Iterator<Entry<String, Chest>> it = map.entrySet().iterator();
+			while(it.hasNext()) {
+				Map.Entry<String, Chest> its = (Entry<String, Chest>) it.next();
+				if(its.getValue().getLocation().equals(chest.getLocation())) {
+					return its.getKey();
+				}
+			}
+		} else {
+			return null;
+		}
+		return null;
+	}
+	
+	public static void clearPlayerCrate(Player p) {
+		if(normalCrateList.getCrateList.containsKey(p.getPlayer().getName())) {
+			Chest chest = normalCrateList.getCrateList.get(p.getPlayer().getName());
+			chest.getBlock().breakNaturally();
+			normalCrateList.getCrateList.remove(p.getPlayer().getName());
+			normalCrateList.chestLocations.remove(chest.getLocation());
+		}
+		if(normalCrateList.ItemsFromChest.containsKey(p.getPlayer().getName())) {
+			normalCrateList.ItemsFromChest.remove(p.getPlayer().getName());
+		}
+		if(normalCrateList.getCrateList2.containsKey(p.getPlayer().getName())) {
+			Chest chest = normalCrateList.getCrateList2.get(p.getPlayer().getName());
+			chest.getBlock().breakNaturally();
+			normalCrateList.getCrateList2.remove(p.getPlayer().getName());
+			normalCrateList.chestLocations.remove(chest.getLocation());
+		}
+		if(normalCrateList.schedulerTime.contains(p.getPlayer().getName())) {
+			normalCrateList.schedulerTime.remove(p.getPlayer().getName());
+		}
+
+		if(rareCrateList.getCrateList.containsKey(p.getPlayer().getName())) {
+			Chest chest = rareCrateList.getCrateList.get(p.getPlayer().getName());
+			chest.getInventory().clear();
+			chest.getBlock().breakNaturally();
+			rareCrateList.getCrateList.remove(p.getPlayer().getName());
+			rareCrateList.chestLocations.remove(chest.getLocation());
+		}
+		if(rareCrateList.ItemsFromChest.containsKey(p.getPlayer().getName())) {
+			rareCrateList.ItemsFromChest.remove(p.getPlayer().getName());
+		}
+		if(rareCrateList.getCrateList2.containsKey(p.getPlayer().getName())) {
+			Chest chest = rareCrateList.getCrateList2.get(p.getPlayer().getName());
+			chest.getInventory().clear();
+			chest.getBlock().breakNaturally();
+			rareCrateList.getCrateList2.remove(p.getPlayer().getName());
+			rareCrateList.chestLocations.remove(chest.getLocation());
+		}
+		if(rareCrateList.schedulerTime.contains(p.getPlayer().getName())) {
+			rareCrateList.schedulerTime.remove(p.getPlayer().getName());
+		}
+		if(rareCrateList.rareCrates.containsKey(p.getName())) {
+			rareCrateList.rareCrates.remove(p.getName());
+		}
+	}
+	
+	public static void clearPlayerCrate(String p) {
+		if(normalCrateList.getCrateList.containsKey(p)) {
+			Chest chest = normalCrateList.getCrateList.get(p);
+			chest.getBlock().breakNaturally();
+			normalCrateList.getCrateList.remove(p);
+			normalCrateList.chestLocations.remove(chest.getLocation());
+		}
+		if(normalCrateList.ItemsFromChest.containsKey(p)) {
+			normalCrateList.ItemsFromChest.remove(p);
+		}
+		if(normalCrateList.getCrateList2.containsKey(p)) {
+			Chest chest = normalCrateList.getCrateList2.get(p);
+			chest.getBlock().breakNaturally();
+			normalCrateList.getCrateList2.remove(p);
+			normalCrateList.chestLocations.remove(chest.getLocation());
+		}
+		if(normalCrateList.schedulerTime.contains(p)) {
+			normalCrateList.schedulerTime.remove(p);
+		}
+
+		if(rareCrateList.getCrateList.containsKey(p)) {
+			Chest chest = rareCrateList.getCrateList.get(p);
+			chest.getInventory().clear();
+			chest.getBlock().breakNaturally();
+			rareCrateList.getCrateList.remove(p);
+			rareCrateList.chestLocations.remove(chest.getLocation());
+		}
+		if(rareCrateList.ItemsFromChest.containsKey(p)) {
+			rareCrateList.ItemsFromChest.remove(p);
+		}
+		if(rareCrateList.getCrateList2.containsKey(p)) {
+			Chest chest = rareCrateList.getCrateList2.get(p);
+			chest.getInventory().clear();
+			chest.getBlock().breakNaturally();
+			rareCrateList.getCrateList2.remove(p);
+			rareCrateList.chestLocations.remove(chest.getLocation());
+		}
+		if(rareCrateList.schedulerTime.contains(p)) {
+			rareCrateList.schedulerTime.remove(p);
+		}
+		if(rareCrateList.rareCrates.containsKey(p)) {
+			rareCrateList.rareCrates.remove(p);
+		}
 	}
 
 }

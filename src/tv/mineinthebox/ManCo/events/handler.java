@@ -6,6 +6,7 @@ import org.bukkit.event.Listener;
 
 import tv.mineinthebox.ManCo.api;
 import tv.mineinthebox.ManCo.manCo;
+import tv.mineinthebox.ManCo.configuration.configuration;
 
 public class handler {
 	
@@ -13,6 +14,11 @@ public class handler {
 		setListener(new chestCheck());
 		setListener(new api());
 		setListener(new moneyCheck());
+		if(configuration.isChestProtectionDisabled()) {
+			setListener(new chestOpenTimer_unprotected());
+		} else {
+			setListener(new chestOpenTimer_protected());
+		}
 	}
 	
 	public static void setListener(Listener listener) {
