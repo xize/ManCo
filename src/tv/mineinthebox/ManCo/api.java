@@ -30,16 +30,16 @@ public class api implements Listener {
 
 	private static HashMap<Entity, ItemStack[]> entityChest = new HashMap<Entity, ItemStack[]>();
 	
-	private static ArrayList<String> getRareCrateList() {
+	private ArrayList<String> getRareCrateList() {
 		return rareCrate.getRareCrateList();
 	}
 
-	public static ItemStack[] convertArrayListToItemStackArray(ArrayList<ItemStack> array) {
+	public ItemStack[] convertArrayListToItemStackArray(ArrayList<ItemStack> array) {
 		ItemStack[] items = new ItemStack[array.size()];
 		return items;
 	}
 	
-	public static boolean isCrate(Chest chest) {
+	public boolean isCrate(Chest chest) {
 		if(normalCrateList.getCrateList.containsValue(chest)) {
 			return true;
 		} else if(normalCrateList.getCrateList2.containsValue(chest)) {
@@ -48,7 +48,7 @@ public class api implements Listener {
 		return false;
 	}
 	
-	public static boolean isRareCrate(Chest chest) {
+	public boolean isRareCrate(Chest chest) {
 		if(rareCrateList.getCrateList.containsValue(chest)) {
 			return true;
 		} else if(rareCrateList.getCrateList2.containsValue(chest)) {
@@ -57,15 +57,15 @@ public class api implements Listener {
 		return false;
 	}
 	
-	public static void destroyCrate(Player p) {
+	public void destroyCrate(Player p) {
 		configuration.clearPlayerCrate(p);
 	}
 	
-	public static void destroyCrate(String name) {
+	public void destroyCrate(String name) {
 		configuration.clearPlayerCrate(name);
 	}
 	
-	public static String getCrateOwner(Chest chest) throws ChestHasNoOwnerException {
+	public String getCrateOwner(Chest chest) throws ChestHasNoOwnerException {
 		String normal = configuration.getNormalChestOwner(chest);
 		String rare = configuration.getRareChestOwner(chest);
 		if(normal != null) {
@@ -78,7 +78,7 @@ public class api implements Listener {
 	}
 	
 	 
-	public static void spawnCrate(Location loc, ItemStack[] items) throws PlayerOnSlabException {
+	public void spawnCrate(Location loc, ItemStack[] items) throws PlayerOnSlabException {
 		if(util.isSlab(loc.getBlock())) {
 			throw new PlayerOnSlabException("[ManCo-API]PlayerOnSlabException: this crate cannot fall on a slab!\ndebug information:\nVersion: + " + manCo.getPlugin().getDescription().getVersion() +  "\nLocation: "+loc.toString() + "\nitems: "+items.toString());
 		} else {
@@ -97,9 +97,7 @@ public class api implements Listener {
 			e.getBlock().setTypeIdAndData(Material.CHEST.getId(), (byte) 1, true);
 			Chest chest = (Chest) e.getBlock().getState();
 			if(entityChest.get(e.getEntity()).length < 27) {
-				for(ItemStack item : entityChest.get(e.getEntity())) {
-					chest.getInventory().addItem(item);
-				}
+				chest.getInventory().setContents(entityChest.get(e.getEntity()));
 				entityChest.remove(e.getEntity());
 			} else {
 				//memory safety in case it throws allready.
@@ -109,7 +107,7 @@ public class api implements Listener {
 		}
 	}
 
-	public static void spawnCrate(Player p) throws PlayerOnSlabException {
+	public void spawnCrate(Player p) throws PlayerOnSlabException {
 		if(util.isSlab(p.getLocation().getBlock())) {
 			throw new PlayerOnSlabException("[ManCo-API]PlayerOnSlabException: this crate cannot fall on a slab!\ndebug information:\nVersion: + " + manCo.getPlugin().getDescription().getVersion() +  "\nLocation: "+p.getLocation().toString());
 		} else {
@@ -117,7 +115,7 @@ public class api implements Listener {
 		}
 	}
 
-	public static void spawnRareCrate(Player p, String crateName) throws InvalidRareCrateException {
+	public void spawnRareCrate(Player p, String crateName) throws InvalidRareCrateException {
 		if(!rareCrate.getRareCrateList().contains(crateName)) {
 			throw new InvalidRareCrateException("[ManCo-API]InvalidRareCrateException: invalid crate name!");
 		} else {

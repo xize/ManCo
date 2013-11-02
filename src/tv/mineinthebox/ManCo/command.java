@@ -37,7 +37,7 @@ public class command implements CommandExecutor {
 								return false;
 							}
 							if(util.isSlab(p.getLocation().getBlock())) {
-								sender.sendMessage(ChatColor.RED + "could not spawn a crate because this player is standing on a slab!");
+								sender.sendMessage(ChatColor.RED + "could not spawn a crate because this player is standing on a block which would break the crate!");
 								return false;
 							}
 							if(vanish.isVanished(p)) {
@@ -159,7 +159,7 @@ public class command implements CommandExecutor {
 									return false;
 								}
 								if(util.isSlab(p.getLocation().getBlock())) {
-									sender.sendMessage(ChatColor.RED + "could not spawn a crate because this player is standing on a slab!");
+									sender.sendMessage(ChatColor.RED + "could not spawn a crate because this player is standing on a block which would break the crate!");
 									return false;
 								}
 								if(vanish.isVanished(p)) {
@@ -210,7 +210,7 @@ public class command implements CommandExecutor {
 												return false;
 											}
 											if(util.isSlab(p.getLocation().getBlock())) {
-												sender.sendMessage(ChatColor.RED + "could not spawn a crate because this player is standing on a slab!");
+												sender.sendMessage(ChatColor.RED + "could not spawn a crate because this player is standing on a block which would break the crate!");
 												return false;
 											}
 											if(util.isWorldGuardEnabled()) {

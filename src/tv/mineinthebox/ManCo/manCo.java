@@ -44,7 +44,7 @@ public class manCo extends JavaPlugin {
 		}
 	}
 	
-	public static api getApi() {
+	public api getApi() {
 		api app = new api();
 		return app;
 	}
