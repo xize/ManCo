@@ -29,6 +29,7 @@ import tv.mineinthebox.ManCo.utils.util;
 public class api implements Listener {
 
 	private static HashMap<Entity, ItemStack[]> entityChest = new HashMap<Entity, ItemStack[]>();
+	
 	private static ArrayList<String> getRareCrateList() {
 		return rareCrate.getRareCrateList();
 	}
@@ -98,7 +99,10 @@ public class api implements Listener {
 				for(ItemStack item : entityChest.get(e.getEntity())) {
 					chest.getInventory().addItem(item);
 				}
+				entityChest.remove(e.getEntity());
 			} else {
+				//memory safety in case it throws allready.
+				entityChest.remove(e.getEntity());
 				throw new InvalidChestStorageException("[ManCo-API]InvalidChestStorage: the ItemStack[] amount is more than the single chest could obtain!");
 			}
 		}
