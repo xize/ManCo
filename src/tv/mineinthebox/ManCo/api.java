@@ -35,7 +35,7 @@ public class api implements Listener {
 	}
 
 	public ItemStack[] convertArrayListToItemStackArray(ArrayList<ItemStack> array) {
-		ItemStack[] items = new ItemStack[array.size()];
+		ItemStack[] items = array.toArray(new ItemStack[array.size()]);
 		return items;
 	}
 	
@@ -97,7 +97,9 @@ public class api implements Listener {
 			e.getBlock().setTypeIdAndData(Material.CHEST.getId(), (byte) 1, true);
 			Chest chest = (Chest) e.getBlock().getState();
 			if(entityChest.get(e.getEntity()).length < 27) {
-				chest.getInventory().setContents(entityChest.get(e.getEntity()));
+				for(ItemStack item : entityChest.get(e.getEntity())) {
+					chest.getInventory().addItem(item);
+				}
 				entityChest.remove(e.getEntity());
 			} else {
 				//memory safety in case it throws allready.
