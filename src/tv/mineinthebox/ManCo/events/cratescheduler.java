@@ -61,7 +61,7 @@ public class cratescheduler {
 				}
 			}
 
-		}, 15, configuration.getTime()+15);
+		}, 1015, configuration.getTime()+15);
 		task2 = taskID;
 	}
 
