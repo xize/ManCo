@@ -77,6 +77,7 @@ public class api implements Listener {
 		}
 	}
 	
+	 
 	public static void spawnCrate(Location loc, ItemStack[] items) throws PlayerOnSlabException {
 		if(util.isSlab(loc.getBlock())) {
 			throw new PlayerOnSlabException("[ManCo-API]PlayerOnSlabException: this crate cannot fall on a slab!\ndebug information:\nVersion: + " + manCo.getPlugin().getDescription().getVersion() +  "\nLocation: "+loc.toString() + "\nitems: "+items.toString());
@@ -90,7 +91,7 @@ public class api implements Listener {
 
 	@SuppressWarnings("deprecation")
 	@EventHandler
-	public void fillChestApi(EntityChangeBlockEvent e) throws InvalidChestStorageException {
+	private void fillChestApi(EntityChangeBlockEvent e) throws InvalidChestStorageException {
 		if(entityChest.containsKey(e.getEntity())) {
 			e.setCancelled(true);
 			e.getBlock().setTypeIdAndData(Material.CHEST.getId(), (byte) 1, true);
