@@ -23,7 +23,7 @@ import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 
-import tv.mineinthebox.ManCo.manCo;
+import tv.mineinthebox.ManCo.ManCo;
 import tv.mineinthebox.ManCo.configuration.configuration;
 import tv.mineinthebox.ManCo.utils.normalCrate;
 import tv.mineinthebox.ManCo.utils.normalCrateList;
@@ -79,7 +79,7 @@ public class chestCheck implements Listener {
 	}
 	
 	public static void playRespectedSound(final Sound sound, final Location loc) {
-		Bukkit.getScheduler().scheduleSyncDelayedTask(manCo.getPlugin(), new Runnable() {
+		Bukkit.getScheduler().scheduleSyncDelayedTask(ManCo.getPlugin(), new Runnable() {
 
 			@Override
 			public void run() {

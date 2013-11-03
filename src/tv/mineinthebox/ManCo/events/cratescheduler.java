@@ -10,7 +10,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitTask;
 
-import tv.mineinthebox.ManCo.manCo;
+import tv.mineinthebox.ManCo.ManCo;
 import tv.mineinthebox.ManCo.configuration.configuration;
 import tv.mineinthebox.ManCo.utils.normalCrate;
 import tv.mineinthebox.ManCo.utils.normalCrateList;
@@ -26,7 +26,7 @@ public class cratescheduler {
 	public static BukkitTask task2;
 
 	public static void startScheduler() {
-		BukkitTask taskID = Bukkit.getScheduler().runTaskTimer(manCo.getPlugin(), new Runnable() {
+		BukkitTask taskID = Bukkit.getScheduler().runTaskTimer(ManCo.getPlugin(), new Runnable() {
 
 			@Override
 			public void run() {
@@ -46,7 +46,7 @@ public class cratescheduler {
 	}
 
 	public static void startRareScheduler() {
-		BukkitTask taskID = Bukkit.getScheduler().runTaskTimer(manCo.getPlugin(), new Runnable() {
+		BukkitTask taskID = Bukkit.getScheduler().runTaskTimer(ManCo.getPlugin(), new Runnable() {
 
 			@Override
 			public void run() {

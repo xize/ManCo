@@ -16,7 +16,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
 import tv.mineinthebox.ManCo.logType;
-import tv.mineinthebox.ManCo.manCo;
+import tv.mineinthebox.ManCo.ManCo;
 import tv.mineinthebox.ManCo.utils.normalCrateList;
 import tv.mineinthebox.ManCo.utils.rareCrateList;
 
@@ -30,7 +30,7 @@ public class configuration {
 
 	public static void createNormalCrateConfig() {
 		try {
-			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "normalCrates.yml");
+			File f = new File(ManCo.getPlugin().getDataFolder() + File.separator + "normalCrates.yml");
 			if(!f.exists()) {
 				FileConfiguration con = YamlConfiguration.loadConfiguration(f);
 				FileConfigurationOptions opt = con.options();
@@ -54,7 +54,7 @@ public class configuration {
 	@SuppressWarnings("deprecation")
 	public static void createRareCrateConfig() {
 		try {
-			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "rareCrates.yml");
+			File f = new File(ManCo.getPlugin().getDataFolder() + File.separator + "rareCrates.yml");
 			if(!f.exists()) {
 				FileConfiguration con = YamlConfiguration.loadConfiguration(f);
 				FileConfigurationOptions opt = con.options();
@@ -99,7 +99,7 @@ public class configuration {
 
 	public static void createDefaultConfiguration() {
 		try {
-			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "config.yml");
+			File f = new File(ManCo.getPlugin().getDataFolder() + File.separator + "config.yml");
 			if(!f.exists()) {
 				FileConfiguration con = YamlConfiguration.loadConfiguration(f);
 				FileConfigurationOptions opt = con.options();
@@ -124,7 +124,7 @@ public class configuration {
 				con.save(f);
 			} else {
 				//check for new worlds!
-				manCo.log("config.yml found! checking for new worlds", logType.info);
+				ManCo.log("config.yml found! checking for new worlds", logType.info);
 				FileConfiguration con = YamlConfiguration.loadConfiguration(f);
 				boolean bol = false;
 				for(World w : Bukkit.getWorlds()) {
@@ -134,13 +134,13 @@ public class configuration {
 						if(!con.isSet("enablePerWorld."+w.getName())) {
 							con.set("enablePerWorld."+w.getName(), true);
 							con.save(f);
-							manCo.log("new world found! " + w.getName(), logType.info);
+							ManCo.log("new world found! " + w.getName(), logType.info);
 							bol = true;
 						}
 					}
 				}
 				if(!bol) {
-					manCo.log("no new worlds found!", logType.info);
+					ManCo.log("no new worlds found!", logType.info);
 				}
 			}
 		} catch(Exception e) {
@@ -150,7 +150,7 @@ public class configuration {
 	
 	public static String getPrefix() {
 		try {
-			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "config.yml");
+			File f = new File(ManCo.getPlugin().getDataFolder() + File.separator + "config.yml");
 			if(f.exists()) {
 				FileConfiguration con = YamlConfiguration.loadConfiguration(f);
 				return ChatColor.translateAlternateColorCodes('&', con.getString("CratePrefix") + " ");
@@ -163,7 +163,7 @@ public class configuration {
 	
 	public static boolean isRareCrate(String crateName) {
 		try {
-			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "rareCrates.yml");
+			File f = new File(ManCo.getPlugin().getDataFolder() + File.separator + "rareCrates.yml");
 			if(f.exists()) {
 				FileConfiguration con = YamlConfiguration.loadConfiguration(f);
 				if(con.isSet("rarecrates."+crateName)) {
@@ -182,7 +182,7 @@ public class configuration {
 	
 	public static boolean isPluginDisabledForWorld(World w) {
 		try {
-			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "config.yml");
+			File f = new File(ManCo.getPlugin().getDataFolder() + File.separator + "config.yml");
 			if(f.exists()) {
 				FileConfiguration con = YamlConfiguration.loadConfiguration(f);
 				if(con.isSet("enablePerWorld."+w.getName())) {
@@ -203,7 +203,7 @@ public class configuration {
 	
 	public static boolean spawnCrateNearby() {
 		try {
-			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "config.yml");
+			File f = new File(ManCo.getPlugin().getDataFolder() + File.separator + "config.yml");
 			if(f.exists()) {
 				FileConfiguration con = YamlConfiguration.loadConfiguration(f);
 				return con.getBoolean("spawnCrateNearby");
@@ -216,7 +216,7 @@ public class configuration {
 	
 	public static boolean isEconomyEnabled() {
 		try {
-			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "config.yml");
+			File f = new File(ManCo.getPlugin().getDataFolder() + File.separator + "config.yml");
 			if(f.exists()) {
 				FileConfiguration con = YamlConfiguration.loadConfiguration(f);
 				if(con.getBoolean("useIconomy.enabled")) {
@@ -231,7 +231,7 @@ public class configuration {
 	
 	public static double returnIconomyPrice() {
 		try {
-			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "config.yml");
+			File f = new File(ManCo.getPlugin().getDataFolder() + File.separator + "config.yml");
 			if(f.exists()) {
 				FileConfiguration con = YamlConfiguration.loadConfiguration(f);
 				return con.getDouble("useIconomy.buyCratePrice");
@@ -244,7 +244,7 @@ public class configuration {
 	
 	public static int roundsPerTime() {
 		try {
-			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "config.yml");
+			File f = new File(ManCo.getPlugin().getDataFolder() + File.separator + "config.yml");
 			if(f.exists()) {
 				FileConfiguration con = YamlConfiguration.loadConfiguration(f);
 				return con.getInt("dropRoundsPerTime");
@@ -257,7 +257,7 @@ public class configuration {
 	
 	public static int getTime() {
 		try {
-			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "config.yml");
+			File f = new File(ManCo.getPlugin().getDataFolder() + File.separator + "config.yml");
 			if(f.exists()) {
 				FileConfiguration con = YamlConfiguration.loadConfiguration(f);
 				return con.getInt("DropTime");
@@ -270,7 +270,7 @@ public class configuration {
 	
 	public static boolean isCrateDropMessageDisabled() {
 		try {
-			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "config.yml");
+			File f = new File(ManCo.getPlugin().getDataFolder() + File.separator + "config.yml");
 			if(f.exists()) {
 				FileConfiguration con = YamlConfiguration.loadConfiguration(f);
 				if(con.getBoolean("CrateFound.enableMessage")) {
@@ -287,7 +287,7 @@ public class configuration {
 	
 	public static boolean isChestProtectionDisabled() {
 		try {
-			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "config.yml");
+			File f = new File(ManCo.getPlugin().getDataFolder() + File.separator + "config.yml");
 			if(f.exists()) {
 				FileConfiguration con = YamlConfiguration.loadConfiguration(f);
 				if(con.getBoolean("disableCrateProtection")) {

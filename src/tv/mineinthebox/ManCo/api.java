@@ -80,7 +80,7 @@ public class api implements Listener {
 	 
 	public void spawnCrate(Location loc, ItemStack[] items) throws PlayerOnSlabException {
 		if(util.isSlab(loc.getBlock())) {
-			throw new PlayerOnSlabException("[ManCo-API]PlayerOnSlabException: this crate cannot fall on a slab!\ndebug information:\nVersion: + " + manCo.getPlugin().getDescription().getVersion() +  "\nLocation: "+loc.toString() + "\nitems: "+items.toString());
+			throw new PlayerOnSlabException("[ManCo-API]PlayerOnSlabException: this crate cannot fall on a slab!\ndebug information:\nVersion: + " + ManCo.getPlugin().getDescription().getVersion() +  "\nLocation: "+loc.toString() + "\nitems: "+items.toString());
 		} else {
 			int y = normalCrate.getCrateSpawnHeight(loc);
 			loc.setY(loc.getY() + y);
@@ -111,7 +111,7 @@ public class api implements Listener {
 
 	public void spawnCrate(Player p) throws PlayerOnSlabException {
 		if(util.isSlab(p.getLocation().getBlock())) {
-			throw new PlayerOnSlabException("[ManCo-API]PlayerOnSlabException: this crate cannot fall on a slab!\ndebug information:\nVersion: + " + manCo.getPlugin().getDescription().getVersion() +  "\nLocation: "+p.getLocation().toString());
+			throw new PlayerOnSlabException("[ManCo-API]PlayerOnSlabException: this crate cannot fall on a slab!\ndebug information:\nVersion: + " + ManCo.getPlugin().getDescription().getVersion() +  "\nLocation: "+p.getLocation().toString());
 		} else {
 			cratescheduler.doCrateNative(p);
 		}

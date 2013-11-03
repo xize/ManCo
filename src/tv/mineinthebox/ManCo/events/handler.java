@@ -5,7 +5,7 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 
 import tv.mineinthebox.ManCo.api;
-import tv.mineinthebox.ManCo.manCo;
+import tv.mineinthebox.ManCo.ManCo;
 import tv.mineinthebox.ManCo.configuration.configuration;
 
 public class handler {
@@ -22,11 +22,11 @@ public class handler {
 	}
 	
 	public static void setListener(Listener listener) {
-		Bukkit.getPluginManager().registerEvents(listener, manCo.getPlugin());
+		Bukkit.getPluginManager().registerEvents(listener, ManCo.getPlugin());
 	}
 	
 	public static void restartListeners() {
-		HandlerList.unregisterAll(manCo.getPlugin());
+		HandlerList.unregisterAll(ManCo.getPlugin());
 		launch();
 	}
 

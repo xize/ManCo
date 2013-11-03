@@ -6,7 +6,7 @@ import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 
 import tv.mineinthebox.ManCo.logType;
-import tv.mineinthebox.ManCo.manCo;
+import tv.mineinthebox.ManCo.ManCo;
 
 public class util {
 
@@ -22,7 +22,7 @@ public class util {
 			if(Bukkit.getPluginManager().isPluginEnabled("Vault")) {
 				return true;
 			} else {
-				manCo.log("in order to let the iConomy part work, please download vault at http://dev.bukkit.org/server-mods/Vault", logType.severe);
+				ManCo.log("in order to let the iConomy part work, please download vault at http://dev.bukkit.org/server-mods/Vault", logType.severe);
 				return false;
 			}
 		}

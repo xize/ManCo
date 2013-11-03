@@ -11,7 +11,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.inventory.InventoryType;
 
-import tv.mineinthebox.ManCo.manCo;
+import tv.mineinthebox.ManCo.ManCo;
 import tv.mineinthebox.ManCo.configuration.configuration;
 import tv.mineinthebox.ManCo.utils.normalCrateList;
 import tv.mineinthebox.ManCo.utils.rareCrate;
@@ -35,7 +35,7 @@ public class chestOpenTimer_unprotected implements Listener {
 					final Player p = (Player) e.getPlayer();
 					e.setCancelled(true);
 					normalCrateList.schedulerTime.add(e.getPlayer().getName());
-					Bukkit.getScheduler().scheduleSyncDelayedTask(manCo.getPlugin(), new Runnable() {
+					Bukkit.getScheduler().scheduleSyncDelayedTask(ManCo.getPlugin(), new Runnable() {
 
 						@Override
 						public void run() {
@@ -47,7 +47,7 @@ public class chestOpenTimer_unprotected implements Listener {
 						}
 
 					}, 50);
-					Bukkit.getScheduler().scheduleSyncDelayedTask(manCo.getPlugin(), new Runnable() {
+					Bukkit.getScheduler().scheduleSyncDelayedTask(ManCo.getPlugin(), new Runnable() {
 
 						@Override
 						public void run() {
@@ -59,7 +59,7 @@ public class chestOpenTimer_unprotected implements Listener {
 						}
 
 					}, 100);
-					Bukkit.getScheduler().scheduleSyncDelayedTask(manCo.getPlugin(), new Runnable() {
+					Bukkit.getScheduler().scheduleSyncDelayedTask(ManCo.getPlugin(), new Runnable() {
 
 						@Override
 						public void run() {
@@ -72,7 +72,7 @@ public class chestOpenTimer_unprotected implements Listener {
 
 
 					}, 150);
-					Bukkit.getScheduler().scheduleSyncDelayedTask(manCo.getPlugin(), new Runnable() {
+					Bukkit.getScheduler().scheduleSyncDelayedTask(ManCo.getPlugin(), new Runnable() {
 
 						@Override
 						public void run() {
@@ -84,7 +84,7 @@ public class chestOpenTimer_unprotected implements Listener {
 						}
 
 					}, 200);
-					Bukkit.getScheduler().scheduleSyncDelayedTask(manCo.getPlugin(), new Runnable() {
+					Bukkit.getScheduler().scheduleSyncDelayedTask(ManCo.getPlugin(), new Runnable() {
 
 						@Override
 						public void run() {
@@ -96,7 +96,7 @@ public class chestOpenTimer_unprotected implements Listener {
 						}
 
 					}, 250);
-					Bukkit.getScheduler().scheduleSyncDelayedTask(manCo.getPlugin(), new Runnable() {
+					Bukkit.getScheduler().scheduleSyncDelayedTask(ManCo.getPlugin(), new Runnable() {
 
 						@Override
 						public void run() {
@@ -137,7 +137,7 @@ public class chestOpenTimer_unprotected implements Listener {
 					final String crateOwner = configuration.getRareChestOwner(chest);
 					final String crateName = rareCrateList.rareCrates.get(crateOwner);
 					rareCrateList.schedulerTime.add(e.getPlayer().getName());
-					Bukkit.getScheduler().scheduleSyncDelayedTask(manCo.getPlugin(), new Runnable() {
+					Bukkit.getScheduler().scheduleSyncDelayedTask(ManCo.getPlugin(), new Runnable() {
 
 						@Override
 						public void run() {
@@ -159,7 +159,7 @@ public class chestOpenTimer_unprotected implements Listener {
 						}
 
 					}, 50);
-					Bukkit.getScheduler().scheduleSyncDelayedTask(manCo.getPlugin(), new Runnable() {
+					Bukkit.getScheduler().scheduleSyncDelayedTask(ManCo.getPlugin(), new Runnable() {
 
 						@Override
 						public void run() {
@@ -191,7 +191,7 @@ public class chestOpenTimer_unprotected implements Listener {
 						}
 
 					}, 100);
-					Bukkit.getScheduler().scheduleSyncDelayedTask(manCo.getPlugin(), new Runnable() {
+					Bukkit.getScheduler().scheduleSyncDelayedTask(ManCo.getPlugin(), new Runnable() {
 
 						@Override
 						public void run() {
@@ -214,7 +214,7 @@ public class chestOpenTimer_unprotected implements Listener {
 
 
 					}, 150);
-					Bukkit.getScheduler().scheduleSyncDelayedTask(manCo.getPlugin(), new Runnable() {
+					Bukkit.getScheduler().scheduleSyncDelayedTask(ManCo.getPlugin(), new Runnable() {
 
 						@Override
 						public void run() {
@@ -236,7 +236,7 @@ public class chestOpenTimer_unprotected implements Listener {
 						}
 
 					}, 200);
-					Bukkit.getScheduler().scheduleSyncDelayedTask(manCo.getPlugin(), new Runnable() {
+					Bukkit.getScheduler().scheduleSyncDelayedTask(ManCo.getPlugin(), new Runnable() {
 
 						@Override
 						public void run() {
@@ -258,7 +258,7 @@ public class chestOpenTimer_unprotected implements Listener {
 						}
 
 					}, 250);
-					Bukkit.getScheduler().scheduleSyncDelayedTask(manCo.getPlugin(), new Runnable() {
+					Bukkit.getScheduler().scheduleSyncDelayedTask(ManCo.getPlugin(), new Runnable() {
 
 						@Override
 						public void run() {

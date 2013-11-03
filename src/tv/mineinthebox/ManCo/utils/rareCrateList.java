@@ -17,7 +17,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import tv.mineinthebox.ManCo.manCo;
+import tv.mineinthebox.ManCo.ManCo;
 
 @SuppressWarnings("deprecation")
 public class rareCrateList {
@@ -35,7 +35,7 @@ public class rareCrateList {
 			ListDataValues.clear();
 		}
 		try {
-			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "rareCrates.yml");
+			File f = new File(ManCo.getPlugin().getDataFolder() + File.separator + "rareCrates.yml");
 			if(f.exists()) {
 				FileConfiguration con = YamlConfiguration.loadConfiguration(f);
 				for(String idDate : con.getStringList("rarecrates."+RareID+".items")) {

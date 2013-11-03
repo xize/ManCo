@@ -18,7 +18,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import tv.mineinthebox.ManCo.logType;
-import tv.mineinthebox.ManCo.manCo;
+import tv.mineinthebox.ManCo.ManCo;
 
 @SuppressWarnings("deprecation")
 public class normalCrateList {
@@ -32,7 +32,7 @@ public class normalCrateList {
 
 	public static void setRandomItems(Chest chest) {
 		try {
-			File f = new File(manCo.getPlugin().getDataFolder() + File.separator + "normalCrates.yml");
+			File f = new File(ManCo.getPlugin().getDataFolder() + File.separator + "normalCrates.yml");
 			if(f.exists()) {
 				FileConfiguration con = YamlConfiguration.loadConfiguration(f);
 				for(String idDate : con.getStringList("crates")) {
@@ -71,7 +71,7 @@ public class normalCrateList {
 				return item;	
 			}
 		} catch(IllegalArgumentException e) {
-			manCo.log("it seems one of your items in items.yml is wrong!", logType.severe);
+			ManCo.log("it seems one of your items in items.yml is wrong!", logType.severe);
 		}
 		return null;
 	}

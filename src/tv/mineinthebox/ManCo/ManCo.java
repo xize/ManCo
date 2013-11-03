@@ -10,10 +10,10 @@ import tv.mineinthebox.ManCo.events.cratescheduler;
 import tv.mineinthebox.ManCo.events.handler;
 import tv.mineinthebox.ManCo.utils.rareCrate;
 
-public class manCo extends JavaPlugin {
+public class ManCo extends JavaPlugin {
 	
 	private static Logger log = Logger.getLogger("Minecraft");
-	private static manCo plugin;
+	private static ManCo plugin;
 	
 	public void onEnable() {
 		plugin = this;
@@ -32,7 +32,7 @@ public class manCo extends JavaPlugin {
 		chestCheck.destroyChestOnDisable();
 	}
 	
-	public static manCo getPlugin() {
+	public static ManCo getPlugin() {
 		return plugin;
 	}
 	
