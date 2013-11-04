@@ -1,8 +1,10 @@
 package tv.mineinthebox.ManCo;
 
+import java.io.IOException;
 import java.util.logging.Logger;
 
 import org.bukkit.plugin.java.JavaPlugin;
+import org.mcstats.MetricsLite;
 
 import tv.mineinthebox.ManCo.configuration.configuration;
 import tv.mineinthebox.ManCo.events.chestCheck;
@@ -24,6 +26,13 @@ public class ManCo extends JavaPlugin {
 		getCommand("manco").setExecutor(new command());
 		if(!rareCrate.getRareCrateList().isEmpty()) {
 			cratescheduler.startRareScheduler();
+		}
+		try {
+			MetricsLite metrics = new MetricsLite(this);
+			metrics.start();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			
 		}
 	}
 	
