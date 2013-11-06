@@ -137,6 +137,23 @@ public class api implements Listener {
 		return false;
 	}
 	
+	public boolean hasCrate(String playername) {
+		if(normalCrateList.getFallingStateChest.containsValue(playername)) {
+			return true;
+		} else if(rareCrateList.rareCrates.containsKey(playername)) {
+			return true;
+		} else if(normalCrateList.getCrateList.containsKey(playername)) {
+			return true;
+		} else if(normalCrateList.getCrateList2.containsKey(playername)) {
+			return true;
+		} else if(rareCrateList.getCrateList.containsKey(playername)) {
+			return true;
+		} else if(rareCrateList.getCrateList2.containsKey(playername)) {
+			return true;
+		}
+		return false;
+	}
+	
 	public boolean isFalling(Player p) {
 		if(hasCrate(p)) {
 			if(normalCrateList.getFallingStateChest.containsValue(p.getName())) {
@@ -181,19 +198,6 @@ public class api implements Listener {
 			}
 		}
 		return null;
-	}
-	
-	public boolean hasCrate(String playername) {
-		if(normalCrateList.getCrateList.containsKey(playername)) {
-			return true;
-		} else if(normalCrateList.getCrateList2.containsKey(playername)) {
-			return true;
-		} else if(rareCrateList.getCrateList.containsKey(playername)) {
-			return true;
-		} else if(rareCrateList.getCrateList2.containsKey(playername)) {
-			return true;
-		}
-		return false;
 	}
 	
 	public Chest getCrate(Player p) throws ChestHasNoOwnerException {
