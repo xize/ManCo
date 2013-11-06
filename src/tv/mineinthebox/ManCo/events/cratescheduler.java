@@ -103,12 +103,13 @@ public class cratescheduler {
 						if(configuration.spawnCrateNearby()) {
 							Random randx = new Random();
 							Random randz = new Random();
-							loc.setX(loc.getX() + (randx.nextDouble() + 16));
-							loc.setZ(loc.getZ() + (randz.nextDouble() + 16));
+							loc.setX(loc.getX() + (randx.nextDouble() + configuration.spawnCrateNearbyRange()));
+							loc.setZ(loc.getZ() + (randz.nextDouble() + configuration.spawnCrateNearbyRange()));
 							loc.setY(normalCrate.getCrateSpawnHeight(p));
 						} else {
 							loc.setY(normalCrate.getCrateSpawnHeight(p));	
 						}
+						loc.getWorld().refreshChunk(loc.getChunk().getX(), loc.getChunk().getZ());
 						Entity entity = p.getWorld().spawnFallingBlock(loc, Material.CHEST, (byte) 1);
 						rareCrateList.getFallingStateChest.put(entity, p.getName()+","+rareCrate.getRareCrateList().get(RandomCrate));	
 						rareCrateList.rareCrates.put(p.getName(), rareCrate.getRareCrateList().get(RandomCrate));
@@ -159,12 +160,13 @@ public class cratescheduler {
 						if(configuration.spawnCrateNearby()) {
 							Random randx = new Random();
 							Random randz = new Random();
-							loc.setX(loc.getX() + (randx.nextDouble() + 16));
-							loc.setZ(loc.getZ() + (randz.nextDouble() + 16));
+							loc.setX(loc.getX() + (randx.nextDouble() + configuration.spawnCrateNearbyRange()));
+							loc.setZ(loc.getZ() + (randz.nextDouble() + configuration.spawnCrateNearbyRange()));
 							loc.setY(normalCrate.getCrateSpawnHeight(p));
 						} else {
 							loc.setY(normalCrate.getCrateSpawnHeight(p));	
 						}
+						loc.getWorld().refreshChunk(loc.getChunk().getX(), loc.getChunk().getZ());
 						Entity entity = p.getWorld().spawnFallingBlock(loc, Material.CHEST, (byte) 1);
 						rareCrateList.getFallingStateChest.put(entity, p.getName()+","+rareCrate.getRareCrateList().get(RandomCrate));
 						rareCrateList.rareCrates.put(p.getName(), rareCrate.getRareCrateList().get(RandomCrate));
@@ -206,12 +208,13 @@ public class cratescheduler {
 				if(configuration.spawnCrateNearby()) {
 					Random randx = new Random();
 					Random randz = new Random();
-					loc.setX(loc.getX() + (randx.nextDouble() + 16));
-					loc.setZ(loc.getZ() + (randz.nextDouble() + 16));
+					loc.setX(loc.getX() + (randx.nextDouble() + configuration.spawnCrateNearbyRange()));
+					loc.setZ(loc.getZ() + (randz.nextDouble() + configuration.spawnCrateNearbyRange()));
 					loc.setY(normalCrate.getCrateSpawnHeight(p));
 				} else {
 					loc.setY(normalCrate.getCrateSpawnHeight(p));	
 				}
+				loc.getWorld().refreshChunk(loc.getChunk().getX(), loc.getChunk().getZ());
 				Entity entity = p.getWorld().spawnFallingBlock(loc, Material.CHEST, (byte) 1);
 				normalCrateList.getFallingStateChest.put(entity, p.getName());
 				if(configuration.isCrateDropMessageDisabled()) {
@@ -248,12 +251,13 @@ public class cratescheduler {
 				if(configuration.spawnCrateNearby()) {
 					Random randx = new Random();
 					Random randz = new Random();
-					loc.setX(loc.getX() + (randx.nextDouble() + 16));
-					loc.setZ(loc.getZ() + (randz.nextDouble() + 16));
+					loc.setX(loc.getX() + (randx.nextDouble() + configuration.spawnCrateNearbyRange()));
+					loc.setZ(loc.getZ() + (randz.nextDouble() + configuration.spawnCrateNearbyRange()));
 					loc.setY(normalCrate.getCrateSpawnHeight(p));
 				} else {
 					loc.setY(normalCrate.getCrateSpawnHeight(p));	
 				}
+				loc.getWorld().refreshChunk(loc.getChunk().getX(), loc.getChunk().getZ());
 				Entity entity = p.getWorld().spawnFallingBlock(loc, Material.CHEST, (byte) 1);
 				normalCrateList.getFallingStateChest.put(entity, p.getName());
 				if(configuration.isCrateDropMessageDisabled()) {
@@ -270,12 +274,13 @@ public class cratescheduler {
 		if(configuration.spawnCrateNearby()) {
 			Random randx = new Random();
 			Random randz = new Random();
-			loc.setX(loc.getX() + (randx.nextDouble() + 16));
-			loc.setZ(loc.getZ() + (randz.nextDouble() + 16));
+			loc.setX(loc.getX() + (randx.nextDouble() + configuration.spawnCrateNearbyRange()));
+			loc.setZ(loc.getZ() + (randz.nextDouble() + configuration.spawnCrateNearbyRange()));
 			loc.setY(normalCrate.getCrateSpawnHeight(p));
 		} else {
 			loc.setY(normalCrate.getCrateSpawnHeight(p));	
 		}
+		loc.getWorld().refreshChunk(loc.getChunk().getX(), loc.getChunk().getZ());
 		Entity entity = p.getWorld().spawnFallingBlock(loc, Material.CHEST, (byte) 1);
 		normalCrateList.getFallingStateChest.put(entity, p.getName());
 		if(configuration.isCrateDropMessageDisabled()) {
@@ -290,20 +295,22 @@ public class cratescheduler {
 		if(configuration.spawnCrateNearby()) {
 			Random randx = new Random();
 			Random randz = new Random();
-			loc.setX(loc.getX() + (randx.nextDouble() + 16));
-			loc.setZ(loc.getZ() + (randz.nextDouble() + 16));
+			loc.setX(loc.getX() + (randx.nextDouble() + configuration.spawnCrateNearbyRange()));
+			loc.setZ(loc.getZ() + (randz.nextDouble() + configuration.spawnCrateNearbyRange()));
 			loc.setY(normalCrate.getCrateSpawnHeight(p));
 		} else {
 			loc.setY(normalCrate.getCrateSpawnHeight(p));	
 		}
+		//first make sure the chunk is loaded and not empty!
+		loc.getWorld().refreshChunk(loc.getChunk().getX(), loc.getChunk().getZ());
 		Entity entity = p.getWorld().spawnFallingBlock(loc, Material.CHEST, (byte) 1);
 		rareCrateList.getFallingStateChest.put(entity, p.getName()+","+rareCrate.getRareCrateList().get(RandomCrate));
 		rareCrateList.rareCrates.put(p.getName(), rareCrate.getRareCrateList().get(RandomCrate));
 		if(configuration.isCrateDropMessageDisabled()) {
-			
+
 		} else {
 			Bukkit.broadcastMessage(ChatColor.GREEN + configuration.getPrefix() + rareCrate.getCrateFoundMessage(rareCrate.getRareCrateList().get(RandomCrate)).replace("%p", p.getName()));
 		}
-		}
+	}
 
 }

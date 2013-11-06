@@ -113,7 +113,14 @@ public class configuration {
 				con.set("CratePrefix", "&2[ManCo]");
 				con.set("disableCrateProtection", false);
 				con.set("disableUncrateMessage", false);
-				con.set("spawnCrateNearby", false);
+				if(con.isSet("spawnCrateNearby")) {
+					con.set("spawnCrateNearby", null);
+					con.set("spawnCrateNearby.enable", false);
+					con.set("spawnCrateNearby.range", 16);
+				} else {
+					con.set("spawnCrateNearby.enable", false);
+					con.set("spawnCrateNearby.range", 16);
+				}
 				for(World w : Bukkit.getWorlds()) {
 					if(w.getName().contains("_nether")) {
 						//ignore nether worlds!
@@ -142,7 +149,18 @@ public class configuration {
 				if(!bol) {
 					ManCo.log("no new worlds found!", logType.info);
 				}
+				if(con.isSet("spawnCrateNearby")) {
+					con.set("spawnCrateNearby", null);
+					con.set("spawnCrateNearby.enable", false);
+					con.set("spawnCrateNearby.range", 16);
+					con.save(f);
+				} else {
+					con.set("spawnCrateNearby.enable", false);
+					con.set("spawnCrateNearby.range", 16);
+					con.save(f);
+				}
 			}
+			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -206,12 +224,25 @@ public class configuration {
 			File f = new File(ManCo.getPlugin().getDataFolder() + File.separator + "config.yml");
 			if(f.exists()) {
 				FileConfiguration con = YamlConfiguration.loadConfiguration(f);
-				return con.getBoolean("spawnCrateNearby");
+				return con.getBoolean("spawnCrateNearby.enable");
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
 		return false;
+	}
+	
+	public static int spawnCrateNearbyRange() {
+		try {
+			File f = new File(ManCo.getPlugin().getDataFolder() + File.separator + "config.yml");
+			if(f.exists()) {
+				FileConfiguration con = YamlConfiguration.loadConfiguration(f);
+				return con.getInt("spawnCrateNearby.range");
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
 	}
 	
 	public static boolean isEconomyEnabled() {
