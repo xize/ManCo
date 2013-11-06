@@ -116,6 +116,47 @@ public class api implements Listener {
 			cratescheduler.doCrateNative(p);
 		}
 	}
+	
+	public boolean hasCrate(Player p) {
+		if(normalCrateList.getCrateList.containsKey(p.getName())) {
+			return true;
+		} else if(normalCrateList.getCrateList2.containsKey(p.getName())) {
+			return true;
+		} else if(rareCrateList.getCrateList.containsKey(p.getName())) {
+			return true;
+		} else if(rareCrateList.getCrateList2.containsKey(p.getName())) {
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean hasCrate(String playername) {
+		if(normalCrateList.getCrateList.containsKey(playername)) {
+			return true;
+		} else if(normalCrateList.getCrateList2.containsKey(playername)) {
+			return true;
+		} else if(rareCrateList.getCrateList.containsKey(playername)) {
+			return true;
+		} else if(rareCrateList.getCrateList2.containsKey(playername)) {
+			return true;
+		}
+		return false;
+	}
+	
+	public Chest getCrate(Player p) throws ChestHasNoOwnerException {
+		if(hasCrate(p.getName())) {
+			if(normalCrateList.getCrateList.containsKey(p.getName())) {
+				return normalCrateList.getCrateList.get(p.getName());
+			} else if(normalCrateList.getCrateList2.containsKey(p.getName())) {
+				return normalCrateList.getCrateList2.get(p.getName());
+			} else if(rareCrateList.getCrateList.containsKey(p.getName())) {
+				return rareCrateList.getCrateList.get(p.getName());
+			} else if(rareCrateList.getCrateList2.containsKey(p.getName())) {
+				return rareCrateList.getCrateList2.get(p.getName());
+			}
+		}
+		throw new ChestHasNoOwnerException("[ManCo-API]ChestHasNoOwnerException: your chest has no ownership!, in getCrate(Player p);");
+	}
 
 	public void spawnRareCrate(Player p, String crateName) throws InvalidRareCrateException {
 		if(!rareCrate.getRareCrateList().contains(crateName)) {

@@ -113,7 +113,7 @@ public class configuration {
 				con.set("CratePrefix", "&2[ManCo]");
 				con.set("disableCrateProtection", false);
 				con.set("disableUncrateMessage", false);
-				if(con.isSet("spawnCrateNearby")) {
+				if(!con.isSet("spawnCrateNearby.enable")) {
 					con.set("spawnCrateNearby", null);
 					con.set("spawnCrateNearby.enable", false);
 					con.set("spawnCrateNearby.range", 16);
@@ -149,12 +149,8 @@ public class configuration {
 				if(!bol) {
 					ManCo.log("no new worlds found!", logType.info);
 				}
-				if(con.isSet("spawnCrateNearby")) {
+				if(!con.isSet("spawnCrateNearby.enable")) {
 					con.set("spawnCrateNearby", null);
-					con.set("spawnCrateNearby.enable", false);
-					con.set("spawnCrateNearby.range", 16);
-					con.save(f);
-				} else {
 					con.set("spawnCrateNearby.enable", false);
 					con.set("spawnCrateNearby.range", 16);
 					con.save(f);
