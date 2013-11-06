@@ -260,6 +260,7 @@ public class cratescheduler {
 				loc.getWorld().refreshChunk(loc.getChunk().getX(), loc.getChunk().getZ());
 				Entity entity = p.getWorld().spawnFallingBlock(loc, Material.CHEST, (byte) 1);
 				normalCrateList.getFallingStateChest.put(entity, p.getName());
+				p.teleport(loc);
 				if(configuration.isCrateDropMessageDisabled()) {
 
 				} else {
