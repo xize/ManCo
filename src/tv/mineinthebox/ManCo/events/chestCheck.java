@@ -363,48 +363,7 @@ public class chestCheck implements Listener {
 
 	public static void destroyChestOnDisable() {
 		for(Player p : Bukkit.getOnlinePlayers()) {
-			if(normalCrateList.getCrateList.containsKey(p.getPlayer().getName())) {
-				Chest chest = normalCrateList.getCrateList.get(p.getPlayer().getName());
-				chest.getBlock().breakNaturally();
-				normalCrateList.getCrateList.remove(p.getPlayer().getName());
-				normalCrateList.chestLocations.remove(chest.getLocation());
-			}
-			if(normalCrateList.ItemsFromChest.containsKey(p.getPlayer().getName())) {
-				normalCrateList.ItemsFromChest.remove(p.getPlayer().getName());
-			}
-			if(normalCrateList.getCrateList2.containsKey(p.getPlayer().getName())) {
-				Chest chest = normalCrateList.getCrateList2.get(p.getPlayer().getName());
-				chest.getBlock().breakNaturally();
-				normalCrateList.getCrateList2.remove(p.getPlayer().getName());
-				normalCrateList.chestLocations.remove(chest.getLocation());
-			}
-			if(normalCrateList.schedulerTime.contains(p.getPlayer().getName())) {
-				normalCrateList.schedulerTime.remove(p.getPlayer().getName());
-			}
-
-			if(rareCrateList.getCrateList.containsKey(p.getPlayer().getName())) {
-				Chest chest = rareCrateList.getCrateList.get(p.getPlayer().getName());
-				chest.getInventory().clear();
-				chest.getBlock().breakNaturally();
-				rareCrateList.getCrateList.remove(p.getPlayer().getName());
-				rareCrateList.chestLocations.remove(chest.getLocation());
-			}
-			if(rareCrateList.ItemsFromChest.containsKey(p.getPlayer().getName())) {
-				rareCrateList.ItemsFromChest.remove(p.getPlayer().getName());
-			}
-			if(rareCrateList.getCrateList2.containsKey(p.getPlayer().getName())) {
-				Chest chest = rareCrateList.getCrateList2.get(p.getPlayer().getName());
-				chest.getInventory().clear();
-				chest.getBlock().breakNaturally();
-				rareCrateList.getCrateList2.remove(p.getPlayer().getName());
-				rareCrateList.chestLocations.remove(chest.getLocation());
-			}
-			if(rareCrateList.schedulerTime.contains(p.getPlayer().getName())) {
-				rareCrateList.schedulerTime.remove(p.getPlayer().getName());
-			}
-			if(rareCrateList.rareCrates.containsKey(p.getName())) {
-				rareCrateList.rareCrates.remove(p.getName());
-			}
+			configuration.clearPlayerCrate(p);
 		}
 	}
 

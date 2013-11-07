@@ -13,9 +13,11 @@ import org.bukkit.block.Chest;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.FileConfigurationOptions;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitTask;
 
+import tv.mineinthebox.ManCo.crateEnum;
 import tv.mineinthebox.ManCo.logType;
 import tv.mineinthebox.ManCo.ManCo;
 import tv.mineinthebox.ManCo.utils.normalCrateList;
@@ -407,6 +409,54 @@ public class configuration {
 		}
 		return null;
 	}
+	
+	public static Entity getEntityFromHashMap(Player p, crateEnum type) {
+		if(type == crateEnum.normalCrate) {
+			Map<Entity, String> map = normalCrateList.getFallingStateChest;
+			Iterator<Entry<Entity, String>> it = map.entrySet().iterator();
+			while(it.hasNext()) {
+				Map.Entry<Entity, String> its = (Entry<Entity, String>) it.next();
+				if(its.getValue().equalsIgnoreCase(p.getName())) {
+					return its.getKey();
+				}
+			}
+		} else if(type == crateEnum.rareCrate) {
+			Map<Entity, String> map = rareCrateList.getFallingStateChest;
+			Iterator<Entry<Entity, String>> it = map.entrySet().iterator();
+			while(it.hasNext()) {
+				Map.Entry<Entity, String> its = (Entry<Entity, String>) it.next();
+				String[] username = its.getValue().split(",");
+				if(username[0].equalsIgnoreCase(p.getName())) {
+					return its.getKey();
+				}
+			}
+		}
+		return null;
+	}
+	
+	public static Entity getEntityFromHashMap(String p, crateEnum type) {
+		if(type == crateEnum.normalCrate) {
+			Map<Entity, String> map = normalCrateList.getFallingStateChest;
+			Iterator<Entry<Entity, String>> it = map.entrySet().iterator();
+			while(it.hasNext()) {
+				Map.Entry<Entity, String> its = (Entry<Entity, String>) it.next();
+				if(its.getValue().equalsIgnoreCase(p)) {
+					return its.getKey();
+				}
+			}
+		} else if(type == crateEnum.rareCrate) {
+			Map<Entity, String> map = rareCrateList.getFallingStateChest;
+			Iterator<Entry<Entity, String>> it = map.entrySet().iterator();
+			while(it.hasNext()) {
+				Map.Entry<Entity, String> its = (Entry<Entity, String>) it.next();
+				String[] username = its.getValue().split(",");
+				if(username[0].equalsIgnoreCase(p)) {
+					return its.getKey();
+				}
+			}
+		}
+		return null;
+	}
 
 	public static void clearPlayerCrate(Player p) {
 		if(normalCrateList.getCrateList.containsKey(p.getPlayer().getName())) {
@@ -426,6 +476,10 @@ public class configuration {
 		}
 		if(normalCrateList.schedulerTime.contains(p.getPlayer().getName())) {
 			normalCrateList.schedulerTime.remove(p.getPlayer().getName());
+		}
+		if(normalCrateList.getFallingStateChest.containsValue(p.getName())) {
+			Entity normalEntity = getEntityFromHashMap(p, crateEnum.normalCrate);
+			normalCrateList.getFallingStateChest.remove(normalEntity);
 		}
 
 		if(rareCrateList.getCrateList.containsKey(p.getPlayer().getName())) {
@@ -451,6 +505,10 @@ public class configuration {
 		if(rareCrateList.rareCrates.containsKey(p.getName())) {
 			rareCrateList.rareCrates.remove(p.getName());
 		}
+		if(rareCrateList.getFallingStateChest.containsValue(p.getName())) {
+			Entity rareEntity = getEntityFromHashMap(p, crateEnum.rareCrate);
+			normalCrateList.getFallingStateChest.remove(rareEntity);
+		}
 	}
 
 	public static void clearPlayerCrate(String p) {
@@ -471,6 +529,10 @@ public class configuration {
 		}
 		if(normalCrateList.schedulerTime.contains(p)) {
 			normalCrateList.schedulerTime.remove(p);
+		}
+		if(normalCrateList.getFallingStateChest.containsValue(p)) {
+			Entity normalEntity = getEntityFromHashMap(p, crateEnum.normalCrate);
+			normalCrateList.getFallingStateChest.remove(normalEntity);
 		}
 
 		if(rareCrateList.getCrateList.containsKey(p)) {
@@ -495,6 +557,10 @@ public class configuration {
 		}
 		if(rareCrateList.rareCrates.containsKey(p)) {
 			rareCrateList.rareCrates.remove(p);
+		}
+		if(rareCrateList.getFallingStateChest.containsValue(p)) {
+			Entity rareEntity = getEntityFromHashMap(p, crateEnum.rareCrate);
+			normalCrateList.getFallingStateChest.remove(rareEntity);
 		}
 	}
 
