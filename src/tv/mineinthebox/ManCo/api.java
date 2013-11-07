@@ -2,10 +2,6 @@ package tv.mineinthebox.ManCo;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Chest;
@@ -167,35 +163,11 @@ public class api implements Listener {
 	
 	public Location getFallingCrateLocation(Player p) {
 		if(normalCrateList.getFallingStateChest.containsValue(p.getName())) {
-			Entity entity = getEntityFromHashMap(p, crateEnum.normalCrate);
+			Entity entity = configuration.getEntityFromHashMap(p, crateEnum.normalCrate);
 			return entity.getLocation();
 		} else if(rareCrateList.rareCrates.containsKey(p.getName())) {
-			Entity entity = getEntityFromHashMap(p, crateEnum.rareCrate);
+			Entity entity = configuration.getEntityFromHashMap(p, crateEnum.rareCrate);
 			return entity.getLocation();
-		}
-		return null;
-	}
-	
-	private Entity getEntityFromHashMap(Player p, crateEnum type) {
-		if(type == crateEnum.normalCrate) {
-			Map<Entity, String> map = normalCrateList.getFallingStateChest;
-			Iterator<Entry<Entity, String>> it = map.entrySet().iterator();
-			while(it.hasNext()) {
-				Map.Entry<Entity, String> its = (Entry<Entity, String>) it.next();
-				if(its.getValue().equalsIgnoreCase(p.getName())) {
-					return its.getKey();
-				}
-			}
-		} else if(type == crateEnum.rareCrate) {
-			Map<Entity, String> map = rareCrateList.getFallingStateChest;
-			Iterator<Entry<Entity, String>> it = map.entrySet().iterator();
-			while(it.hasNext()) {
-				Map.Entry<Entity, String> its = (Entry<Entity, String>) it.next();
-				String[] username = its.getValue().split(",");
-				if(username[0].equalsIgnoreCase(p.getName())) {
-					return its.getKey();
-				}
-			}
 		}
 		return null;
 	}
