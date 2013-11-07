@@ -14,6 +14,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.FileConfigurationOptions;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitTask;
 
 import tv.mineinthebox.ManCo.logType;
 import tv.mineinthebox.ManCo.ManCo;
@@ -21,7 +22,7 @@ import tv.mineinthebox.ManCo.utils.normalCrateList;
 import tv.mineinthebox.ManCo.utils.rareCrateList;
 
 public class configuration {
-	
+
 	public static void createConfigs() {
 		createNormalCrateConfig();
 		createRareCrateConfig();
@@ -104,6 +105,9 @@ public class configuration {
 				FileConfiguration con = YamlConfiguration.loadConfiguration(f);
 				FileConfigurationOptions opt = con.options();
 				opt.header("Default configuration for ManCo supply crates\nhere you can specify the prefixes, suffixes, enable iConomy and more");
+				if(!con.isSet("debug-mode")) {
+					con.set("debug-mode", false);
+				}
 				con.set("DropTime", 90000);
 				con.set("dropRoundsPerTime", 1);
 				con.set("useIconomy.enabled", false);
@@ -149,6 +153,11 @@ public class configuration {
 				if(!bol) {
 					ManCo.log("no new worlds found!", logType.info);
 				}
+				if(!con.isSet("debug-mode")) {
+					con.set("debug-mode", false);
+					con.save(f);
+				}
+
 				if(!con.isSet("spawnCrateNearby.enable")) {
 					con.set("spawnCrateNearby", null);
 					con.set("spawnCrateNearby.enable", false);
@@ -156,12 +165,19 @@ public class configuration {
 					con.save(f);
 				}
 			}
-			
+
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
+
+	public static boolean isNull(BukkitTask task) {
+		if(task == null) {
+			return true;
+		}
+		return false;	
+	}
+
 	public static String getPrefix() {
 		try {
 			File f = new File(ManCo.getPlugin().getDataFolder() + File.separator + "config.yml");
@@ -174,7 +190,22 @@ public class configuration {
 		}
 		return null;
 	}
-	
+
+	public static boolean isDebugMode() {
+		try {
+			File f = new File(ManCo.getPlugin().getDataFolder() + File.separator + "config.yml");
+			if(f.exists()) {
+				FileConfiguration con = YamlConfiguration.loadConfiguration(f);
+				if(con.isBoolean("debug-mode")) {
+					return con.getBoolean("debug-mode");
+				}
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
 	public static boolean isRareCrate(String crateName) {
 		try {
 			File f = new File(ManCo.getPlugin().getDataFolder() + File.separator + "rareCrates.yml");
@@ -193,7 +224,7 @@ public class configuration {
 		}
 		return false;
 	}
-	
+
 	public static boolean isPluginDisabledForWorld(World w) {
 		try {
 			File f = new File(ManCo.getPlugin().getDataFolder() + File.separator + "config.yml");
@@ -214,7 +245,7 @@ public class configuration {
 		}
 		return false;
 	}
-	
+
 	public static boolean spawnCrateNearby() {
 		try {
 			File f = new File(ManCo.getPlugin().getDataFolder() + File.separator + "config.yml");
@@ -227,7 +258,7 @@ public class configuration {
 		}
 		return false;
 	}
-	
+
 	public static int spawnCrateNearbyRange() {
 		try {
 			File f = new File(ManCo.getPlugin().getDataFolder() + File.separator + "config.yml");
@@ -240,7 +271,7 @@ public class configuration {
 		}
 		return 0;
 	}
-	
+
 	public static boolean isEconomyEnabled() {
 		try {
 			File f = new File(ManCo.getPlugin().getDataFolder() + File.separator + "config.yml");
@@ -255,7 +286,7 @@ public class configuration {
 		}
 		return false;
 	}
-	
+
 	public static double returnIconomyPrice() {
 		try {
 			File f = new File(ManCo.getPlugin().getDataFolder() + File.separator + "config.yml");
@@ -268,7 +299,7 @@ public class configuration {
 		}
 		return 0.0;
 	}
-	
+
 	public static int roundsPerTime() {
 		try {
 			File f = new File(ManCo.getPlugin().getDataFolder() + File.separator + "config.yml");
@@ -281,7 +312,7 @@ public class configuration {
 		}
 		return 0;
 	}
-	
+
 	public static int getTime() {
 		try {
 			File f = new File(ManCo.getPlugin().getDataFolder() + File.separator + "config.yml");
@@ -294,7 +325,7 @@ public class configuration {
 		}
 		return 0;
 	}
-	
+
 	public static boolean isCrateDropMessageDisabled() {
 		try {
 			File f = new File(ManCo.getPlugin().getDataFolder() + File.separator + "config.yml");
@@ -311,7 +342,7 @@ public class configuration {
 		}
 		return false;
 	}
-	
+
 	public static boolean isChestProtectionDisabled() {
 		try {
 			File f = new File(ManCo.getPlugin().getDataFolder() + File.separator + "config.yml");
@@ -326,7 +357,7 @@ public class configuration {
 		}
 		return false;
 	}
-	
+
 	public static String getNormalChestOwner(Chest chest) {
 		if(normalCrateList.getCrateList.containsValue(chest)) {
 			Map<String, Chest> map = normalCrateList.getCrateList;
@@ -351,7 +382,7 @@ public class configuration {
 		}
 		return null;
 	}
-	
+
 	public static String getRareChestOwner(Chest chest) {
 		if(rareCrateList.getCrateList.containsValue(chest)) {
 			Map<String, Chest> map = rareCrateList.getCrateList;
@@ -376,7 +407,7 @@ public class configuration {
 		}
 		return null;
 	}
-	
+
 	public static void clearPlayerCrate(Player p) {
 		if(normalCrateList.getCrateList.containsKey(p.getPlayer().getName())) {
 			Chest chest = normalCrateList.getCrateList.get(p.getPlayer().getName());
@@ -421,7 +452,7 @@ public class configuration {
 			rareCrateList.rareCrates.remove(p.getName());
 		}
 	}
-	
+
 	public static void clearPlayerCrate(String p) {
 		if(normalCrateList.getCrateList.containsKey(p)) {
 			Chest chest = normalCrateList.getCrateList.get(p);
