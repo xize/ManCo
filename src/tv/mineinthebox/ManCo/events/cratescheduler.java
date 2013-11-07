@@ -152,9 +152,11 @@ public class cratescheduler {
 
 						Location loc = p.getLocation();
 						if(configuration.spawnCrateNearby()) {
-							try {
-								Random randx = new Random();
-								Random randz = new Random();
+							Random randx = new Random();
+							Random randz = new Random();
+							if(configuration.spawnCrateNearbyRange() > 100) {
+								ManCo.log("your random range from configuration option spawnCrateNearby is to big, max range value is: " + 100, logType.severe);
+							} else {
 								loc.setX(loc.getX() + (randx.nextDouble() + configuration.spawnCrateNearbyRange()));
 								loc.setZ(loc.getZ() + (randz.nextDouble() + configuration.spawnCrateNearbyRange()));
 								loc.setY(normalCrate.getCrateSpawnHeight(p));
@@ -162,8 +164,6 @@ public class cratescheduler {
 									ManCo.log("Type: doRareCrateWithoutWG", logType.debug);
 									ManCo.log("Rare crate spawns at: x:"+loc.getX() + " y:"+loc.getY()+" z:"+loc.getZ()+ " and world: " + loc.getWorld().getName(), logType.debug);
 								}
-							} catch(Exception e) {
-								ManCo.log("your random range from configuration option spawnCrateNearby is to big, max value is: " + Integer.MAX_VALUE, logType.severe);
 							}
 						} else {
 							loc.setY(normalCrate.getCrateSpawnHeight(p));	
@@ -217,19 +217,20 @@ public class cratescheduler {
 
 						Location loc = p.getLocation();
 						if(configuration.spawnCrateNearby()) {
-							try {
 								Random randx = new Random();
 								Random randz = new Random();
-								loc.setX(loc.getX() + (randx.nextDouble() + configuration.spawnCrateNearbyRange()));
-								loc.setZ(loc.getZ() + (randz.nextDouble() + configuration.spawnCrateNearbyRange()));
-								loc.setY(normalCrate.getCrateSpawnHeight(p));
-								if(configuration.isDebugMode()) {
-									ManCo.log("Type: doRareCrateWithWG", logType.debug);
-									ManCo.log("Rare crate spawns at: x:"+loc.getX() + " y:"+loc.getY()+" z:"+loc.getZ()+ " and world: " + loc.getWorld().getName(), logType.debug);
+								if(configuration.spawnCrateNearbyRange() > 100) {
+									ManCo.log("your random range from configuration option spawnCrateNearby is to big, max range value is: " + 100, logType.severe);
+								} else {
+									loc.setX(loc.getX() + (randx.nextDouble() + configuration.spawnCrateNearbyRange()));
+									loc.setZ(loc.getZ() + (randz.nextDouble() + configuration.spawnCrateNearbyRange()));
+									loc.setY(normalCrate.getCrateSpawnHeight(p));
+									if(configuration.isDebugMode()) {
+										ManCo.log("Type: doRareCrateWithWG", logType.debug);
+										ManCo.log("Rare crate spawns at: x:"+loc.getX() + " y:"+loc.getY()+" z:"+loc.getZ()+ " and world: " + loc.getWorld().getName(), logType.debug);
+									}
 								}
-							} catch(Exception e) {
-								ManCo.log("your random range from configuration option spawnCrateNearby is to big, max value is: " + Integer.MAX_VALUE, logType.severe);
-							}
+							
 						} else {
 							loc.setY(normalCrate.getCrateSpawnHeight(p));	
 						}
@@ -273,19 +274,21 @@ public class cratescheduler {
 
 				Location loc = p.getLocation();
 				if(configuration.spawnCrateNearby()) {
-					try {
+					
 						Random randx = new Random();
 						Random randz = new Random();
-						loc.setX(loc.getX() + (randx.nextDouble() + configuration.spawnCrateNearbyRange()));
-						loc.setZ(loc.getZ() + (randz.nextDouble() + configuration.spawnCrateNearbyRange()));
-						loc.setY(normalCrate.getCrateSpawnHeight(p));
-						if(configuration.isDebugMode()) {
-							ManCo.log("Type: doCrateWithoutWG", logType.debug);
-							ManCo.log("crate spawns at: x:"+loc.getX() + " y:"+loc.getY()+" z:"+loc.getZ()+ " and world: " + loc.getWorld().getName(), logType.debug);
+						if(configuration.spawnCrateNearbyRange() > 100) {
+							ManCo.log("your random range from configuration option spawnCrateNearby is to big, max range value is: " + 100, logType.severe);
+						} else {
+							loc.setX(loc.getX() + (randx.nextDouble() + configuration.spawnCrateNearbyRange()));
+							loc.setZ(loc.getZ() + (randz.nextDouble() + configuration.spawnCrateNearbyRange()));
+							loc.setY(normalCrate.getCrateSpawnHeight(p));
+							if(configuration.isDebugMode()) {
+								ManCo.log("Type: doCrateWithoutWG", logType.debug);
+								ManCo.log("crate spawns at: x:"+loc.getX() + " y:"+loc.getY()+" z:"+loc.getZ()+ " and world: " + loc.getWorld().getName(), logType.debug);
+							}
 						}
-					} catch(Exception e) {
-						ManCo.log("your random range from configuration option spawnCrateNearby is to big, max value is: " + Integer.MAX_VALUE, logType.severe);
-					}
+					
 				} else {
 					loc.setY(normalCrate.getCrateSpawnHeight(p));	
 				}
@@ -324,19 +327,20 @@ public class cratescheduler {
 
 				Location loc = p.getLocation();
 				if(configuration.spawnCrateNearby()) {
-					try {
 						Random randx = new Random();
 						Random randz = new Random();
-						loc.setX(loc.getX() + (randx.nextDouble() + configuration.spawnCrateNearbyRange()));
-						loc.setZ(loc.getZ() + (randz.nextDouble() + configuration.spawnCrateNearbyRange()));
-						loc.setY(normalCrate.getCrateSpawnHeight(p));
-						if(configuration.isDebugMode()) {
-							ManCo.log("Type: doCrateWithWG", logType.debug);
-							ManCo.log("crate spawns at: x:"+loc.getX() + " y:"+loc.getY()+" z:"+loc.getZ()+ " and world: " + loc.getWorld().getName(), logType.debug);
+						if(configuration.spawnCrateNearbyRange() > 100) {
+							ManCo.log("your random range from configuration option spawnCrateNearby is to big, max range value is: " + 100, logType.severe);
+						} else {
+							loc.setX(loc.getX() + (randx.nextDouble() + configuration.spawnCrateNearbyRange()));
+							loc.setZ(loc.getZ() + (randz.nextDouble() + configuration.spawnCrateNearbyRange()));
+							loc.setY(normalCrate.getCrateSpawnHeight(p));
+							if(configuration.isDebugMode()) {
+								ManCo.log("Type: doCrateWithWG", logType.debug);
+								ManCo.log("crate spawns at: x:"+loc.getX() + " y:"+loc.getY()+" z:"+loc.getZ()+ " and world: " + loc.getWorld().getName(), logType.debug);
+							}
 						}
-					} catch(Exception e) {
-						ManCo.log("your random range from configuration option spawnCrateNearby is to big, max value is: " + Integer.MAX_VALUE, logType.severe);
-					}
+					
 				} else {
 					loc.setY(normalCrate.getCrateSpawnHeight(p));	
 				}
@@ -355,19 +359,19 @@ public class cratescheduler {
 	public static void doCrateNative(Player p) {
 		Location loc = p.getLocation();
 		if(configuration.spawnCrateNearby()) {
-			try {
 				Random randx = new Random();
 				Random randz = new Random();
-				loc.setX(loc.getX() + (randx.nextDouble() + configuration.spawnCrateNearbyRange()));
-				loc.setZ(loc.getZ() + (randz.nextDouble() + configuration.spawnCrateNearbyRange()));
-				loc.setY(normalCrate.getCrateSpawnHeight(p));
-				if(configuration.isDebugMode()) {
-					ManCo.log("Type: doCrateNative", logType.debug);
-					ManCo.log("crate spawns at: x:"+loc.getX() + " y:"+loc.getY()+" z:"+loc.getZ()+ " and world: " + loc.getWorld().getName(), logType.debug);
+				if(configuration.spawnCrateNearbyRange() > 100) {
+					ManCo.log("your random range from configuration option spawnCrateNearby is to big, max range value is: " + 100, logType.severe);
+				} else {
+					loc.setX(loc.getX() + (randx.nextDouble() + configuration.spawnCrateNearbyRange()));
+					loc.setZ(loc.getZ() + (randz.nextDouble() + configuration.spawnCrateNearbyRange()));
+					loc.setY(normalCrate.getCrateSpawnHeight(p));
+					if(configuration.isDebugMode()) {
+						ManCo.log("Type: doCrateNative", logType.debug);
+						ManCo.log("crate spawns at: x:"+loc.getX() + " y:"+loc.getY()+" z:"+loc.getZ()+ " and world: " + loc.getWorld().getName(), logType.debug);
+					}
 				}
-			} catch(Exception e) {
-				ManCo.log("your random range from configuration option spawnCrateNearby is to big, max value is: " + Integer.MAX_VALUE, logType.severe);
-			}
 		} else {
 			loc.setY(normalCrate.getCrateSpawnHeight(p));	
 		}
@@ -384,19 +388,19 @@ public class cratescheduler {
 	public static void doRareCrateNative(Player p, int RandomCrate) {
 		Location loc = p.getLocation();
 		if(configuration.spawnCrateNearby()) {
-			try {
 				Random randx = new Random();
 				Random randz = new Random();
-				loc.setX(loc.getX() + (randx.nextDouble() + configuration.spawnCrateNearbyRange()));
-				loc.setZ(loc.getZ() + (randz.nextDouble() + configuration.spawnCrateNearbyRange()));
-				loc.setY(normalCrate.getCrateSpawnHeight(p));
-				if(configuration.isDebugMode()) {
-					ManCo.log("Type: doRareCrateNative", logType.debug);
-					ManCo.log("Rare crate spawns at: x:"+loc.getX() + " y:"+loc.getY()+" z:"+loc.getZ()+ " and world: " + loc.getWorld().getName(), logType.debug);
+				if(configuration.spawnCrateNearbyRange() > 100) {
+					ManCo.log("your random range from configuration option spawnCrateNearby is to big, max range value is: " + 100, logType.severe);
+				} else {
+					loc.setX(loc.getX() + (randx.nextDouble() + configuration.spawnCrateNearbyRange()));
+					loc.setZ(loc.getZ() + (randz.nextDouble() + configuration.spawnCrateNearbyRange()));
+					loc.setY(normalCrate.getCrateSpawnHeight(p));
+					if(configuration.isDebugMode()) {
+						ManCo.log("Type: doRareCrateNative", logType.debug);
+						ManCo.log("Rare crate spawns at: x:"+loc.getX() + " y:"+loc.getY()+" z:"+loc.getZ()+ " and world: " + loc.getWorld().getName(), logType.debug);
+					}
 				}
-			} catch(Exception e) {
-				ManCo.log("your random range from configuration option spawnCrateNearby is to big, max value is: " + Integer.MAX_VALUE, logType.severe);
-			}
 		} else {
 			loc.setY(normalCrate.getCrateSpawnHeight(p));	
 		}
