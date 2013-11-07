@@ -245,7 +245,7 @@ public class command implements CommandExecutor {
 												sender.sendMessage(ChatColor.RED + "you cannot spawn a crate in a disabled world!");
 												return false;
 											}
-											cratescheduler.doRareCrateNative(p, i);
+											cratescheduler.doRareCrateNative(p, i, true);
 											sender.sendMessage(ChatColor.GREEN + "successfully spawned a rare crate to player " + p.getName());
 											break;
 										}

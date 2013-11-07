@@ -112,7 +112,7 @@ public class api implements Listener {
 		if(util.isSlab(p.getLocation().getBlock())) {
 			throw new PlayerOnSlabException("[ManCo-API]PlayerOnSlabException: this crate cannot fall on a slab!\ndebug information:\nVersion: + " + ManCo.getPlugin().getDescription().getVersion() +  "\nLocation: "+p.getLocation().toString());
 		} else {
-			cratescheduler.doCrateNative(p);
+			cratescheduler.doCrateNative(p, true);
 		}
 	}
 	
@@ -194,14 +194,14 @@ public class api implements Listener {
 			for(int i = 0; i < getRareCrateList().size(); i++) {
 				if(i == getRareCrateList().size()) {
 					if(getRareCrateList().get(i) == crateName) {
-						cratescheduler.doRareCrateNative(p, i);
+						cratescheduler.doRareCrateNative(p, i, true);
 						break;
 					} else {
 						throw new InvalidRareCrateException("[ManCo-API]InvalidRareCrateException: invalid crate name! maybe the name is case sensitive?");
 					}
 				} else {
 					if(getRareCrateList().get(i) == crateName) {
-						cratescheduler.doRareCrateNative(p, i);
+						cratescheduler.doRareCrateNative(p, i, true);
 						break;
 					}	
 				}
