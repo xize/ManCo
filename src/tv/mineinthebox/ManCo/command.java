@@ -11,6 +11,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
 import tv.mineinthebox.ManCo.configuration.configuration;
+import tv.mineinthebox.ManCo.events.chestCheck;
 import tv.mineinthebox.ManCo.events.cratescheduler;
 import tv.mineinthebox.ManCo.events.handler;
 import tv.mineinthebox.ManCo.utils.iconomy;
@@ -76,9 +77,7 @@ public class command implements CommandExecutor {
 							cratescheduler.task2.cancel();
 							cratescheduler.task = null;
 							cratescheduler.task2 = null;
-							for(Player p : Bukkit.getOnlinePlayers()) {
-								configuration.clearPlayerCrate(p);
-							}
+							chestCheck.destroyChestOnDisable();
 							if(configuration.isDebugMode()) {
 								ManCo.log("CommandType: /mc reload", logType.debug);
 								ManCo.log("scheduler status both needs to be null here: \n" + "isNull("+configuration.isNull(cratescheduler.task) + "), isNull(" + configuration.isNull(cratescheduler.task2)+")", logType.debug);
