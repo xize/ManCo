@@ -1,7 +1,6 @@
 package tv.mineinthebox.ManCo;
 
 import java.io.IOException;
-import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -18,7 +17,6 @@ import tv.mineinthebox.ManCo.utils.rareCrateList;
 
 public class ManCo extends JavaPlugin {
 	
-	private static Logger log = Logger.getLogger("Minecraft");
 	private static ManCo plugin;
 	
 	public void onEnable() {
@@ -94,9 +92,9 @@ public class ManCo extends JavaPlugin {
 	
 	public static void log(String message, logType type) {
 		if(type == logType.info) {
-			log.info("["+getPlugin().getName()+"]" + " " + message);
+			Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "&2["+getPlugin().getName()+"]&f" + " " + message));
 		} else if(type == logType.severe) {
-			log.severe("["+getPlugin().getName()+"]" + " " + message);
+			Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "&c[Error]&2["+getPlugin().getName()+"]&f" + " " + message));
 		} else if(type == logType.debug) {
 			Bukkit.getConsoleSender().sendMessage((ChatColor.translateAlternateColorCodes('&', "&c[Debug]&2["+getPlugin().getName()+"]&3" + " " + message)));
 		}
