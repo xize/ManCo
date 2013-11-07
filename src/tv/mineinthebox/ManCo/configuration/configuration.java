@@ -503,11 +503,11 @@ public class configuration {
 			rareCrateList.schedulerTime.remove(p.getPlayer().getName());
 		}
 		if(rareCrateList.rareCrates.containsKey(p.getName())) {
-			rareCrateList.rareCrates.remove(p.getName());
-		}
-		if(rareCrateList.getFallingStateChest.containsValue(p.getName())) {
 			Entity rareEntity = getEntityFromHashMap(p, crateEnum.rareCrate);
-			normalCrateList.getFallingStateChest.remove(rareEntity);
+			rareCrateList.getFallingStateChest.remove(rareEntity);
+		}
+		if(rareCrateList.rareCrates.containsKey(p.getName())) {
+			rareCrateList.rareCrates.remove(p.getName());
 		}
 	}
 
@@ -554,6 +554,10 @@ public class configuration {
 		}
 		if(rareCrateList.schedulerTime.contains(p)) {
 			rareCrateList.schedulerTime.remove(p);
+		}
+		if(rareCrateList.rareCrates.containsKey(p)) {
+			Entity rareEntity = getEntityFromHashMap(p, crateEnum.rareCrate);
+			rareCrateList.getFallingStateChest.remove(rareEntity);
 		}
 		if(rareCrateList.rareCrates.containsKey(p)) {
 			rareCrateList.rareCrates.remove(p);
