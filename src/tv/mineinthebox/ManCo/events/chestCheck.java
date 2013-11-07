@@ -9,6 +9,7 @@ import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.Chest;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -24,6 +25,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 
 import tv.mineinthebox.ManCo.ManCo;
+import tv.mineinthebox.ManCo.crateEnum;
 import tv.mineinthebox.ManCo.configuration.configuration;
 import tv.mineinthebox.ManCo.utils.normalCrate;
 import tv.mineinthebox.ManCo.utils.normalCrateList;
@@ -289,6 +291,10 @@ public class chestCheck implements Listener {
 		if(normalCrateList.schedulerTime.contains(e.getPlayer().getName())) {
 			normalCrateList.schedulerTime.remove(e.getPlayer().getName());
 		}
+		if(normalCrateList.getFallingStateChest.containsValue(e.getPlayer().getName())) {
+			Entity normalEntity = configuration.getEntityFromHashMap(e.getPlayer(), crateEnum.normalCrate);
+			normalCrateList.getFallingStateChest.remove(normalEntity);
+		}
 
 		if(rareCrateList.getCrateList.containsKey(e.getPlayer().getName())) {
 			Chest chest = rareCrateList.getCrateList.get(e.getPlayer().getName());
@@ -302,13 +308,17 @@ public class chestCheck implements Listener {
 		}
 		if(rareCrateList.getCrateList2.containsKey(e.getPlayer().getName())) {
 			Chest chest = rareCrateList.getCrateList2.get(e.getPlayer().getName());
-			chest.getBlock().breakNaturally();
 			chest.getInventory().clear();
+			chest.getBlock().breakNaturally();
 			rareCrateList.getCrateList2.remove(e.getPlayer().getName());
 			rareCrateList.chestLocations.remove(chest.getLocation());
 		}
 		if(rareCrateList.schedulerTime.contains(e.getPlayer().getName())) {
 			rareCrateList.schedulerTime.remove(e.getPlayer().getName());
+		}
+		if(rareCrateList.rareCrates.containsKey(e.getPlayer().getName())) {
+			Entity rareEntity = configuration.getEntityFromHashMap(e.getPlayer(), crateEnum.rareCrate);
+			rareCrateList.getFallingStateChest.remove(rareEntity);
 		}
 		if(rareCrateList.rareCrates.containsKey(e.getPlayer().getName())) {
 			rareCrateList.rareCrates.remove(e.getPlayer().getName());
@@ -335,6 +345,10 @@ public class chestCheck implements Listener {
 		if(normalCrateList.schedulerTime.contains(e.getPlayer().getName())) {
 			normalCrateList.schedulerTime.remove(e.getPlayer().getName());
 		}
+		if(normalCrateList.getFallingStateChest.containsValue(e.getPlayer().getName())) {
+			Entity normalEntity = configuration.getEntityFromHashMap(e.getPlayer(), crateEnum.normalCrate);
+			normalCrateList.getFallingStateChest.remove(normalEntity);
+		}
 
 		if(rareCrateList.getCrateList.containsKey(e.getPlayer().getName())) {
 			Chest chest = rareCrateList.getCrateList.get(e.getPlayer().getName());
@@ -355,6 +369,10 @@ public class chestCheck implements Listener {
 		}
 		if(rareCrateList.schedulerTime.contains(e.getPlayer().getName())) {
 			rareCrateList.schedulerTime.remove(e.getPlayer().getName());
+		}
+		if(rareCrateList.rareCrates.containsKey(e.getPlayer().getName())) {
+			Entity rareEntity = configuration.getEntityFromHashMap(e.getPlayer(), crateEnum.rareCrate);
+			rareCrateList.getFallingStateChest.remove(rareEntity);
 		}
 		if(rareCrateList.rareCrates.containsKey(e.getPlayer().getName())) {
 			rareCrateList.rareCrates.remove(e.getPlayer().getName());
