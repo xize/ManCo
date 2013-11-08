@@ -1,5 +1,8 @@
 package tv.mineinthebox.ManCo;
 
+import java.io.File;
+import java.util.ArrayList;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -7,6 +10,8 @@ import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
@@ -25,6 +30,7 @@ import tv.mineinthebox.ManCo.utils.worldguard;
 
 public class command implements CommandExecutor {
 
+	@SuppressWarnings("deprecation")
 	public boolean onCommand(CommandSender sender, Command cmd, String CommandLabel, String[] args) {
 		if(cmd.getName().equalsIgnoreCase("manco")) {
 			if(sender.hasPermission("manco.command")) {
@@ -263,7 +269,65 @@ public class command implements CommandExecutor {
 						sender.sendMessage(ChatColor.RED + "you don't have permission to spawn crates!");
 					}
 				} else if(args.length == 3) {
-					if(args[0].equalsIgnoreCase("buy")) {
+					if(args[0].equalsIgnoreCase("rarecrate")) {
+						if(args[1].equalsIgnoreCase("create")) {
+							if(sender.hasPermission("manco.createRareCrate")) {
+								try {
+									File f = new File(ManCo.getPlugin().getDataFolder() + File.separator + "rareCrates.yml");
+									if(f.exists()) {
+										FileConfiguration con = YamlConfiguration.loadConfiguration(f);
+										if(!con.isSet("rarecrates."+args[2]+".enable")) {
+											ArrayList<String> a = new ArrayList<String>();
+											a.add("264:0:32");
+											a.add("264:0:12");
+											a.add("265:0:5");
+											a.add("322:1:2");
+											con.set("rarecrates."+ args[2] +".enable", true);
+											con.set("rarecrates."+ args[2] +".dropRateChance", 5);
+											con.set("rarecrates."+ args[2] +".crateFoundMessage", "&7%p has found a &1(Rare)&7 ManCo crate!");
+											con.set("rarecrates."+ args[2] +".needKey.enabled", false);
+											con.set("rarecrates."+ args[2] +".needKey.material", Material.BLAZE_ROD.getId());
+											con.set("rarecrates."+ args[2] +".needKey.price", 3.0);
+											con.set("rarecrates."+ args[2] +".effect", false);
+											con.set("rarecrates."+ args[2] +".items", a.toArray());
+											con.save(f);
+											a.clear();
+											sender.sendMessage(configuration.getPrefix() + ChatColor.GRAY + "successfully created a new rareCrate please check rareCrate.yml for futher configuration and reload the plugin.");
+										} else {
+											sender.sendMessage(ChatColor.RED + "it seems this crate entry already exists!");
+										}
+									}
+								} catch(Exception e) {
+									e.printStackTrace();
+								}
+							} else {
+								sender.sendMessage(ChatColor.RED + "you aren't allowed to create configuration nodes in rareCrates.yml!");
+							}
+						} else if(args[1].equalsIgnoreCase("remove")) {
+							if(sender.hasPermission("manco.removeRareCrate")) {
+								try {
+									File f = new File(ManCo.getPlugin().getDataFolder() + File.separator + "rareCrates.yml");
+									if(f.exists()) {
+										FileConfiguration con = YamlConfiguration.loadConfiguration(f);
+										if(con.isSet("rarecrates."+args[2]+".enable")) {
+											con.set("rarecrates."+args[2], null);
+											con.save(f);
+											sender.sendMessage(configuration.getPrefix() + ChatColor.GRAY + "successfully removed rare crate from configuration!, please use /mc reload to refesh the configurations");
+										} else {
+											sender.sendMessage(ChatColor.RED + "no such name for rare crate found in the configuration!");
+										}
+									}
+								} catch(Exception e) {
+									e.printStackTrace();
+								}
+							} else {
+								sender.sendMessage(ChatColor.RED + "you aren't allowed to remove configuration nodes in rareCrates.yml!");
+							}
+						} else {
+							sender.sendMessage(ChatColor.RED + "we don't know nothing about this argument!");
+						}
+						return false;
+					}else if(args[0].equalsIgnoreCase("buy")) {
 						if(args[1].equalsIgnoreCase("key")) {
 							if(sender.hasPermission("manco.canbuy")) {
 								if(args[2].equalsIgnoreCase("list") || args[2].equalsIgnoreCase("help")) {
