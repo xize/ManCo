@@ -480,6 +480,7 @@ public class configuration {
 		if(normalCrateList.getFallingStateChest.containsValue(p.getName())) {
 			Entity normalEntity = getEntityFromHashMap(p, crateEnum.normalCrate);
 			normalCrateList.getFallingStateChest.remove(normalEntity);
+			normalEntity.remove();
 		}
 
 		if(rareCrateList.getCrateList.containsKey(p.getPlayer().getName())) {
@@ -505,6 +506,7 @@ public class configuration {
 		if(rareCrateList.rareCrates.containsKey(p.getName())) {
 			Entity rareEntity = getEntityFromHashMap(p, crateEnum.rareCrate);
 			rareCrateList.getFallingStateChest.remove(rareEntity);
+			rareEntity.remove();
 		}
 		if(rareCrateList.rareCrates.containsKey(p.getName())) {
 			rareCrateList.rareCrates.remove(p.getName());
@@ -533,6 +535,7 @@ public class configuration {
 		if(normalCrateList.getFallingStateChest.containsValue(p)) {
 			Entity normalEntity = getEntityFromHashMap(p, crateEnum.normalCrate);
 			normalCrateList.getFallingStateChest.remove(normalEntity);
+			normalEntity.remove();
 		}
 
 		if(rareCrateList.getCrateList.containsKey(p)) {
@@ -558,13 +561,10 @@ public class configuration {
 		if(rareCrateList.rareCrates.containsKey(p)) {
 			Entity rareEntity = getEntityFromHashMap(p, crateEnum.rareCrate);
 			rareCrateList.getFallingStateChest.remove(rareEntity);
+			rareEntity.remove();
 		}
 		if(rareCrateList.rareCrates.containsKey(p)) {
 			rareCrateList.rareCrates.remove(p);
-		}
-		if(rareCrateList.getFallingStateChest.containsValue(p)) {
-			Entity rareEntity = getEntityFromHashMap(p, crateEnum.rareCrate);
-			normalCrateList.getFallingStateChest.remove(rareEntity);
 		}
 	}
 
