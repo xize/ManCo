@@ -125,6 +125,8 @@ public class command implements CommandExecutor {
 							sender.sendMessage(ChatColor.RED + "Admin: " + ChatColor.GRAY + "/manco buy " + ChatColor.WHITE + ": buy a ManCo crate!");
 							sender.sendMessage(ChatColor.RED + "Admin: " + ChatColor.GRAY + "/manco buy key list " + ChatColor.WHITE + ": shows a list of rare keys");
 							sender.sendMessage(ChatColor.RED + "Admin: " + ChatColor.GRAY + "/manco buy key <keyName> " + ChatColor.WHITE + ": here you can buy a key!");
+							sender.sendMessage(ChatColor.RED + "Admin: " + ChatColor.GRAY + "/manco rarecrate create <nameOfCrate> " + ChatColor.WHITE + "allows you to create a new rare crate in rareCrates.yml");
+							sender.sendMessage(ChatColor.RED + "Admin: " + ChatColor.GRAY + "/manco rarecrate remove <nameOfCrate> " + ChatColor.WHITE + "allows you to remove a rare crate in rareCrates.yml");
 						} else if(sender.hasPermission("manco.help.default")) {
 							sender.sendMessage(ChatColor.GOLD + ".oO___[ManCo supplycrates default help]___Oo.");
 							sender.sendMessage(ChatColor.DARK_GRAY + "Default: " + ChatColor.GRAY + "/manco buy " + ChatColor.WHITE + ": allows you to buy a crate!");
