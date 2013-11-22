@@ -38,8 +38,12 @@ public class normalCrate {
 	}
 	
 	public static int getCrateSpawnHeight(Player p) {
-		if(p.getLocation().getY() < 100) {
-			return 120;
+		if(p.getLocation().getBlock().getY() < 100) {
+			if(p.getLocation().getBlock().getY() < 58) {
+				return (p.getLocation().getBlock().getY()+3);
+			} else {
+				return 120;	
+			}
 		} else {
 			return 256;
 		}
