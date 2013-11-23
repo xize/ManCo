@@ -31,12 +31,12 @@ public class moneyCheck implements Listener {
 						if(args[0].equals(prefix)) {
 							if(util.isIconomyEnabled()) {
 								try {
-									Double money = Double.parseDouble(ChatColor.stripColor(args[1].replace("$", "")));
+									Double money = Double.parseDouble(ChatColor.stripColor(args[1].replace(iconomy.getSymbol(), "")));
 									if(iconomy.addMoney(e.getPlayer(), money)) {
 										ItemStack item = new ItemStack(e.getItem());
 										item.setAmount(item.getAmount() - 1);
 										e.getPlayer().getInventory().setItemInHand(item);
-										e.getPlayer().sendMessage(ChatColor.GREEN + configuration.getPrefix() + ChatColor.GRAY + "you successfully got " + money + "$ added to your economy bank!");
+										e.getPlayer().sendMessage(ChatColor.GREEN + configuration.getPrefix() + ChatColor.GRAY + "you successfully got " + money + iconomy.getSymbol(money) + " added to your economy bank!");
 									}
 								} catch(Exception r) {
 									r.printStackTrace();

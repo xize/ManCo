@@ -25,6 +25,7 @@ import tv.mineinthebox.ManCo.exceptions.InvalidChestStorageException;
 import tv.mineinthebox.ManCo.exceptions.InvalidRareCrateException;
 import tv.mineinthebox.ManCo.exceptions.NoValidMoneyObjectException;
 import tv.mineinthebox.ManCo.exceptions.PlayerOnSlabException;
+import tv.mineinthebox.ManCo.utils.iconomy;
 import tv.mineinthebox.ManCo.utils.normalCrate;
 import tv.mineinthebox.ManCo.utils.normalCrateList;
 import tv.mineinthebox.ManCo.utils.rareCrate;
@@ -226,7 +227,11 @@ public class api implements Listener {
 	public ItemStack createMoneyItem(Double amountInCurrency, int amount) {
 		ItemStack item = new ItemStack(Material.PAPER);
 		ItemMeta meta = item.getItemMeta();
-		meta.setDisplayName(ChatColor.GREEN + "[ManCo]" + ChatColor.GOLD + ":money" + " " + ChatColor.GRAY + amountInCurrency + "$");
+		if(util.isIconomyEnabled()) {
+			meta.setDisplayName(ChatColor.GREEN + "[ManCo]" + ChatColor.GOLD + ":money" + " " + ChatColor.GRAY + amountInCurrency + iconomy.getSymbol(amountInCurrency));
+		} else {
+			meta.setDisplayName(ChatColor.GREEN + "[ManCo]" + ChatColor.GOLD + ":money" + " " + ChatColor.GRAY + amountInCurrency + "$");	
+		}
 		item.setItemMeta(meta);
 		item.addUnsafeEnchantment(Enchantment.DURABILITY, 1);
 		item.setAmount(amount);
@@ -236,7 +241,11 @@ public class api implements Listener {
 	public ItemStack createMoneyItem(int amountInCurrency, int amount) {
 		ItemStack item = new ItemStack(Material.PAPER);
 		ItemMeta meta = item.getItemMeta();
-		meta.setDisplayName(ChatColor.GREEN + "[ManCo]" + ChatColor.GOLD + ":money" + " " + ChatColor.GRAY + amountInCurrency + "$");
+		if(util.isIconomyEnabled()) {
+			meta.setDisplayName(ChatColor.GREEN + "[ManCo]" + ChatColor.GOLD + ":money" + " " + ChatColor.GRAY + amountInCurrency + iconomy.getSymbol(amountInCurrency));
+		} else {
+			meta.setDisplayName(ChatColor.GREEN + "[ManCo]" + ChatColor.GOLD + ":money" + " " + ChatColor.GRAY + amountInCurrency + "$");	
+		}
 		item.setItemMeta(meta);
 		item.addUnsafeEnchantment(Enchantment.DURABILITY, 1);
 		item.setAmount(amount);
@@ -261,7 +270,12 @@ public class api implements Listener {
 				if(item.getItemMeta().hasEnchant(Enchantment.DURABILITY)) {
 					String[] args = item.getItemMeta().getDisplayName().split(" ");
 					if(args[0].equals(moneyCheck.prefix)) {
-						Double money = Double.parseDouble(ChatColor.stripColor(args[1].replace("$", "")));
+						Double money;
+						if(util.isIconomyEnabled()) {
+							money = Double.parseDouble(ChatColor.stripColor(args[1].replace(iconomy.getSymbol(), "")));
+						} else {
+							money = Double.parseDouble(ChatColor.stripColor(args[1].replace("$", "")));	
+						}
 						return money;
 					}
 				}

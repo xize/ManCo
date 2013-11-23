@@ -9,7 +9,7 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import tv.mineinthebox.ManCo.configuration.configuration;
 
 public class iconomy {
-	
+
 	public static boolean debitMoney(Player p, double money) {
 		if(util.isIconomyEnabled()) {
 			RegisteredServiceProvider<Economy> economyProvider = Bukkit.getServer().getServicesManager().getRegistration(net.milkbowl.vault.economy.Economy.class);
@@ -26,18 +26,44 @@ public class iconomy {
 		}
 		return false;
 	}
-	
+
 	public static boolean addMoney(Player p, double money) {
 		if(util.isIconomyEnabled()) {
 			RegisteredServiceProvider<Economy> economyProvider = Bukkit.getServer().getServicesManager().getRegistration(net.milkbowl.vault.economy.Economy.class);
 			Economy econ = economyProvider.getProvider();
-				if(econ.depositPlayer(p.getName(), money).transactionSuccess()) {
-					return true;
-				} else {
-					return false;
-				}
+			if(econ.depositPlayer(p.getName(), money).transactionSuccess()) {
+				return true;
+			} else {
+				return false;
+			}
 		}
 		return false;
+	}
+
+	public static String getSymbol(Double price) {
+		RegisteredServiceProvider<Economy> economyProvider = Bukkit.getServer().getServicesManager().getRegistration(net.milkbowl.vault.economy.Economy.class);
+		Economy econ = economyProvider.getProvider();
+		if(price > 1) {
+			return econ.currencyNameSingular();
+		} else {
+			return econ.currencyNamePlural();
+		}
+	}
+
+	public static String getSymbol(int price) {
+		RegisteredServiceProvider<Economy> economyProvider = Bukkit.getServer().getServicesManager().getRegistration(net.milkbowl.vault.economy.Economy.class);
+		Economy econ = economyProvider.getProvider();
+		if(price > 1) {
+			return econ.currencyNameSingular();
+		} else {
+			return econ.currencyNamePlural();
+		}
+	}
+	
+	public static String getSymbol() {
+		RegisteredServiceProvider<Economy> economyProvider = Bukkit.getServer().getServicesManager().getRegistration(net.milkbowl.vault.economy.Economy.class);
+		Economy econ = economyProvider.getProvider();
+		return econ.currencyNamePlural();
 	}
 
 }
