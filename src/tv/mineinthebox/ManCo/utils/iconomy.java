@@ -43,7 +43,7 @@ public class iconomy {
 	public static String getSymbol() {
 		RegisteredServiceProvider<Economy> economyProvider = Bukkit.getServer().getServicesManager().getRegistration(net.milkbowl.vault.economy.Economy.class);
 		Economy econ = economyProvider.getProvider();
-		return econ.currencyNamePlural();
+		return econ.currencyNameSingular()+"(s)";
 	}
 
 }
