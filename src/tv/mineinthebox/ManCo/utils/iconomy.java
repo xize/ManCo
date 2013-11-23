@@ -39,26 +39,6 @@ public class iconomy {
 		}
 		return false;
 	}
-
-	public static String getSymbol(Double price) {
-		RegisteredServiceProvider<Economy> economyProvider = Bukkit.getServer().getServicesManager().getRegistration(net.milkbowl.vault.economy.Economy.class);
-		Economy econ = economyProvider.getProvider();
-		if(price > 1) {
-			return econ.currencyNameSingular();
-		} else {
-			return econ.currencyNamePlural();
-		}
-	}
-
-	public static String getSymbol(int price) {
-		RegisteredServiceProvider<Economy> economyProvider = Bukkit.getServer().getServicesManager().getRegistration(net.milkbowl.vault.economy.Economy.class);
-		Economy econ = economyProvider.getProvider();
-		if(price > 1) {
-			return econ.currencyNameSingular();
-		} else {
-			return econ.currencyNamePlural();
-		}
-	}
 	
 	public static String getSymbol() {
 		RegisteredServiceProvider<Economy> economyProvider = Bukkit.getServer().getServicesManager().getRegistration(net.milkbowl.vault.economy.Economy.class);

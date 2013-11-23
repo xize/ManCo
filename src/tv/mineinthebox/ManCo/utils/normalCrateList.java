@@ -57,7 +57,7 @@ public class normalCrateList {
 				ItemStack item = new ItemStack(Material.PAPER);
 				ItemMeta meta = item.getItemMeta();
 				if(util.isIconomyEnabled()) {
-					meta.setDisplayName(ChatColor.GREEN + "[ManCo]" + ChatColor.GOLD + ":money" + " " + ChatColor.GRAY + subMoney + iconomy.getSymbol(Double.parseDouble(subMoney)));	
+					meta.setDisplayName(ChatColor.GREEN + "[ManCo]" + ChatColor.GOLD + ":money" + " " + ChatColor.GRAY + subMoney + iconomy.getSymbol());	
 				} else {
 					meta.setDisplayName(ChatColor.GREEN + "[ManCo]" + ChatColor.GOLD + ":money" + " " + ChatColor.GRAY + subMoney + "$");
 				}

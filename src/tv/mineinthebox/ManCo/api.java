@@ -228,7 +228,7 @@ public class api implements Listener {
 		ItemStack item = new ItemStack(Material.PAPER);
 		ItemMeta meta = item.getItemMeta();
 		if(util.isIconomyEnabled()) {
-			meta.setDisplayName(ChatColor.GREEN + "[ManCo]" + ChatColor.GOLD + ":money" + " " + ChatColor.GRAY + amountInCurrency + iconomy.getSymbol(amountInCurrency));
+			meta.setDisplayName(ChatColor.GREEN + "[ManCo]" + ChatColor.GOLD + ":money" + " " + ChatColor.GRAY + amountInCurrency + iconomy.getSymbol());
 		} else {
 			meta.setDisplayName(ChatColor.GREEN + "[ManCo]" + ChatColor.GOLD + ":money" + " " + ChatColor.GRAY + amountInCurrency + "$");	
 		}
@@ -242,7 +242,7 @@ public class api implements Listener {
 		ItemStack item = new ItemStack(Material.PAPER);
 		ItemMeta meta = item.getItemMeta();
 		if(util.isIconomyEnabled()) {
-			meta.setDisplayName(ChatColor.GREEN + "[ManCo]" + ChatColor.GOLD + ":money" + " " + ChatColor.GRAY + amountInCurrency + iconomy.getSymbol(amountInCurrency));
+			meta.setDisplayName(ChatColor.GREEN + "[ManCo]" + ChatColor.GOLD + ":money" + " " + ChatColor.GRAY + amountInCurrency + iconomy.getSymbol());
 		} else {
 			meta.setDisplayName(ChatColor.GREEN + "[ManCo]" + ChatColor.GOLD + ":money" + " " + ChatColor.GRAY + amountInCurrency + "$");	
 		}
