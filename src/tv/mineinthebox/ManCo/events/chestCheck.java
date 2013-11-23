@@ -217,15 +217,15 @@ public class chestCheck implements Listener {
 								if(items[i] != null) {
 									if(i == (items.length - 1)) {
 										if(items[i].hasItemMeta()) {
-											build.append(items[i].getItemMeta().getDisplayName().replace("_", " ") + "").toString();
+											build.append(ChatColor.GREEN + "(" + ChatColor.GRAY + "x"+items[i].getAmount()+ ChatColor.GREEN + ")" + ChatColor.GRAY + items[i].getItemMeta().getDisplayName().replace("_", " ") + "").toString();
 										} else {
-											build.append(items[i].getType().name().toLowerCase().replace("_", " ") + "").toString();	
+											build.append(ChatColor.GREEN + "(" + ChatColor.GRAY + "x"+items[i].getAmount()+ ChatColor.GREEN + ")" + ChatColor.GRAY +items[i].getType().name().toLowerCase().replace("_", " ") + "").toString();	
 										}
 									} else {
 										if(items[i].hasItemMeta()) {
-											build.append(items[i].getItemMeta().getDisplayName().replace("_", " ") + ", ").toString();
+											build.append(ChatColor.GREEN + "(" + ChatColor.GRAY + "x"+items[i].getAmount()+ ChatColor.GREEN + ")" + ChatColor.GRAY +items[i].getItemMeta().getDisplayName().replace("_", " ") + ", ").toString();
 										} else {
-											build.append(items[i].getType().name().toLowerCase().replace("_", " ") + ", ").toString();	
+											build.append(ChatColor.GREEN + "(" + ChatColor.GRAY + "x"+items[i].getAmount()+ ChatColor.GREEN + ")" + ChatColor.GRAY +items[i].getType().name().toLowerCase().replace("_", " ") + ", ").toString();	
 										}	
 									}
 								}
