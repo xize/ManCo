@@ -56,11 +56,7 @@ public class normalCrateList {
 				String subMoney = splitItemName[0].substring("MONEY_".length());
 				ItemStack item = new ItemStack(Material.PAPER);
 				ItemMeta meta = item.getItemMeta();
-				if(util.isIconomyEnabled()) {
-					meta.setDisplayName(ChatColor.GREEN + "[ManCo]" + ChatColor.GOLD + ":money" + " " + ChatColor.GRAY + subMoney + iconomy.getSymbol());	
-				} else {
-					meta.setDisplayName(ChatColor.GREEN + "[ManCo]" + ChatColor.GOLD + ":money" + " " + ChatColor.GRAY + subMoney + "$");
-				}
+				meta.setDisplayName(ChatColor.GREEN + "[ManCo]" + ChatColor.GOLD + ":money" + " " + ChatColor.GRAY + subMoney + "$");
 				item.setItemMeta(meta);
 				item.addUnsafeEnchantment(Enchantment.DURABILITY, 1);
 				item.setAmount(Integer.parseInt(splitItemName[2]));
