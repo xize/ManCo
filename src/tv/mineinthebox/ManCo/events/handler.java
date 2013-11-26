@@ -14,6 +14,7 @@ public class handler {
 		setListener(new chestCheck());
 		setListener(new api());
 		setListener(new moneyCheck());
+		setListener(new eggCheck());
 		if(configuration.isChestProtectionDisabled()) {
 			setListener(new chestOpenTimer_unprotected());
 		} else {
