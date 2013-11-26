@@ -14,6 +14,7 @@ import tv.mineinthebox.ManCo.events.handler;
 import tv.mineinthebox.ManCo.utils.normalCrateList;
 import tv.mineinthebox.ManCo.utils.rareCrate;
 import tv.mineinthebox.ManCo.utils.rareCrateList;
+import tv.mineinthebox.ManCo.utils.schematics.pasteSchematic;
 
 public class ManCo extends JavaPlugin {
 	
@@ -26,6 +27,7 @@ public class ManCo extends JavaPlugin {
 		handler.launch();
 		cratescheduler.startScheduler();
 		getCommand("manco").setExecutor(new command());
+		pasteSchematic.scheduleBuild();
 		if(!rareCrate.getRareCrateList().isEmpty()) {
 			cratescheduler.startRareScheduler();
 		}

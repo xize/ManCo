@@ -33,6 +33,7 @@ public class eggCheck implements Listener {
 							String[] args = item.getItemMeta().getDisplayName().split(" ");
 							if(args[0].equals(prefix)) {
 								if(schematicApi.isSchematic(ChatColor.stripColor(args[1]))) {
+									e.setCancelled(true);
 									schematic schem = loadschematic.loadSchematic(new File(ManCo.getPlugin().getDataFolder() + File.separator + "schematics" + File.separator + ChatColor.stripColor(args[1]) + ".schematic"));
 									pasteSchematic.pasteOldSchematic(e.getPlayer().getWorld(), e.getClickedBlock().getLocation(), schem);
 									e.getPlayer().sendMessage("pasting schematic...");
