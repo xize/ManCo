@@ -61,6 +61,16 @@ public class normalCrateList {
 				item.addUnsafeEnchantment(Enchantment.DURABILITY, 1);
 				item.setAmount(Integer.parseInt(splitItemName[2]));
 				return item;
+			} else if(splitItemName[0].startsWith("SCHEMATIC_")) {
+				String schematicName = splitItemName[0].substring("SCHEMATIC_".length());
+				ItemStack item = new ItemStack(Material.getMaterial(383));
+				item.setDurability((short) 120);
+				ItemMeta meta = item.getItemMeta();
+				meta.setDisplayName(ChatColor.GREEN + "[ManCo]" + ChatColor.GOLD + ":monument" + " " + ChatColor.GRAY + schematicName);
+				item.setItemMeta(meta);
+				item.addUnsafeEnchantment(Enchantment.DURABILITY, 1);
+				item.setAmount(Integer.parseInt(splitItemName[2]));
+				return item;
 			} else {
 				int itemID = Integer.parseInt(splitItemName[0]);
 				int subData = Integer.parseInt(splitItemName[1]);

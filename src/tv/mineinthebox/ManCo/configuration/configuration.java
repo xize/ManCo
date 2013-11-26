@@ -29,6 +29,18 @@ public class configuration {
 		createNormalCrateConfig();
 		createRareCrateConfig();
 		createDefaultConfiguration();
+		createSchematicDir();
+	}
+	
+	public static void createSchematicDir() {
+		try {
+			File f = new File(ManCo.getPlugin().getDataFolder() + File.separator + "schematics");
+			if(!f.isDirectory()) {
+				f.mkdir();
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public static void createNormalCrateConfig() {
