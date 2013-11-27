@@ -1,5 +1,7 @@
 package tv.mineinthebox.ManCo.utils.schematics;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -9,6 +11,9 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitTask;
 
 import tv.mineinthebox.ManCo.ManCo;
@@ -22,8 +27,6 @@ public class pasteSchematic {
 	 * 
 	 * 
 	 */
-
-	//old source.
 
 	public static HashMap<Location, String> locations = new HashMap<Location, String>();
 	public static BukkitTask task;
@@ -46,7 +49,10 @@ public class pasteSchematic {
 						Block b = new Location(w, x + l.getX(), y + l.getY(), z + l.getZ()).getBlock();
 						if(b.getType() == Material.AIR) {
 							//b.setTypeIdAndData(blocks[index], blockData[index], true);
-							locations.put(b.getLocation(), blocks[index]+":"+blockData[index]);	
+							String dataTypeSerialized = blocks[index]+":"+blockData[index];
+							if(!dataTypeSerialized.equalsIgnoreCase(0+":"+0)) {
+								locations.put(b.getLocation(), blocks[index]+":"+blockData[index]);	
+							}	
 						}
 					}
 				}
@@ -55,7 +61,9 @@ public class pasteSchematic {
 			//ignore
 		}
 	}
-	
+
+	public static Boolean testbol = false;
+
 	public static void scheduleBuild() {
 		BukkitTask taskID = Bukkit.getScheduler().runTaskTimer(ManCo.getPlugin(), new Runnable() {
 
@@ -67,19 +75,64 @@ public class pasteSchematic {
 					if(it.hasNext()) {
 						Location loc = it.next();
 						String[] args = locations.get(loc).split(":");
-						int dataValue = Integer.parseInt(args[0]);
-						byte subValue = Byte.parseByte(args[1]);
+						Integer DataValue = Integer.parseInt(args[0]);
+						Byte subValue = Byte.parseByte(args[1]);
 						Block block = loc.getBlock();
-						block.setTypeIdAndData(dataValue, subValue, true);
-						block.getWorld().playEffect(loc, Effect.STEP_SOUND, dataValue);
+						block.getWorld().playEffect(loc, Effect.STEP_SOUND, DataValue);
+						block.setTypeIdAndData(DataValue, subValue, true);
 						it.remove();
 						locations.remove(loc);
+						if(!testbol) {
+							Player p = Bukkit.getPlayerExact("Xeph0re");
+							p.teleport(block.getLocation());
+							testbol = true;
+						}
 					}
 				}
 			}
-			
+
 		}, 0, 1);
 		task = taskID;
+	}
+
+	public static void saveHashMap() { 
+		ArrayList<String> array = new ArrayList<String>();
+		try {
+			File f = new File(ManCo.getPlugin().getDataFolder() + File.separator + "schematicTask_data.db");
+			FileConfiguration con = YamlConfiguration.loadConfiguration(f);
+			Iterator<Location> it = locations.keySet().iterator();
+			while(it.hasNext()) {
+				Location loc = it.next();
+				array.add(loc.getWorld().getName()+","+loc.getBlock().getX()+","+loc.getBlock().getY()+","+loc.getBlock().getZ()+","+locations.get(loc));
+				
+			}
+			con.set("locations", array.toArray());
+			con.save(f);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void loadSavedHashMap() {
+		try {
+			File f = new File(ManCo.getPlugin().getDataFolder() + File.separator + "schematicTask_data.db");
+			if(f.exists()) {
+				FileConfiguration con = YamlConfiguration.loadConfiguration(f);
+				for(String serialized : con.getStringList("locations")) {
+					String[] args = serialized.split(",");
+					String worldName = args[0];
+					Integer x = Integer.parseInt(args[1]);
+					Integer y = Integer.parseInt(args[2]);
+					Integer z = Integer.parseInt(args[3]);
+					String DataValues = args[4];
+					Location loc = new Location(Bukkit.getWorld(worldName), x, y , z);
+					locations.put(loc, DataValues);
+				}
+				f.delete();
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 
