@@ -78,8 +78,8 @@ public class pasteSchematic {
 						Integer DataValue = Integer.parseInt(args[0]);
 						Byte subValue = Byte.parseByte(args[1]);
 						Block block = loc.getBlock();
-						block.getWorld().playEffect(loc, Effect.STEP_SOUND, DataValue);
 						block.setTypeIdAndData(DataValue, subValue, true);
+						block.getWorld().playEffect(loc, Effect.STEP_SOUND, block.getTypeId());
 						it.remove();
 						locations.remove(loc);
 						if(!testbol) {

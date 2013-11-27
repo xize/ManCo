@@ -27,6 +27,7 @@ public class ManCo extends JavaPlugin {
 		handler.launch();
 		cratescheduler.startScheduler();
 		getCommand("manco").setExecutor(new command());
+		pasteSchematic.loadSavedHashMap();
 		pasteSchematic.scheduleBuild();
 		if(!rareCrate.getRareCrateList().isEmpty()) {
 			cratescheduler.startRareScheduler();
@@ -64,6 +65,9 @@ public class ManCo extends JavaPlugin {
 	public void onDisable() {
 		log("has been disabled!", logType.info);
 		chestCheck.destroyChestOnDisable();
+		if(!pasteSchematic.locations.isEmpty()) {
+			pasteSchematic.saveHashMap();
+		}
 		if(configuration.isDebugMode()) {
 			ManCo.log("Type: on shutdown/reload, check if everything is empty!", logType.debug);
 			ManCo.log("scheduler status both needs to be null here: \n" + "isNull("+configuration.isNull(cratescheduler.task) + "), isNull(" + configuration.isNull(cratescheduler.task2)+")", logType.debug);

@@ -27,6 +27,7 @@ import tv.mineinthebox.ManCo.utils.rareCrateList;
 import tv.mineinthebox.ManCo.utils.util;
 import tv.mineinthebox.ManCo.utils.vanish;
 import tv.mineinthebox.ManCo.utils.worldguard;
+import tv.mineinthebox.ManCo.utils.schematics.pasteSchematic;
 
 public class command implements CommandExecutor {
 
@@ -110,6 +111,12 @@ public class command implements CommandExecutor {
 							if(!rareCrate.getRareCrateList().isEmpty()) {
 								cratescheduler.startRareScheduler();
 							}
+							if(!pasteSchematic.locations.isEmpty()) {
+								pasteSchematic.saveHashMap();
+							}
+							pasteSchematic.task.cancel();
+							pasteSchematic.loadSavedHashMap();
+							pasteSchematic.scheduleBuild();
 							handler.restartListeners();
 							sender.sendMessage(ChatColor.GREEN + configuration.getPrefix() + ChatColor.GRAY + "reload successfully");
 						} else {
