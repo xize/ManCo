@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 
 import org.bukkit.ChatColor;
+import org.bukkit.block.BlockFace;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -12,6 +13,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
 import tv.mineinthebox.ManCo.ManCo;
+import tv.mineinthebox.ManCo.configuration.configuration;
 import tv.mineinthebox.ManCo.utils.schematics.loadschematic;
 import tv.mineinthebox.ManCo.utils.schematics.pasteSchematic;
 import tv.mineinthebox.ManCo.utils.schematics.schematic;
@@ -34,12 +36,14 @@ public class eggCheck implements Listener {
 							if(args[0].equals(prefix)) {
 								if(schematicApi.isSchematic(ChatColor.stripColor(args[1]))) {
 									e.setCancelled(true);
+									ItemStack items = new ItemStack(e.getItem());
+									items.setAmount(items.getAmount() - 1);
+									e.getPlayer().getInventory().setItemInHand(items);
 									schematic schem = loadschematic.loadSchematic(new File(ManCo.getPlugin().getDataFolder() + File.separator + "schematics" + File.separator + ChatColor.stripColor(args[1]) + ".schematic"));
-									pasteSchematic.pasteOldSchematic(e.getPlayer().getWorld(), e.getClickedBlock().getLocation(), schem);
-									e.getPlayer().sendMessage("pasting schematic...");
+									pasteSchematic.pasteOldSchematic(e.getPlayer().getWorld(), e.getClickedBlock().getRelative(BlockFace.UP).getLocation(), schem);
+									e.getPlayer().sendMessage(ChatColor.GREEN + configuration.getPrefix() + ChatColor.GRAY + "you successfully spawned a " + args[1] + " house!");
 								} else {
 									e.getPlayer().sendMessage(ChatColor.RED + "this schematic monument does not exists!");
-									System.out.print("this is the args[1]: " + args[1]);
 								}
 							}
 						}
