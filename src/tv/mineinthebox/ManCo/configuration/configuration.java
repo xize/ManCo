@@ -1,10 +1,13 @@
 package tv.mineinthebox.ManCo.configuration;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -17,9 +20,9 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitTask;
 
+import tv.mineinthebox.ManCo.ManCo;
 import tv.mineinthebox.ManCo.crateEnum;
 import tv.mineinthebox.ManCo.logType;
-import tv.mineinthebox.ManCo.ManCo;
 import tv.mineinthebox.ManCo.utils.normalCrateList;
 import tv.mineinthebox.ManCo.utils.rareCrateList;
 
@@ -31,15 +34,39 @@ public class configuration {
 		createDefaultConfiguration();
 		createSchematicDir();
 	}
-	
+
 	public static void createSchematicDir() {
-		try {
-			File f = new File(ManCo.getPlugin().getDataFolder() + File.separator + "schematics");
-			if(!f.isDirectory()) {
-				f.mkdir();
+		File f = new File(ManCo.getPlugin().getDataFolder() + File.separator + "schematics");
+		if(!f.isDirectory()) {
+			f.mkdir();
+			File fe = new File(ManCo.getPlugin().getDataFolder() + File.separator + "schematics" + File.separator + "readme_first.txt");
+			try {
+				FileWriter fw = new FileWriter(fe, true);
+				fw.write("=============================================\n");
+				fw.write("#   Read me first ManCo schematic support   #\n");
+				fw.write("=============================================\n");
+				fw.write("\n");
+				fw.write("this is a new experimental feature we have implented however this feature comes with a few important warents.\n");
+				fw.write("\n");
+				fw.write("1. Do not use big schematics.\n");
+				fw.write("\n");
+				fw.write("this could result in a very slow process in building.\n");
+				fw.write("and require alot of memory to accolate, we prefer sizes related to a village house instead.\n");
+				fw.write("\n");
+				fw.write("our plugin is designed to start again where it whas stopped with placing the schematic.\n");
+				fw.write("however sometimes this could end in a endless loop (with big schematics and or schematic egg spam) while the server owner just want to stop this process.\n");
+				fw.write("in this case we recommend to shutdown the server then go to the ManCo directory and remove the file 'schematicTask_data.db'\n");
+				fw.write("when you finished this restart the server.\n");
+				fw.write("\n");
+				fw.write("3. how to use schematics?\n");
+				fw.write("\n");
+				fw.write("like the MONEY_30 example, you can also now use SCHEMATIC_nameOfSchematic\n");
+				fw.write("this will give you a enchanted egg with a special name when used it pastes the schematic.");
+				fw.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-		} catch(Exception e) {
-			e.printStackTrace();
 		}
 	}
 
@@ -421,7 +448,7 @@ public class configuration {
 		}
 		return null;
 	}
-	
+
 	public static Entity getEntityFromHashMap(Player p, crateEnum type) {
 		if(type == crateEnum.normalCrate) {
 			Map<Entity, String> map = normalCrateList.getFallingStateChest;
@@ -445,7 +472,7 @@ public class configuration {
 		}
 		return null;
 	}
-	
+
 	public static Entity getEntityFromHashMap(String p, crateEnum type) {
 		if(type == crateEnum.normalCrate) {
 			Map<Entity, String> map = normalCrateList.getFallingStateChest;
