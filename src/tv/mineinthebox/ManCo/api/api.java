@@ -1,8 +1,6 @@
 package tv.mineinthebox.ManCo.api;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -11,9 +9,6 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntityChangeBlockEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -22,7 +17,7 @@ import tv.mineinthebox.ManCo.configuration.configuration;
 import tv.mineinthebox.ManCo.events.cratescheduler;
 import tv.mineinthebox.ManCo.events.moneyCheck;
 import tv.mineinthebox.ManCo.exceptions.ChestHasNoOwnerException;
-import tv.mineinthebox.ManCo.exceptions.InvalidChestStorageException;
+import tv.mineinthebox.ManCo.exceptions.InvalidCrateMethodException;
 import tv.mineinthebox.ManCo.exceptions.InvalidRareCrateException;
 import tv.mineinthebox.ManCo.exceptions.NoValidMoneyObjectException;
 import tv.mineinthebox.ManCo.exceptions.PlayerOnSlabException;
@@ -32,9 +27,7 @@ import tv.mineinthebox.ManCo.utils.rareCrate;
 import tv.mineinthebox.ManCo.utils.rareCrateList;
 import tv.mineinthebox.ManCo.utils.util;
 
-public class api implements Listener {
-
-	private static HashMap<Entity, ItemStack[]> entityChest = new HashMap<Entity, ItemStack[]>();
+public class api {
 
 	private ArrayList<String> getRareCrateList() {
 		return rareCrate.getRareCrateList();
@@ -45,8 +38,12 @@ public class api implements Listener {
 		return items;
 	}
 	
-	public void createCrate() {
-		
+	public void createManCoSupportedCrate(ItemStack[] items, crateEnum rareCrate, String YourCrateName, boolean useKey, boolean useEffects, Double price, Player p) throws InvalidCrateMethodException {
+		if(rareCrate == crateEnum.rareCrate) {
+			
+		} else {
+			throw new InvalidCrateMethodException("[ManCo-API]InvalidCrateMethodException: the crate enum is used in the wrong method!, this method can only obtain the rareCrate enum");
+		}
 	}
 
 	public boolean isCrate(Chest chest) {
@@ -95,27 +92,7 @@ public class api implements Listener {
 			int y = normalCrate.getCrateSpawnHeight(loc);
 			loc.setY(loc.getY() + y);
 			FallingBlock entity = loc.getWorld().spawnFallingBlock(loc, Material.CHEST, (byte) 1);
-			entityChest.put(entity, items);
-		}
-	}
-
-	@SuppressWarnings("deprecation")
-	@EventHandler
-	private void fillChestApi(EntityChangeBlockEvent e) throws InvalidChestStorageException {
-		if(entityChest.containsKey(e.getEntity())) {
-			e.setCancelled(true);
-			e.getBlock().setTypeIdAndData(Material.CHEST.getId(), (byte) 1, true);
-			Chest chest = (Chest) e.getBlock().getState();
-			if(entityChest.get(e.getEntity()).length < 27) {
-				for(ItemStack item : entityChest.get(e.getEntity())) {
-					chest.getInventory().addItem(item);
-				}
-				entityChest.remove(e.getEntity());
-			} else {
-				//memory safety in case it throws allready.
-				entityChest.remove(e.getEntity());
-				throw new InvalidChestStorageException("[ManCo-API]InvalidChestStorage: the ItemStack[] amount is more than the single chest could obtain!");
-			}
+			api_ManCoUnsuportedEvents.add(entity, items);
 		}
 	}
 

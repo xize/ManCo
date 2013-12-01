@@ -5,14 +5,16 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 
 import tv.mineinthebox.ManCo.ManCo;
-import tv.mineinthebox.ManCo.api.api;
+import tv.mineinthebox.ManCo.api.api_ManCoSupportedEvents;
+import tv.mineinthebox.ManCo.api.api_ManCoUnsuportedEvents;
 import tv.mineinthebox.ManCo.configuration.configuration;
 
 public class handler {
 	
 	public static void launch() {
 		setListener(new chestCheck());
-		setListener(new api());
+		setListener(new api_ManCoSupportedEvents());
+		setListener(new api_ManCoUnsuportedEvents());
 		setListener(new moneyCheck());
 		setListener(new eggCheck());
 		if(configuration.isChestProtectionDisabled()) {
