@@ -7,6 +7,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.mcstats.MetricsLite;
 
+import tv.mineinthebox.ManCo.api.api;
 import tv.mineinthebox.ManCo.configuration.configuration;
 import tv.mineinthebox.ManCo.events.chestCheck;
 import tv.mineinthebox.ManCo.events.cratescheduler;

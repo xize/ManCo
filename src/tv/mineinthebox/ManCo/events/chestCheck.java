@@ -25,8 +25,8 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 
 import tv.mineinthebox.ManCo.ManCo;
-import tv.mineinthebox.ManCo.crateEnum;
 import tv.mineinthebox.ManCo.logType;
+import tv.mineinthebox.ManCo.api.crateEnum;
 import tv.mineinthebox.ManCo.configuration.configuration;
 import tv.mineinthebox.ManCo.utils.normalCrate;
 import tv.mineinthebox.ManCo.utils.normalCrateList;

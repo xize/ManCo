@@ -21,8 +21,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitTask;
 
 import tv.mineinthebox.ManCo.ManCo;
-import tv.mineinthebox.ManCo.crateEnum;
 import tv.mineinthebox.ManCo.logType;
+import tv.mineinthebox.ManCo.api.crateEnum;
 import tv.mineinthebox.ManCo.utils.normalCrateList;
 import tv.mineinthebox.ManCo.utils.rareCrateList;
 

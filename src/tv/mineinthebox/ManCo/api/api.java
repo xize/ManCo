@@ -1,4 +1,4 @@
-package tv.mineinthebox.ManCo;
+package tv.mineinthebox.ManCo.api;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,6 +17,7 @@ import org.bukkit.event.entity.EntityChangeBlockEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import tv.mineinthebox.ManCo.ManCo;
 import tv.mineinthebox.ManCo.configuration.configuration;
 import tv.mineinthebox.ManCo.events.cratescheduler;
 import tv.mineinthebox.ManCo.events.moneyCheck;
@@ -42,6 +43,10 @@ public class api implements Listener {
 	public ItemStack[] convertArrayListToItemStackArray(ArrayList<ItemStack> array) {
 		ItemStack[] items = array.toArray(new ItemStack[array.size()]);
 		return items;
+	}
+	
+	public void createCrate() {
+		
 	}
 
 	public boolean isCrate(Chest chest) {

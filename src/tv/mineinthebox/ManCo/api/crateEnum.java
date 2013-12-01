@@ -1,4 +1,4 @@
-package tv.mineinthebox.ManCo;
+package tv.mineinthebox.ManCo.api;
 
 public enum crateEnum {
 	normalCrate,

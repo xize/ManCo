@@ -4,8 +4,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 
-import tv.mineinthebox.ManCo.api;
 import tv.mineinthebox.ManCo.ManCo;
+import tv.mineinthebox.ManCo.api.api;
 import tv.mineinthebox.ManCo.configuration.configuration;
 
 public class handler {
