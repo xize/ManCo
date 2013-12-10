@@ -13,6 +13,7 @@ import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitTask;
 
 import tv.mineinthebox.ManCo.ManCo;
@@ -35,7 +36,7 @@ public class pasteSchematic {
 	public static HashMap<Location, String> locations = new HashMap<Location, String>();
 	public static BukkitTask task;
 
-	public static void pasteOldSchematic(World w, Location l, schematic schem) {
+	public static void pasteOldSchematic(World w, Location l, schematic schem, Player p) {
 		try {
 			byte[] blocks = schem.getBlocks();
 			byte[] blockData = schem.getData();
@@ -55,7 +56,7 @@ public class pasteSchematic {
 							//b.setTypeIdAndData(blocks[index], blockData[index], true);
 							String dataTypeSerialized = blocks[index]+":"+blockData[index];
 							if(!dataTypeSerialized.equalsIgnoreCase(0+":"+0)) {
-								locations.put(b.getLocation(), blocks[index]+":"+blockData[index]);	
+								locations.put(b.getLocation(), blocks[index]+":"+blockData[index]+":"+p.getName());	
 							}	
 						}
 					}
@@ -82,16 +83,15 @@ public class pasteSchematic {
 						Block block = loc.getBlock();
 						block.setTypeIdAndData(DataValue, subValue, true);
 						block.getWorld().playEffect(loc, Effect.STEP_SOUND, block.getTypeId());
-						//first check whenever we could log this, sadly enough not with player names but hey
-						//you can use area flags instead.
+						//we now log on the players name!
 						if(util.isCoreProtectEnabled()) {
-							coreprotect.log("#ManCo", block);
+							coreprotect.log(args[2], block);
 						} else if(util.isLogBlockEnabled()) {
-							logblock.log("#ManCo", block);
+							logblock.log(args[2], block);
 						} else if(util.isPrismEnabled()) {
-							prism.log("#ManCo", block);
+							prism.log(args[2], block);
 						} else if(util.isHawkEyeEnabled()) {
-							hawkeye.log("#ManCo", block);
+							hawkeye.log(args[2], block);
 						}
 						it.remove();
 						locations.remove(loc);
