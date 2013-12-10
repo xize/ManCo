@@ -16,6 +16,9 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.scheduler.BukkitTask;
 
 import tv.mineinthebox.ManCo.ManCo;
+import tv.mineinthebox.ManCo.utils.coreprotect;
+import tv.mineinthebox.ManCo.utils.logblock;
+import tv.mineinthebox.ManCo.utils.util;
 
 public class pasteSchematic {
 
@@ -77,6 +80,13 @@ public class pasteSchematic {
 						Block block = loc.getBlock();
 						block.setTypeIdAndData(DataValue, subValue, true);
 						block.getWorld().playEffect(loc, Effect.STEP_SOUND, block.getTypeId());
+						//first check whenever we could log this, sadly enough not with player names but hey
+						//you can use area flags instead.
+						if(util.isCoreProtectEnabled()) {
+							coreprotect.log("#ManCo", block);
+						} else if(util.isLogBlockEnabled()) {
+							logblock.log("#ManCo", block);
+						}
 						it.remove();
 						locations.remove(loc);
 					}
