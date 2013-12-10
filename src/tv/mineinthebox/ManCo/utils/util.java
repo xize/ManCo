@@ -29,6 +29,20 @@ public class util {
 		}
 		return false;
 	}
+	
+	public static boolean isCoreProtectEnabled() {
+		if(Bukkit.getPluginManager().isPluginEnabled("CoreProtect")) {
+			return true;
+		}
+		return false;
+	}
+	
+	public static boolean isLogBlockEnabled() {
+		if(Bukkit.getPluginManager().isPluginEnabled("LogBlock")) {
+			return true;
+		}
+		return false;
+	}
 
 	@SuppressWarnings("deprecation")
 	public static boolean isSlab(Block block) {
