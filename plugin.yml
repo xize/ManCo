@@ -8,7 +8,7 @@ website:
 main: tv.mineinthebox.ManCo.ManCo
 database: false
 depend: []
-softdepend: [WorldGuard, iConomy, Vault]
+softdepend: [WorldGuard, iConomy, Vault, CoreProtect, LogBlock]
 
 commands:
   manco:
