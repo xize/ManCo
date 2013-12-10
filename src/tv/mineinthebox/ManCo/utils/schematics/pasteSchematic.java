@@ -54,9 +54,9 @@ public class pasteSchematic {
 						Block b = new Location(w, x + l.getX(), y + l.getY(), z + l.getZ()).getBlock();
 						if(b.getType() == Material.AIR) {
 							//b.setTypeIdAndData(blocks[index], blockData[index], true);
-							String dataTypeSerialized = blocks[index]+":"+blockData[index];
-							if(!dataTypeSerialized.equalsIgnoreCase(0+":"+0)) {
-								locations.put(b.getLocation(), blocks[index]+":"+blockData[index]+":"+p.getName());	
+							String dataTypeSerialized = (blocks[index]+":"+blockData[index]+":"+p.getName()).replace("-", "");
+							if(!dataTypeSerialized.equalsIgnoreCase(0+":"+0+":"+p.getName())) {
+								locations.put(b.getLocation(), dataTypeSerialized);	
 							}	
 						}
 					}
@@ -73,75 +73,75 @@ public class pasteSchematic {
 			@SuppressWarnings("deprecation")
 			@Override
 			public void run() {
-				if(!locations.isEmpty()) {
-					Iterator<Location> it = locations.keySet().iterator();
-					if(it.hasNext()) {
-						Location loc = it.next();
+				Iterator<Location> it = locations.keySet().iterator();
+				if(it.hasNext()) {
+					Location loc = it.next();
+					if(loc != null) {
 						String[] args = locations.get(loc).split(":");
 						Integer DataValue = Integer.parseInt(args[0]);
 						Byte subValue = Byte.parseByte(args[1]);
+						String playerName = args[2];
 						Block block = loc.getBlock();
 						block.setTypeIdAndData(DataValue, subValue, true);
 						block.getWorld().playEffect(loc, Effect.STEP_SOUND, block.getTypeId());
 						//we now log on the players name!
 						if(util.isCoreProtectEnabled()) {
-							coreprotect.log(args[2], block);
+							coreprotect.log(playerName, block);
 						} else if(util.isLogBlockEnabled()) {
-							logblock.log(args[2], block);
+							logblock.log(playerName, block);
 						} else if(util.isPrismEnabled()) {
-							prism.log(args[2], block);
+							prism.log(playerName, block);
 						} else if(util.isHawkEyeEnabled()) {
-							hawkeye.log(args[2], block);
+							hawkeye.log(playerName, block);
 						}
-						it.remove();
-						locations.remove(loc);
 					}
+					it.remove();
+					locations.remove(loc);
 				}
 			}
-
-		}, 0, 1);
+	}, 0, 1);
 		task = taskID;
-	}
+}
 
-	public static void saveHashMap() { 
-		ArrayList<String> array = new ArrayList<String>();
-		try {
-			File f = new File(ManCo.getPlugin().getDataFolder() + File.separator + "schematicTask_data.db");
+public static void saveHashMap() { 
+	ArrayList<String> array = new ArrayList<String>();
+	try {
+		File f = new File(ManCo.getPlugin().getDataFolder() + File.separator + "schematicTask_data.db");
+		FileConfiguration con = YamlConfiguration.loadConfiguration(f);
+		Iterator<Location> it = locations.keySet().iterator();
+		while(it.hasNext()) {
+			Location loc = it.next();
+			array.add(loc.getWorld().getName()+","+loc.getBlock().getX()+","+loc.getBlock().getY()+","+loc.getBlock().getZ()+","+locations.get(loc));
+
+		}
+		con.set("locations", array.toArray());
+		con.save(f);
+	} catch(Exception e) {
+		e.printStackTrace();
+	}
+}
+
+public static void loadSavedHashMap() {
+	try {
+		File f = new File(ManCo.getPlugin().getDataFolder() + File.separator + "schematicTask_data.db");
+		if(f.exists()) {
 			FileConfiguration con = YamlConfiguration.loadConfiguration(f);
-			Iterator<Location> it = locations.keySet().iterator();
-			while(it.hasNext()) {
-				Location loc = it.next();
-				array.add(loc.getWorld().getName()+","+loc.getBlock().getX()+","+loc.getBlock().getY()+","+loc.getBlock().getZ()+","+locations.get(loc));
-				
+			for(String serialized : con.getStringList("locations")) {
+				String[] args = serialized.split(",");
+				String worldName = args[0];
+				Integer x = Integer.parseInt(args[1]);
+				Integer y = Integer.parseInt(args[2]);
+				Integer z = Integer.parseInt(args[3]);
+				String DataValues = args[4];
+				Location loc = new Location(Bukkit.getWorld(worldName), x, y , z);
+				locations.put(loc, DataValues);
 			}
-			con.set("locations", array.toArray());
-			con.save(f);
-		} catch(Exception e) {
-			e.printStackTrace();
+			f.delete();
 		}
+	} catch(Exception e) {
+		e.printStackTrace();
 	}
-
-	public static void loadSavedHashMap() {
-		try {
-			File f = new File(ManCo.getPlugin().getDataFolder() + File.separator + "schematicTask_data.db");
-			if(f.exists()) {
-				FileConfiguration con = YamlConfiguration.loadConfiguration(f);
-				for(String serialized : con.getStringList("locations")) {
-					String[] args = serialized.split(",");
-					String worldName = args[0];
-					Integer x = Integer.parseInt(args[1]);
-					Integer y = Integer.parseInt(args[2]);
-					Integer z = Integer.parseInt(args[3]);
-					String DataValues = args[4];
-					Location loc = new Location(Bukkit.getWorld(worldName), x, y , z);
-					locations.put(loc, DataValues);
-				}
-				f.delete();
-			}
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-	}
+}
 
 
 }

@@ -52,6 +52,7 @@ public class eggCheck implements Listener {
 									pasteSchematic.pasteOldSchematic(e.getPlayer().getWorld(), e.getClickedBlock().getRelative(BlockFace.UP).getLocation(), schem, e.getPlayer());
 									e.getPlayer().sendMessage(ChatColor.GREEN + configuration.getPrefix() + ChatColor.GRAY + "you successfully spawned a " + args[1] + " house!");
 								} else {
+									e.setCancelled(true);
 									e.getPlayer().sendMessage(ChatColor.RED + "this schematic monument does not exists!");
 								}
 							}
