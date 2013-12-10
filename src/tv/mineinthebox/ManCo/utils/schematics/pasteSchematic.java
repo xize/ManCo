@@ -13,7 +13,6 @@ import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitTask;
 
 import tv.mineinthebox.ManCo.ManCo;
@@ -62,8 +61,6 @@ public class pasteSchematic {
 		}
 	}
 
-	public static Boolean testbol = false;
-
 	public static void scheduleBuild() {
 		BukkitTask taskID = Bukkit.getScheduler().runTaskTimer(ManCo.getPlugin(), new Runnable() {
 
@@ -82,11 +79,6 @@ public class pasteSchematic {
 						block.getWorld().playEffect(loc, Effect.STEP_SOUND, block.getTypeId());
 						it.remove();
 						locations.remove(loc);
-						if(!testbol) {
-							Player p = Bukkit.getPlayerExact("Xeph0re");
-							p.teleport(block.getLocation());
-							testbol = true;
-						}
 					}
 				}
 			}
