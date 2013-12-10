@@ -43,6 +43,20 @@ public class util {
 		}
 		return false;
 	}
+	
+	public static boolean isPrismEnabled() {
+		if(Bukkit.getPluginManager().isPluginEnabled("Prism")) {
+			return true;
+		}
+		return false;
+	}
+	
+	public static boolean isHawkEyeEnabled() {
+		if(Bukkit.getPluginManager().isPluginEnabled("HawkEye")) {
+			return true;
+		}
+		return false;
+	}
 
 	@SuppressWarnings("deprecation")
 	public static boolean isSlab(Block block) {

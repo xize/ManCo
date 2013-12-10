@@ -17,7 +17,9 @@ import org.bukkit.scheduler.BukkitTask;
 
 import tv.mineinthebox.ManCo.ManCo;
 import tv.mineinthebox.ManCo.utils.coreprotect;
+import tv.mineinthebox.ManCo.utils.hawkeye;
 import tv.mineinthebox.ManCo.utils.logblock;
+import tv.mineinthebox.ManCo.utils.prism;
 import tv.mineinthebox.ManCo.utils.util;
 
 public class pasteSchematic {
@@ -86,6 +88,10 @@ public class pasteSchematic {
 							coreprotect.log("#ManCo", block);
 						} else if(util.isLogBlockEnabled()) {
 							logblock.log("#ManCo", block);
+						} else if(util.isPrismEnabled()) {
+							prism.log("#ManCo", block);
+						} else if(util.isHawkEyeEnabled()) {
+							hawkeye.log("#ManCo", block);
 						}
 						it.remove();
 						locations.remove(loc);

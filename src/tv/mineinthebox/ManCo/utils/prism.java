@@ -15,7 +15,11 @@ public class prism {
 		
 		QueryParameters param = new QueryParameters();
 		param.setWorld(block.getWorld().getName());
-		param.addActionType("BLOCK_BREAK");
+		param.addActionType("BLOCK_BREAK=INCLUDE");
+		for(int i = 0; i < param.getActionTypes().size();i++) {
+			System.out.print("paramsValue: " + param.getActionTypes().get(i));
+			
+		}
 		param.setLimit(100);
 		param.addPlayerName(p);
 		param.addSpecificBlockLocation(block.getLocation());
