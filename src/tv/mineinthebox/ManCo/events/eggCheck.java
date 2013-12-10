@@ -14,6 +14,8 @@ import org.bukkit.inventory.ItemStack;
 
 import tv.mineinthebox.ManCo.ManCo;
 import tv.mineinthebox.ManCo.configuration.configuration;
+import tv.mineinthebox.ManCo.utils.util;
+import tv.mineinthebox.ManCo.utils.worldguard;
 import tv.mineinthebox.ManCo.utils.schematics.loadschematic;
 import tv.mineinthebox.ManCo.utils.schematics.pasteSchematic;
 import tv.mineinthebox.ManCo.utils.schematics.schematic;
@@ -36,6 +38,13 @@ public class eggCheck implements Listener {
 							if(args[0].equals(prefix)) {
 								if(schematicApi.isSchematic(ChatColor.stripColor(args[1]))) {
 									e.setCancelled(true);
+									//we need first to check whenever the player is able to build !
+									if(util.isWorldGuardEnabled()) {
+										if(!worldguard.canPlayerBuild(e.getPlayer())) {
+											e.getPlayer().sendMessage(ChatColor.RED + "you are not allowed to place these kind of ManCo eggs in a protected region!");
+											return;
+										}
+									}
 									ItemStack items = new ItemStack(e.getItem());
 									items.setAmount(items.getAmount() - 1);
 									e.getPlayer().getInventory().setItemInHand(items);
