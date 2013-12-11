@@ -1,6 +1,8 @@
 package tv.mineinthebox.ManCo.api;
 
 import java.util.ArrayList;
+
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -38,13 +40,16 @@ public class api {
 		return items;
 	}
 	
-	public void createManCoSupportedCrate(ItemStack[] items, crateEnum rareCrate, String YourCrateName, boolean useKey, boolean useEffects, Double price, Player p) throws InvalidCrateMethodException {
+	public void createManCoSupportedCrate(ItemStack[] items, crateEnum rareCrate, String YourCrateName, boolean useKey, boolean useEffects, Double price, Player p, String message) throws InvalidCrateMethodException {
 		if(rareCrate == crateEnum.rareCrate) {
 			Location loc = p.getLocation();
 			loc.setY(normalCrate.getCrateSpawnHeight(loc));
 			Entity entity = p.getWorld().spawnFallingBlock(loc, Material.CHEST, (byte)1);
 			api_ManCoSupportedEvents.addFallState(entity, p.getName()+":"+YourCrateName+":"+useKey+":"+useEffects+":"+price);
 			api_ManCoSupportedEvents.addItemsForChestPreparation(p, items);
+			if(!configuration.isCrateDropMessageDisabled()){
+				Bukkit.broadcastMessage(ChatColor.GREEN + configuration.getPrefix() + message);
+			}
 		} else {
 			throw new InvalidCrateMethodException("[ManCo-API]InvalidCrateMethodException: the crate enum is used in the wrong method!, this method can only obtain the rareCrate enum");
 		}
