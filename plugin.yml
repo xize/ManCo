@@ -1,5 +1,5 @@
 name: ManCo
-version: 0.8
+version: {project.version}
 description: ManCo item spawner
 author: xize
 authors: [] 

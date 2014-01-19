@@ -45,17 +45,17 @@ public class pasteSchematic {
 			short width = schem.getWidth();
 			short height = schem.getHeight();
 
-			for(int x = 0; x < width; ++x) {
-				for(int y = 0; y < height; ++y) {
+			for(int y = 0; y < height;y++) {
+				for(int x = 0; x < width; x++) {
 					for(int z = 0; z < length; ++z) {
-						//int index = y * width * length + z * width + x;
-						int index = x + (y * length + z) * width;
-
+						//here under working version
+						//int index = x + (y * length + z) * width;
+						int index = y*width*length+z*width+x;
 						Block b = new Location(w, x + l.getX(), y + l.getY(), z + l.getZ()).getBlock();
 						if(b.getType() == Material.AIR) {
 							//b.setTypeIdAndData(blocks[index], blockData[index], true);
-							String dataTypeSerialized = (blocks[index]+":"+blockData[index]+":"+p.getName()).replace("-", "");
-							if(!dataTypeSerialized.equalsIgnoreCase(0+":"+0+":"+p.getName())) {
+							String dataTypeSerialized = Math.abs(blocks[index])+":"+Math.abs(blockData[index])+":"+p.getName();
+							if(!dataTypeSerialized.equalsIgnoreCase(0+":"+0+":"+p.getName()) || !dataTypeSerialized.equalsIgnoreCase("?:?:"+p.getName())) {
 								locations.put(b.getLocation(), dataTypeSerialized);	
 							}	
 						}
@@ -82,7 +82,7 @@ public class pasteSchematic {
 						Byte subValue = Byte.parseByte(args[1]);
 						String playerName = args[2];
 						Block block = loc.getBlock();
-						block.setTypeIdAndData(DataValue, subValue, true);
+						block.setTypeIdAndData(DataValue, subValue, false);
 						block.getWorld().playEffect(loc, Effect.STEP_SOUND, block.getTypeId());
 						//we now log on the players name!
 						if(util.isCoreProtectEnabled()) {

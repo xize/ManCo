@@ -48,7 +48,8 @@ public class eggCheck implements Listener {
 									ItemStack items = new ItemStack(e.getItem());
 									items.setAmount(items.getAmount() - 1);
 									e.getPlayer().getInventory().setItemInHand(items);
-									schematic schem = loadschematic.loadSchematic(new File(ManCo.getPlugin().getDataFolder() + File.separator + "schematics" + File.separator + ChatColor.stripColor(args[1]) + ".schematic"));
+									schematic schem;
+									schem = loadschematic.loadSchematic(new File(ManCo.getPlugin().getDataFolder() + File.separator + "schematics" + File.separator + ChatColor.stripColor(args[1]) + ".schematic"));
 									pasteSchematic.pasteOldSchematic(e.getPlayer().getWorld(), e.getClickedBlock().getRelative(BlockFace.UP).getLocation(), schem, e.getPlayer());
 									e.getPlayer().sendMessage(ChatColor.GREEN + configuration.getPrefix() + ChatColor.GRAY + "you successfully spawned a " + args[1] + " house!");
 								} else {
