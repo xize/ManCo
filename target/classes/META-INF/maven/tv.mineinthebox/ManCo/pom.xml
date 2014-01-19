@@ -4,21 +4,17 @@
 	<groupId>tv.mineinthebox</groupId>
 	<artifactId>ManCo</artifactId>
 	<version>0.0.8-SNAPSHOT</version>
-	<resources>
-		<resource>
-			<includes>
-				<include>${project.basedir}/plugin.yml</include>
-			</includes>
-			<includes>
-				<include>${project.basedir}/LICENSE_GPL3.txt</include>
-			</includes>
-			<includes>
-				<include>${project.basedir}/LICENSE_MIT.txt</include>
-			</includes>
-		</resource>
-	</resources>
 	<build>
 		<sourceDirectory>src</sourceDirectory>
+		<resources>
+			<resource>
+				<includes>
+					<include>${project.basedir}/plugin.yml</include>
+					<include>${project.basedir}/LICENSE_GPL3.txt</include>
+					<include>${project.basedir}/LICENSE_MIT.txt</include>
+				</includes>
+			</resource>
+		</resources>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -41,16 +37,16 @@
 		</repository>
 	</repositories>
 	<dependencies>
-	<dependency>
-		<groupId>org.bukkit</groupId>
-		<artifactId>bukkit</artifactId>
-		<version>LATEST</version>
-	</dependency>
-	<dependency>
-		<groupId>org.bukkit</groupId>
-		<artifactId>craftbukkit</artifactId>
-		<version>LATEST</version>
-	</dependency>
+		<dependency>
+			<groupId>org.bukkit</groupId>
+			<artifactId>bukkit</artifactId>
+			<version>LATEST</version>
+		</dependency>
+		<dependency>
+			<groupId>org.bukkit</groupId>
+			<artifactId>craftbukkit</artifactId>
+			<version>LATEST</version>
+		</dependency>
 	<dependency>
 		<groupId>com.sk89q</groupId>
 		<artifactId>worldguard</artifactId>
