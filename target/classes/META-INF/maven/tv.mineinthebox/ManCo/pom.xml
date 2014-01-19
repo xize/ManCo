@@ -8,10 +8,11 @@
 		<sourceDirectory>src</sourceDirectory>
 		<resources>
 			<resource>
+				<directory>${project.basedir}</directory>
 				<includes>
-					<include>${project.basedir}/plugin.yml</include>
-					<include>${project.basedir}/LICENSE_GPL3.txt</include>
-					<include>${project.basedir}/LICENSE_MIT.txt</include>
+					<include>plugin.yml</include>
+					<include>LICENSE_GPL3.txt</include>
+					<include>LICENSE_MIT.txt</include>
 				</includes>
 			</resource>
 		</resources>
