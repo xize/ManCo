@@ -76,11 +76,6 @@
 			<version>LATEST</version>
 		</dependency>
 		<dependency>
-			<groupId>de.diddiz</groupId>
-			<artifactId>logblock</artifactId>
-			<version>LATEST</version>
-		</dependency>
-		<dependency>
 			<groupId>me.botsko</groupId>
 			<artifactId>prism</artifactId>
 			<version>LATEST</version>
@@ -98,6 +93,13 @@
 		<version>LATEST</version>
 		<scope>system</scope>
 		<systemPath>${project.basedir}/repo/HawkEye.jar</systemPath>
+		</dependency>
+				<dependency>
+			<groupId>de.diddiz</groupId>
+			<artifactId>logblock</artifactId>
+			<version>LATEST</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/repo/LogBlock.jar</systemPath>
 		</dependency>
 	</dependencies>
 </project>
