@@ -17,7 +17,7 @@ import org.bukkit.plugin.Plugin;
 import tv.mineinthebox.manco.instances.CratePlayer;
 import tv.mineinthebox.manco.interfaces.Crate;
 
-public class CrateFallEvent extends CrateEvent implements Chest {
+public class CrateFallEvent extends CrateEvent {
 
 	private final Chest chest;
 	private static final HandlerList handlers = new HandlerList();
