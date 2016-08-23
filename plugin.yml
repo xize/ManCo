@@ -1,20 +1,17 @@
 name: ManCo
-version: {project.version}
-description: ManCo item spawner
+version: ${project.version}
+description: ManCo supply crates
 author: xize
 authors: [] 
 website:
+loadbefore: [LWC]
 
-main: tv.mineinthebox.ManCo.ManCo
+main: tv.mineinthebox.manco.ManCo
 database: false
 depend: []
-softdepend: [WorldGuard, iConomy, Vault, CoreProtect, LogBlock, Prism]
+softdepend: [Worldguard, Worldedit, Vault, CoreProtect, Prism, LogBlock, NoCheatPlus]
 
 commands:
   manco:
-    description: main command
-    aliases: [mc]
-    permission:
-    permission-message:
-
-permissions:
+     description: manco main command
+     aliases: []
