@@ -21,7 +21,7 @@ public class EditorEvent implements Listener {
 	@EventHandler
 	public void onOpen(InventoryOpenEvent e) {
 		if(e.getInventory().getTitle().startsWith("me:") || e.getInventory().getTitle().startsWith("mc:")) {
-			e.getPlayer().getWorld().playSound(e.getPlayer().getLocation(), Sound.CHEST_OPEN, 1F, 1F);
+			e.getPlayer().getWorld().playSound(e.getPlayer().getLocation(), Sound.BLOCK_CHEST_OPEN, 1F, 1F);
 		}
 	}
 	

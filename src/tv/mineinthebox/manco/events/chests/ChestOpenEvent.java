@@ -139,8 +139,8 @@ public class ChestOpenEvent implements Listener {
 										Effect effect = rcrate.getEffect();
 										Sound sound = rcrate.getEffectSound();
 										p.sendMessage(ChatColor.GOLD + "opening crate in 10 seconds");
-										playSound(p, chest, Sound.HORSE_ARMOR);
-										playSound(p, chest, Sound.CHEST_OPEN);
+										playSound(p, chest, Sound.ENTITY_HORSE_ARMOR);
+										playSound(p, chest, Sound.BLOCK_CHEST_OPEN);
 										if(effect instanceof Effect) {
 											p.getWorld().playEffect(chest.getLocation(), effect, 10);
 										}
@@ -149,21 +149,21 @@ public class ChestOpenEvent implements Listener {
 										}
 									} else {
 										p.sendMessage(ChatColor.GOLD + "opening crate in 10 seconds");
-										playSound(p, chest, Sound.HORSE_ARMOR);
-										playSound(p, chest, Sound.CHEST_OPEN);
+										playSound(p, chest, Sound.ENTITY_HORSE_ARMOR);
+										playSound(p, chest, Sound.BLOCK_CHEST_OPEN);
 									}
 								} else {
 									p.sendMessage(ChatColor.GOLD + "opening crate in 10 seconds");
-									playSound(p, chest, Sound.HORSE_ARMOR);
-									playSound(p, chest, Sound.CHEST_OPEN);
+									playSound(p, chest, Sound.ENTITY_HORSE_ARMOR);
+									playSound(p, chest, Sound.BLOCK_CHEST_OPEN);
 								}
 							} else {
 								if(crate.getType() == CrateType.RARE) {
 									RareCrate rcrate = (RareCrate)crate;
 									if(rcrate.hasEffects()) {
 										p.sendMessage(ChatColor.GOLD + "opening crate in " + i + " seconds");
-										playSound(p, chest, Sound.HORSE_ARMOR);
-										playSound(p, chest, Sound.CHEST_OPEN);
+										playSound(p, chest, Sound.ENTITY_HORSE_ARMOR);
+										playSound(p, chest, Sound.BLOCK_CHEST_OPEN);
 										if(rcrate.getEffect() instanceof Effect) {
 											p.getWorld().playEffect(chest.getLocation(), rcrate.getEffect(), 10);
 										}
@@ -172,13 +172,13 @@ public class ChestOpenEvent implements Listener {
 										}
 									} else {
 										p.sendMessage(ChatColor.GOLD + "opening crate in " + i + " seconds");
-										playSound(p, chest, Sound.HORSE_ARMOR);
-										playSound(p, chest, Sound.CHEST_OPEN);
+										playSound(p, chest, Sound.ENTITY_HORSE_ARMOR);
+										playSound(p, chest, Sound.BLOCK_CHEST_OPEN);
 									}
 								} else {
 									p.sendMessage(ChatColor.GOLD + "opening crate in " + i + " seconds");
-									playSound(p, chest, Sound.HORSE_ARMOR);
-									playSound(p, chest, Sound.CHEST_OPEN);
+									playSound(p, chest, Sound.ENTITY_HORSE_ARMOR);
+									playSound(p, chest, Sound.BLOCK_CHEST_OPEN);
 								}
 							}
 						}

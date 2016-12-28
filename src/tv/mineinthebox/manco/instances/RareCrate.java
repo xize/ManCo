@@ -255,7 +255,7 @@ public class RareCrate implements Crate {
 	public Sound getEffectSound() {
 		if(!(sound instanceof Sound)) {
 			if(hasEffects()) {
-				return Sound.ZOMBIE_WOODBREAK;
+				return Sound.ENTITY_ZOMBIE_BREAK_DOOR_WOOD;
 			}
 		}
 		return (sound instanceof Sound ? sound : null);
