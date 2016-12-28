@@ -72,7 +72,7 @@ public class SchematicBuilder {
 
 							Location temp = loc.clone().add(x, y, z);
 
-							//Location temp = loc.clone().add(x/2, y, z/2); <- pastes the schematic but 1/² smaller this is per accident but pretty cool.
+							//Location temp = loc.clone().add(x/2, y, z/2); <- pastes the schematic but 1/ï¿½ smaller this is per accident but pretty cool.
 
 							//Location loc = new Location(temp.getWorld(), temp.getBlockX()/2, temp.getBlockY(), temp.getBlockZ()/2);
 

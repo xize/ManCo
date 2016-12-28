@@ -72,9 +72,9 @@ public class SchematicUtils {
 
 				Map<String, Tag> tags = compound.getValue();
 
-				Short width = ((ShortTag) tags.get("Width")).getValue();
-				Short height = ((ShortTag) tags.get("Height")).getValue();
-				Short length = ((ShortTag) tags.get("Length")).getValue();
+				short width = ((ShortTag) tags.get("Width")).getValue();
+				short height = ((ShortTag) tags.get("Height")).getValue();
+				short length = ((ShortTag) tags.get("Length")).getValue();
 
 				String materials = ((StringTag) tags.get("Materials")).getValue();
 

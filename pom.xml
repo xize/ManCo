@@ -4,9 +4,6 @@
 	<groupId>tv.mineinthebox.manco</groupId>
 	<artifactId>ManCo</artifactId>
 	<version>2.1</version>
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	</properties>
 
 	<repositories>
 		<repository>
@@ -23,6 +20,7 @@
 			<groupId>org.bukkit</groupId>
 			<artifactId>bukkit</artifactId>
 			<version>LATEST</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.jnbt</groupId>
