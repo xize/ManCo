@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import src.org.jnbt.ByteArrayTag;
+import org.jnbt.ByteArrayTag;
 import org.jnbt.CompoundTag;
 import org.jnbt.NBTInputStream;
 import org.jnbt.ShortTag;
